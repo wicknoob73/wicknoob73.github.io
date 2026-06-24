@@ -9,12 +9,23 @@
 </head>
 <body>
 
+<div class="stamp" aria-hidden="true">
+  <svg viewBox="0 0 120 120">
+    <circle cx="60" cy="60" r="54"/>
+    <path id="stamp-arc-top" d="M 60 60 m -42 0 a 42 42 0 0 1 84 0" fill="none"/>
+    <path id="stamp-arc-bot" d="M 60 60 m -42 0 a 42 42 0 0 0 84 0" fill="none"/>
+    <text><textPath href="#stamp-arc-top" startOffset="50%" text-anchor="middle">CARMELO BOT</textPath></text>
+    <text class="stamp-sub" x="60" y="64" text-anchor="middle">DOSSIER</text>
+    <text><textPath href="#stamp-arc-bot" startOffset="50%" text-anchor="middle">DOCUMENTO ATTIVO</textPath></text>
+  </svg>
+</div>
+
 <!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
 <div class="container">
   <header class="hero">
-    <div class="hero-badge">
-      <span class="dot"></span>
-      Bot Discord attivo
+    <div class="hero-badge" id="bot-status-badge">
+      <span class="dot" id="bot-status-dot"></span>
+      <span id="bot-status-text">Verifica stato...</span>
     </div>
     <h1><span>Carmelo</span> Bot</h1>
     <p class="hero-sub">
@@ -167,7 +178,24 @@
       <li>Data, ora e tipo di azione di moderazione</li>
     </ul>
 
-    <h3>6. Configurazione server</h3>
+    <h3>6. Note dello staff</h3>
+    <p>Memorizzate in <code>mod_notes.json</code>:</p>
+    <p>
+      Lo staff di moderazione può annotare note testuali libere associate a un utente
+      del server, ad esempio per tenere traccia di comportamenti passati non ancora
+      sanzionabili con un warn formale.
+    </p>
+    <ul>
+      <li>ID utente a cui si riferisce la nota</li>
+      <li>Testo della nota, scritto liberamente dal moderatore</li>
+      <li>ID del moderatore autore e data di inserimento</li>
+    </ul>
+    <p>
+      Queste note sono visibili solo allo staff del server e non vengono mai
+      condivise tra server diversi.
+    </p>
+
+    <h3>7. Configurazione server</h3>
     <p>Memorizzata in <code>config.json</code>:</p>
     <div class="file-grid">
       <div class="file-pill">📣 Canale level-up</div>
@@ -177,14 +205,30 @@
       <div class="file-pill">🎫 Contatore ticket</div>
     </div>
 
-    <h3>7. Cooldown comandi</h3>
+    <h3>8. Cooldown comandi</h3>
     <p>
       I file <code>daily_cooldowns.json</code> e <code>wheel_cooldowns.json</code>
       contengono ID utenti/server e la data dell'ultimo utilizzo di determinati comandi.
       Sono dati temporanei necessari al corretto funzionamento del rate-limiting.
     </p>
 
-    <h3>8. Giveaway</h3>
+    <h3>9. Compleanni</h3>
+    <p>Memorizzati in <code>birthdays.json</code>:</p>
+    <p>
+      Su richiesta volontaria dell'utente tramite apposito comando, il bot può
+      memorizzare giorno e mese di nascita per inviare un messaggio di auguri
+      automatico nel server. L'anno di nascita non viene richiesto né memorizzato.
+    </p>
+    <ul>
+      <li>ID utente, ID server</li>
+      <li>Giorno e mese di nascita</li>
+    </ul>
+    <p>
+      Il dato è fornito spontaneamente e può essere rimosso in qualsiasi momento
+      contattando lo staff o gli sviluppatori.
+    </p>
+
+    <h3>10. Giveaway</h3>
     <p>Memorizzati nel database <code>giveaways.db</code> (SQLite):</p>
     <ul>
       <li>ID server, canale e messaggio del giveaway</li>
@@ -193,25 +237,42 @@
       <li>ID del creatore, dei partecipanti e dei vincitori</li>
     </ul>
 
-    <h3>9. Condivisione dati</h3>
+    <h3>11. Immagini generate al volo</h3>
+    <p>
+      Alcuni comandi (card di livello, messaggi di benvenuto/addio, biglietti utente)
+      generano un'immagine componendo l'avatar pubblico Discord dell'utente con testo
+      ed elementi grafici. Queste immagini vengono create al momento e inviate nel
+      canale: non vengono salvate permanentemente su disco dal bot, oltre la durata
+      necessaria a comporle e inviarle.
+    </p>
+
+    <h3>12. Account Spotify del bot</h3>
+    <p>
+      Per riprodurre brani da Spotify, il bot utilizza un proprio account/applicazione
+      Spotify autenticata via OAuth, con token salvato localmente sul server che ospita
+      il bot. Questo account appartiene agli sviluppatori: gli utenti del server non
+      collegano né esporrebbero alcun account Spotify personale usando i comandi musicali.
+    </p>
+
+    <h3>13. Condivisione dati</h3>
     <p>
       Carmelo Bot non vende, cede né condivide dati personali con terze parti
       a scopo commerciale o di profilazione.
     </p>
 
-    <h3>10. Sicurezza</h3>
+    <h3>14. Sicurezza</h3>
     <p>
       Lo sviluppatore adotta misure ragionevoli per proteggere i dati memorizzati,
       ma non può garantire sicurezza assoluta contro accessi non autorizzati.
     </p>
 
-    <h3>11. Rimozione dati</h3>
+    <h3>15. Rimozione dati</h3>
     <p>
       Gli amministratori di un server possono richiedere la cancellazione di tutti i
       dati relativi al proprio server contattando direttamente lo sviluppatore.
     </p>
 
-    <h3>12. Contatti</h3>
+    <h3>16. Contatti</h3>
     <p>Per qualsiasi domanda relativa alla privacy, contatta gli sviluppatori su Discord:</p>
     <div class="contact-box">
       <div class="avatar">⚙️</div>
@@ -321,12 +382,54 @@
 <!-- ═══════════════════════════════ FOOTER ══════════════════════════════ -->
 <footer>
   <div class="footer-logo"><span>Carmelo</span> Bot</div>
-  <div class="footer-meta">bot Discord v50 • discord.py 2.x</div>
+  <div class="footer-meta">bot Discord v34 • discord.py 2.x</div>
   <div class="footer-copy">
     &copy; 2026 <strong>wicknoob73 &amp; jeimaster.</strong> — Tutti i diritti riservati.<br>
     Carmelo Bot non è affiliato né approvato da Discord Inc.
   </div>
 </footer>
+
+<script>
+  // ── Stato reale del bot, letto dal widget pubblico Discord ──
+  // Richiede che il Widget Server sia attivo in:
+  // Impostazioni server → Engagement → Widget
+  const GUILD_ID = "1079422976249843762";
+  const BOT_NAME = "Carmelo Bot"; // username esatto del bot su Discord
+
+  async function checkBotStatus() {
+    const badge = document.getElementById('bot-status-badge');
+    const dot   = document.getElementById('bot-status-dot');
+    const text  = document.getElementById('bot-status-text');
+
+    try {
+      const res = await fetch(`https://discord.com/api/guilds/${GUILD_ID}/widget.json`);
+      if (!res.ok) throw new Error('widget non disponibile');
+      const data = await res.json();
+
+      const bot = (data.members || []).find(m => m.username === BOT_NAME);
+
+      if (bot) {
+        dot.style.background = '#2dd4bf';
+        dot.style.boxShadow = '0 0 6px #2dd4bf';
+        text.textContent = 'Bot Discord attivo';
+      } else {
+        dot.style.background = '#6b7280';
+        dot.style.boxShadow = 'none';
+        text.textContent = 'Bot Discord offline';
+        badge.style.opacity = '0.75';
+      }
+    } catch (err) {
+      // Widget non attivo o errore di rete: stato sconosciuto, non mostriamo un falso "attivo"
+      dot.style.background = '#6b7280';
+      dot.style.boxShadow = 'none';
+      text.textContent = 'Stato non disponibile';
+      badge.style.opacity = '0.6';
+    }
+  }
+
+  checkBotStatus();
+  setInterval(checkBotStatus, 60000); // riprova ogni 60 secondi
+</script>
 
 <script>
   // Evidenzia la nav pill in base alla sezione visibile
