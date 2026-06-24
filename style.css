@@ -375,12 +375,14 @@ code {
 .file-pill {
   display: flex;
   align-items: center;
-  gap: 9px;
+  flex-wrap: wrap;
+  gap: 5px 9px;
   padding: 10px 14px;
   background: var(--bg-surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   font-size: 0.83rem;
+  line-height: 1.4;
   color: var(--text-secondary);
   transition: border-color var(--transition);
 }
