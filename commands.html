@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comandi — Carmelo Bot</title>
+  <meta name="description" content="Lista completa dei 60+ comandi slash di Carmelo Bot, organizzata per categoria.">
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="Comandi — Carmelo Bot">
+  <meta property="og:description" content="70+ slash command organizzati per categoria. Musica, moderazione, livelli, ticket, giveaway e utility.">
+  <meta property="og:image"       content="https://placehold.co/1200x630/0a0c14/4ab3e8?text=Carmelo+Bot+Commands">
+  <meta name="theme-color"        content="#4ab3e8">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230a0c14'/><text y='24' x='4' font-size='22'>🤖</text></svg>">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .page-hero { padding: 60px 0 40px; }
+    .page-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800; letter-spacing: -0.04em;
+      margin: 12px 0 10px;
+    }
+    .page-hero p { color: var(--text-secondary); font-size: 0.95rem; max-width: 460px; }
+
+    /* Filter pills */
+    .cat-filter {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin: 32px 0 28px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .cat-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 16px; border-radius: 999px;
+      font-size: 0.82rem; font-weight: 600;
+      color: var(--text-secondary);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all var(--ease);
+      user-select: none;
+      font-family: var(--font-body);
+    }
+    .cat-pill:hover { color: var(--text-primary); border-color: var(--border-hover); }
+    .cat-pill.active { color: var(--bg-base); background: var(--pill-color, var(--blue)); border-color: transparent; }
+
+    /* Search */
+    .search-wrap { position: relative; margin-bottom: 24px; }
+    .search-wrap svg {
+      position: absolute; left: 14px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted); pointer-events: none;
+    }
+    .search-input {
+      width: 100%;
+      padding: 11px 16px 11px 42px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      font-family: var(--font-mono); font-size: 0.88rem;
+      outline: none;
+      transition: border-color var(--ease);
+    }
+    .search-input::placeholder { color: var(--text-muted); }
+    .search-input:focus { border-color: var(--blue); }
+
+    /* Category blocks */
+    .cat-block { margin-bottom: 48px; }
+    .cat-block.hidden { display: none; }
+    .cat-heading { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+    .cat-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--cat-color);
+      box-shadow: 0 0 8px var(--cat-color);
+      flex-shrink: 0;
+    }
+    .cat-heading h2 { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: var(--text-primary); }
+    .cat-count {
+      font-size: 0.72rem; font-family: var(--font-mono);
+      color: var(--text-muted);
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 999px; padding: 2px 9px; margin-left: auto;
+    }
+
+    /* Table */
+    .cmd-table {
+      width: 100%; border-collapse: collapse;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md); overflow: hidden;
+    }
+    .cmd-table thead tr { border-bottom: 1px solid var(--border); }
+    .cmd-table th {
+      text-align: left; padding: 10px 16px;
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-muted); font-family: var(--font-mono);
+    }
+    .cmd-table tbody tr {
+      border-bottom: 1px solid rgba(74,179,232,0.06);
+      transition: background var(--ease);
+    }
+    .cmd-table tbody tr:last-child { border-bottom: none; }
+    .cmd-table tbody tr:hover { background: var(--bg-hover); }
+    .cmd-table td { padding: 11px 16px; font-size: 0.88rem; color: var(--text-secondary); vertical-align: middle; }
+
+    /* Command name cell with copy button */
+    .cmd-cell {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .cmd-name {
+      font-family: var(--font-mono);
+      color: var(--cat-color) !important;
+      font-weight: 600; font-size: 0.85rem !important;
+      white-space: nowrap;
+    }
+    .copy-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      cursor: pointer;
+      color: var(--text-muted);
+      opacity: 0;
+      transition: all var(--ease);
+      flex-shrink: 0;
+      padding: 0;
+    }
+    .cmd-table tbody tr:hover .copy-btn { opacity: 1; }
+    .copy-btn:hover {
+      background: rgba(74,179,232,0.1);
+      border-color: var(--border-hover);
+      color: var(--blue);
+    }
+    .copy-btn.copied {
+      color: var(--green);
+      border-color: rgba(77,232,154,0.3);
+      background: rgba(77,232,154,0.08);
+      opacity: 1;
+    }
+
+    /* Badges */
+    .cmd-badge {
+      display: inline-block; font-size: 0.68rem;
+      font-family: var(--font-mono); font-weight: 600;
+      padding: 2px 8px; border-radius: 4px; letter-spacing: 0.05em;
+    }
+    .badge-admin { background: rgba(232,96,96,0.12); color:#e86060; border:1px solid rgba(232,96,96,0.2); }
+    .badge-mod   { background: rgba(212,169,71,0.1);  color:#d4a947; border:1px solid rgba(212,169,71,0.2); }
+
+    /* Note under table */
+    .cat-note {
+      font-size: 0.8rem; color: var(--text-muted);
+      margin-top: 10px; font-family: var(--font-mono);
+    }
+
+    /* No results */
+    .no-results {
+      text-align: center; padding: 60px 20px;
+      color: var(--text-muted); font-size: 0.9rem; display: none;
+    }
+
+    @media (max-width: 640px) {
+      .cmd-table th:nth-child(3), .cmd-table td:nth-child(3) { display: none; }
+      .page-hero { padding: 40px 0 28px; }
+      .copy-btn { opacity: 1; }
+    }
+  
+    /* ── Commands search ── */
+    .cmd-search-wrap {
+      display: flex; gap: 10px; flex-wrap: wrap;
+      margin-bottom: 24px; align-items: center;
+    }
+    .cmd-search {
+      flex: 1; min-width: 200px;
+      padding: 10px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color var(--ease);
+    }
+    .cmd-search::placeholder { color: var(--text-muted); }
+    .cmd-search:focus { border-color: var(--blue); }
+    .cmd-cats {
+      display: flex; flex-wrap: wrap; gap: 6px;
+    }
+    .cmd-cat {
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-size: 0.72rem; font-weight: 600;
+      cursor: pointer;
+      transition: all var(--ease);
+    }
+    .cmd-cat:hover { border-color: var(--blue); color: var(--blue); }
+    .cmd-cat.active { background: var(--blue); border-color: var(--blue); color: var(--bg-base); }
+    .cmd-item { transition: opacity 0.15s; }
+    .cmd-item.hidden { display: none; }
+    .cmd-section.hidden { display: none; }
+    .cmd-no-results { color: var(--text-muted); font-size: 0.9rem; padding: 20px 0; display: none; }
+
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="navbar-logo"><span>Carmelo</span> Bot</a>
+  <ul class="navbar-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="commands.html" class="active">Comandi</a></li>
+    <li><a href="changelog.html">Changelog</a></li>
+    <li><a href="stats.html">Statistiche</a></li>
+    <li><a href="legal.html">Termini & Privacy</a></li>
+    <li><a href="legal.html#contatti">Contatti</a></li>
+  </ul>
+  <a href="#" class="navbar-cta">+ Aggiungi al server</a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" class="active">Home</a>
+  <a href="commands.html">Comandi</a>
+  <a href="changelog.html">Changelog</a>
+  <a href="stats.html">Statistiche</a>
+  <a href="legal.html">Termini & Privacy</a>
+  <a href="legal.html#contatti">Contatti</a>
+  <a href="#" class="mobile-cta">+ Aggiungi al server</a>
+</div>
+
+<div class="container container--wide">
+
+  <header class="page-hero">
+    <div class="section-label">Riferimento completo</div>
+    <h1>Tutti i <span style="color:var(--blue);">Comandi</span></h1>
+    <p>60+ slash command organizzati per categoria. Scrivi <code>/</code> su Discord per vederli in tempo reale. Clicca il nome di un comando per copiarlo.</p>
+  </header>
+
+
+  <div class="search-wrap">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input class="search-input" type="text" id="cmd-search" placeholder="Cerca un comando… es. /play, /warn" autocomplete="off">
+  </div>
+
+  <div class="cat-filter">
+    <button class="cat-pill active" data-filter="all"        style="--pill-color:#4ab3e8;">✦ Tutti</button>
+    <button class="cat-pill" data-filter="musica"            style="--pill-color:#4ab3e8;">🎵 Musica</button>
+    <button class="cat-pill" data-filter="moderazione"       style="--pill-color:#e86060;">🛡️ Moderazione</button>
+    <button class="cat-pill" data-filter="livelli"           style="--pill-color:#4de89a;">📈 Livelli & XP</button>
+    <button class="cat-pill" data-filter="ticket"            style="--pill-color:#d4a947;">🎫 Ticket</button>
+    <button class="cat-pill" data-filter="giveaway"          style="--pill-color:#a78bfa;">🎁 Giveaway</button>
+    <button class="cat-pill" data-filter="utility"           style="--pill-color:#2dd4bf;">🎲 Utility</button>
+  </div>
+
+  <div id="no-results" class="no-results">
+    Nessun comando trovato per "<span id="no-results-term"></span>".
+  </div>
+
+  <!-- MUSICA -->
+  <div class="cat-block" data-cat="musica">
+    <div class="cat-heading" style="--cat-color:#4ab3e8;">
+      <div class="cat-dot"></div>
+      <h2>🎵 Musica</h2>
+      <span class="cat-count">17 comandi</span>
+    </div>
+    <table class="cmd-table" style="--cat-color:#4ab3e8;">
+      <thead><tr><th>Comando</th><th>Descrizione</th><th>Permessi</th></tr></thead>
+      <tbody>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/play</span><button class="copy-btn" data-cmd="/play" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Suona un brano da YouTube o Spotify</td><td></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/join</span><button class="copy-btn" data-cmd="/join" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Entra nel canale vocale</td><td></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/leave</span><button class="copy-btn" data-cmd="/leave" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Esce dal canale vocale</td><td></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/queue</span><button class="copy-btn" data-cmd="/queue" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Mostra la coda dei brani</td><td></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/skip</span><button class="copy-btn" data-cmd="/skip" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Salta il brano corrente</td><td></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/stop</span><button class="copy-btn" data-cmd="/stop" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Ferma la riproduzione e svuota la coda</td><td></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/pause</span><button class="copy-btn" data-cmd="/pause" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Mette in pausa la riproduzione</td><td></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/resume</span><button class="copy-btn" data-cmd="/resume" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Riprende la riproduzione</td><td></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/seek</span><button class="copy-btn" data-cmd="/seek" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Salta a un punto specifico del brano</td><td></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/shuffle</span><button class="copy-btn" data-cmd="/shuffle" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Mischia l'ordine della coda</td><td></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/remove</span><button class="copy-btn" data-cmd="/remove" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Rimuove un brano dalla coda</td><td></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/volume</span><button class="copy-btn" data-cmd="/volume" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Regola il volume (0–200)</td><td></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/loop</span><button class="copy-btn" data-cmd="/loop" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Ripete il brano corrente</td><td></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/autoplay</span><button class="copy-btn" data-cmd="/autoplay" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Continua con brani correlati automaticamente</td><td></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/nowplaying</span><button class="copy-btn" data-cmd="/nowplaying" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Mostra il brano in riproduzione</td><td></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/duration</span><button class="copy-btn" data-cmd="/duration" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Mostra la durata del brano corrente</td><td></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/reset</span><button class="copy-btn" data-cmd="/reset" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Rimuove tutti gli effetti audio attivi</td><td></td></tr>
+      </tbody>
+    </table>
+    <p class="cat-note">Effetti audio: /nightcore · /bassboost · /slowed · /vaporwave · /reverb · /8d · /chipmunk · /robot · /earrape</p>
+  </div>
+
+  <!-- MODERAZIONE -->
+  <div class="cat-block" data-cat="moderazione">
+    <div class="cat-heading" style="--cat-color:#e86060;">
+      <div class="cat-dot"></div>
+      <h2>🛡️ Moderazione</h2>
+      <span class="cat-count">18 comandi</span>
+    </div>
+    <table class="cmd-table" style="--cat-color:#e86060;">
+      <thead><tr><th>Comando</th><th>Descrizione</th><th>Permessi</th></tr></thead>
+      <tbody>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/warn</span><button class="copy-btn" data-cmd="/warn" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Assegna un warn a un utente</td><td><span class="cmd-badge badge-mod">Moderatori</span></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/warnings</span><button class="copy-btn" data-cmd="/warnings" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Mostra la lista warn di un utente</td><td><span class="cmd-badge badge-mod">Moderatori</span></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/unwarn</span><button class="copy-btn" data-cmd="/unwarn" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Rimuove un warn specifico</td><td><span class="cmd-badge badge-mod">Moderatori</span></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/case</span><button class="copy-btn" data-cmd="/case" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Dettagli di un'azione di moderazione</td><td><span class="cmd-badge badge-mod">Moderatori</span></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/kick</span><button class="copy-btn" data-cmd="/kick" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Espelle un utente dal server</td><td><span class="cmd-badge badge-mod">Moderatori</span></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/ban</span><button class="copy-btn" data-cmd="/ban" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Banna permanentemente un utente</td><td><span class="cmd-badge badge-mod">Moderatori</span></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/unban</span><button class="copy-btn" data-cmd="/unban" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Rimuove il ban a un utente</td><td><span class="cmd-badge badge-mod">Moderatori</span></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/timeout</span><button class="copy-btn" data-cmd="/timeout" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Silenzia temporaneamente un utente</td><td><span class="cmd-badge badge-mod">Moderatori</span></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/untimeout</span><button class="copy-btn" data-cmd="/untimeout" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Rimuove il timeout di un utente</td><td><span class="cmd-badge badge-mod">Moderatori</span></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/purge</span><button class="copy-btn" data-cmd="/purge" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Elimina messaggi recenti da un canale</td><td><span class="cmd-badge badge-mod">Moderatori</span></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/modnote</span><button class="copy-btn" data-cmd="/modnote" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Aggiunge una nota privata staff su un utente</td><td><span class="cmd-badge badge-mod">Moderatori</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- LIVELLI -->
+  <div class="cat-block" data-cat="livelli">
+    <div class="cat-heading" style="--cat-color:#4de89a;">
+      <div class="cat-dot"></div>
+      <h2>📈 Livelli & XP</h2>
+      <span class="cat-count">7 comandi</span>
+    </div>
+    <table class="cmd-table" style="--cat-color:#4de89a;">
+      <thead><tr><th>Comando</th><th>Descrizione</th><th>Permessi</th></tr></thead>
+      <tbody>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/rank</span><button class="copy-btn" data-cmd="/rank" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Mostra livello, XP e statistiche personali</td><td></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/leaderboard</span><button class="copy-btn" data-cmd="/leaderboard" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Classifiche XP del server</td><td></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/daily</span><button class="copy-btn" data-cmd="/daily" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Riscatta XP giornalieri (cooldown 24h)</td><td></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/wheel</span><button class="copy-btn" data-cmd="/wheel" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Ruota della fortuna per XP extra (cooldown 12h)</td><td></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/setlevel</span><button class="copy-btn" data-cmd="/setlevel" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Imposta livello o XP di un utente</td><td><span class="cmd-badge badge-admin">Admin</span></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/reset_daily</span><button class="copy-btn" data-cmd="/reset_daily" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Resetta il cooldown daily di un utente</td><td><span class="cmd-badge badge-admin">Admin</span></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/reset_wheel</span><button class="copy-btn" data-cmd="/reset_wheel" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Resetta il cooldown della ruota di un utente</td><td><span class="cmd-badge badge-admin">Admin</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- TICKET -->
+  <div class="cat-block" data-cat="ticket">
+    <div class="cat-heading" style="--cat-color:#d4a947;">
+      <div class="cat-dot"></div>
+      <h2>🎫 Ticket</h2>
+      <span class="cat-count">2 comandi</span>
+    </div>
+    <table class="cmd-table" style="--cat-color:#d4a947;">
+      <thead><tr><th>Comando</th><th>Descrizione</th><th>Permessi</th></tr></thead>
+      <tbody>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/sendticketpanel</span><button class="copy-btn" data-cmd="/sendticketpanel" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Invia il pannello di apertura ticket in un canale</td><td><span class="cmd-badge badge-admin">Admin</span></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/claim</span><button class="copy-btn" data-cmd="/claim" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Prende in carico un ticket aperto</td><td><span class="cmd-badge badge-mod">Moderatori</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- GIVEAWAY -->
+  <div class="cat-block" data-cat="giveaway">
+    <div class="cat-heading" style="--cat-color:#a78bfa;">
+      <div class="cat-dot"></div>
+      <h2>🎁 Giveaway</h2>
+      <span class="cat-count">7 comandi</span>
+    </div>
+    <table class="cmd-table" style="--cat-color:#a78bfa;">
+      <thead><tr><th>Comando</th><th>Descrizione</th><th>Permessi</th></tr></thead>
+      <tbody>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/giveaway</span><button class="copy-btn" data-cmd="/giveaway" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Crea un nuovo giveaway</td><td><span class="cmd-badge badge-mod">Moderatori</span></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/glist</span><button class="copy-btn" data-cmd="/glist" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Lista dei giveaway attivi</td><td></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/ginfo</span><button class="copy-btn" data-cmd="/ginfo" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Dettagli di un giveaway specifico</td><td></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/gparticipants</span><button class="copy-btn" data-cmd="/gparticipants" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Lista dei partecipanti a un giveaway</td><td><span class="cmd-badge badge-mod">Moderatori</span></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/reroll</span><button class="copy-btn" data-cmd="/reroll" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Estrae nuovi vincitori per un giveaway concluso</td><td><span class="cmd-badge badge-mod">Moderatori</span></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/gend</span><button class="copy-btn" data-cmd="/gend" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Termina anticipatamente un giveaway</td><td><span class="cmd-badge badge-mod">Moderatori</span></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/gdelete</span><button class="copy-btn" data-cmd="/gdelete" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Elimina definitivamente un giveaway</td><td><span class="cmd-badge badge-mod">Moderatori</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- UTILITY -->
+  <div class="cat-block" data-cat="utility">
+    <div class="cat-heading" style="--cat-color:#2dd4bf;">
+      <div class="cat-dot"></div>
+      <h2>🎲 Utility & Server</h2>
+      <span class="cat-count">18 comandi</span>
+    </div>
+    <table class="cmd-table" style="--cat-color:#2dd4bf;">
+      <thead><tr><th>Comando</th><th>Descrizione</th><th>Permessi</th></tr></thead>
+      <tbody>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/help</span><button class="copy-btn" data-cmd="/help" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Mostra la lista dei comandi disponibili</td><td></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/ping</span><button class="copy-btn" data-cmd="/ping" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Mostra la latenza del bot</td><td></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/versione</span><button class="copy-btn" data-cmd="/versione" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Versione corrente di Carmelo Bot</td><td></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/termini</span><button class="copy-btn" data-cmd="/termini" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Link a Termini di Servizio e Privacy Policy</td><td></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/serverinfo</span><button class="copy-btn" data-cmd="/serverinfo" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Informazioni dettagliate sul server</td><td></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/roleinfo</span><button class="copy-btn" data-cmd="/roleinfo" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Informazioni su un ruolo specifico</td><td></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/profile</span><button class="copy-btn" data-cmd="/profile" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Profilo Discord di un utente</td><td></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/invite</span><button class="copy-btn" data-cmd="/invite" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Link di invito al server</td><td></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/dice</span><button class="copy-btn" data-cmd="/dice" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Lancia un dado (personalizzabile)</td><td></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/coinflip</span><button class="copy-btn" data-cmd="/coinflip" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Lancia una moneta (testa o croce)</td><td></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/birthday_set</span><button class="copy-btn" data-cmd="/birthday_set" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Imposta la tua data di compleanno</td><td></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/birthday_enable</span><button class="copy-btn" data-cmd="/birthday_enable" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Abilita/disabilita gli auguri compleanno nel server</td><td><span class="cmd-badge badge-admin">Admin</span></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/birthday_preview</span><button class="copy-btn" data-cmd="/birthday_preview" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Anteprima del messaggio di auguri</td><td><span class="cmd-badge badge-admin">Admin</span></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/welcome_test</span><button class="copy-btn" data-cmd="/welcome_test" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Anteprima del messaggio di benvenuto</td><td><span class="cmd-badge badge-admin">Admin</span></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/set_welcome_channel</span><button class="copy-btn" data-cmd="/set_welcome_channel" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Imposta il canale di benvenuto</td><td><span class="cmd-badge badge-admin">Admin</span></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/set_goodbye_channel</span><button class="copy-btn" data-cmd="/set_goodbye_channel" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Imposta il canale di addio</td><td><span class="cmd-badge badge-admin">Admin</span></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/set_autorole</span><button class="copy-btn" data-cmd="/set_autorole" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Ruolo assegnato automaticamente ai nuovi membri</td><td><span class="cmd-badge badge-admin">Admin</span></td></tr>
+        <tr><td><div class="cmd-cell"><span class="cmd-name">/configshow</span><button class="copy-btn" data-cmd="/configshow" title="Copia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></td><td>Mostra la configurazione attiva del bot</td><td><span class="cmd-badge badge-admin">Admin</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-left">
+    <div class="footer-brand"><span>Carmelo</span> Bot</div>
+    <div class="footer-meta">discord.py 2.x · v58 · 60+ comandi</div>
+    <div class="footer-copy">© 2026 wicknoob73 & jeimaster. — Non affiliato con Discord Inc.</div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="legal.html">Termini di Servizio</a></li>
+    <li><a href="legal.html#privacy">Privacy Policy</a></li>
+    <li><a href="legal.html#contatti">Contatti</a></li>
+  </ul>
+</footer>
+
+<script>
+  // Category filter
+  document.querySelectorAll('.cat-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      const filter = pill.dataset.filter;
+      document.querySelectorAll('.cat-block').forEach(b => {
+        b.classList.toggle('hidden', filter !== 'all' && b.dataset.cat !== filter);
+      });
+      document.getElementById('cmd-search').value = '';
+      document.getElementById('no-results').style.display = 'none';
+    });
+  });
+
+  // Search
+  document.getElementById('cmd-search').addEventListener('input', function() {
+    const q = this.value.toLowerCase().trim();
+    if (q) {
+      document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+      document.querySelector('[data-filter="all"]').classList.add('active');
+    }
+    let anyVisible = false;
+    document.querySelectorAll('.cat-block').forEach(block => {
+      block.classList.remove('hidden');
+      let blockVisible = false;
+      block.querySelectorAll('tbody tr').forEach(row => {
+        const name = row.cells[0]?.textContent.toLowerCase() || '';
+        const desc = row.cells[1]?.textContent.toLowerCase() || '';
+        const match = !q || name.includes(q) || desc.includes(q);
+        row.style.display = match ? '' : 'none';
+        if (match) blockVisible = true;
+      });
+      if (!q) { block.classList.remove('hidden'); blockVisible = true; }
+      else if (!blockVisible) block.classList.add('hidden');
+      if (blockVisible) anyVisible = true;
+    });
+    const noRes = document.getElementById('no-results');
+    noRes.style.display = (q && !anyVisible) ? 'block' : 'none';
+    if (q) document.getElementById('no-results-term').textContent = q;
+  });
+
+  // Copy command on click
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+      e.stopPropagation();
+      const cmd = btn.dataset.cmd;
+      try {
+        await navigator.clipboard.writeText(cmd);
+      } catch {
+        // fallback
+        const ta = document.createElement('textarea');
+        ta.value = cmd; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }
+      btn.classList.add('copied');
+      btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>';
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+      }, 1500);
+    });
+  });
+</script>
+
+
+<button class="back-to-top" id="backToTop" aria-label="Torna su">
+  <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="18 15 12 9 6 15"/>
+  </svg>
+</button>
+
+<script>
+// Hamburger
+const ham = document.getElementById('hamburgerBtn');
+const mob = document.getElementById('mobileMenu');
+if (ham && mob) {
+  ham.addEventListener('click', () => {
+    ham.classList.toggle('open');
+    mob.classList.toggle('open');
+  });
+  document.addEventListener('click', e => {
+    if (!ham.contains(e.target) && !mob.contains(e.target)) {
+      ham.classList.remove('open');
+      mob.classList.remove('open');
+    }
+  });
+}
+// Back to top
+const btt = document.getElementById('backToTop');
+if (btt) {
+  window.addEventListener('scroll', () => {
+    btt.classList.toggle('visible', window.scrollY > 300);
+  }, { passive: true });
+  btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+}
+</script>
+
+<script>
+(function() {
+  const searchEl  = document.getElementById('cmdSearch');
+  const noResults = document.getElementById('cmdNoResults');
+
+  // Mappa sezioni → categorie (adattare se i titoli differiscono)
+  const catMap = {
+    'musica':      ['musica','play','skip','stop','queue','volume','pause','resume','seek','loop','8d','reverb','chipmunk','earrape','robot','vaporwave','bassboost','nightcore','slowed','autoplay','duration','shuffle','remove','nowplaying'],
+    'xp':          ['rank','leaderboard','daily','wheel','setlevel','xp','livell','reset_daily','reset_wheel'],
+    'moderazione': ['warn','ban','kick','timeout','untimeout','purge','unban','unwarn','case','modnote','clear'],
+    'ticket':      ['ticket','claim','close','sendticket'],
+    'utility':     ['ping','serverinfo','profile','roleinfo','versione','termini','help','invite','coinflip','dice','configshow','birthday','welcome'],
+    'giveaway':    ['giveaway','gend','gdelete','ginfo','glist','gparticipants','reroll'],
+  };
+
+  function getTextOf(el) {
+    return (el.textContent || '').toLowerCase();
+  }
+
+  function matchCat(itemText, cat) {
+    if (cat === 'all') return true;
+    return (catMap[cat] || []).some(kw => itemText.includes(kw));
+  }
+
+  function filterCommands() {
+    const query   = (searchEl?.value || '').toLowerCase().trim();
+    const activeCat = document.querySelector('.cmd-cat.active')?.dataset.cat || 'all';
+    const items   = document.querySelectorAll('.cmd-item');
+    let visible   = 0;
+
+    items.forEach(item => {
+      const txt    = getTextOf(item);
+      const matchQ = !query || txt.includes(query);
+      const matchC = matchCat(txt, activeCat);
+      if (matchQ && matchC) { item.classList.remove('hidden'); visible++; }
+      else                   { item.classList.add('hidden'); }
+    });
+
+    // Nascondi sezioni vuote
+    document.querySelectorAll('.cmd-section').forEach(sec => {
+      const anyVisible = [...sec.querySelectorAll('.cmd-item')].some(i => !i.classList.contains('hidden'));
+      sec.classList.toggle('hidden', !anyVisible);
+    });
+
+    if (noResults) noResults.style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  if (searchEl) searchEl.addEventListener('input', filterCommands);
+
+  document.querySelectorAll('.cmd-cat').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.cmd-cat').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filterCommands();
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

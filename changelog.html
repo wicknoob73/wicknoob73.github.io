@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Changelog — Carmelo Bot</title>
+  <meta name="description" content="Cronologia degli aggiornamenti di Carmelo Bot — novità, fix e miglioramenti per ogni versione.">
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="Changelog — Carmelo Bot">
+  <meta property="og:description" content="Cronologia degli aggiornamenti di Carmelo Bot.">
+  <meta property="og:image"       content="https://placehold.co/1200x630/0a0c14/4ab3e8?text=Carmelo+Bot+Changelog">
+  <meta name="theme-color"        content="#4ab3e8">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230a0c14'/><text y='24' x='4' font-size='22'>🤖</text></svg>">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .page-hero { padding: 60px 0 48px; }
+    .page-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800; letter-spacing: -0.04em;
+      margin: 12px 0 10px;
+    }
+    .page-hero p { color: var(--text-secondary); font-size: 0.95rem; max-width: 460px; }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding-left: 32px;
+      margin-top: 8px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px; top: 8px; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--blue), rgba(74,179,232,0.05));
+    }
+
+    .tl-entry {
+      position: relative;
+      margin-bottom: 36px;
+    }
+
+    .tl-entry:last-child { margin-bottom: 0; }
+
+    /* Dot on the line */
+    .tl-dot {
+      position: absolute;
+      left: calc(-32px + 7px);
+      top: 18px;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--bg-base);
+      border: 2px solid var(--blue);
+      box-shadow: 0 0 8px rgba(74,179,232,0.4);
+      z-index: 1;
+      transform: translateX(-50%);
+    }
+
+    .tl-dot.latest {
+      background: var(--blue);
+      box-shadow: 0 0 12px rgba(74,179,232,0.6);
+    }
+
+    /* Card */
+    .tl-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px 32px;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      transition: border-color var(--ease), box-shadow var(--ease);
+    }
+
+    .tl-card:hover {
+      border-color: var(--border-hover);
+      box-shadow: 0 4px 28px rgba(0,0,0,0.4);
+    }
+
+    .tl-entry.latest .tl-card {
+      border-color: rgba(74,179,232,0.3);
+    }
+
+    .tl-header {
+      display: flex; align-items: center;
+      flex-wrap: wrap; gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .tl-version {
+      font-family: var(--font-mono);
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .tl-badge-latest {
+      font-size: 0.68rem; font-weight: 700;
+      font-family: var(--font-mono);
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--bg-base);
+      background: var(--blue);
+      border-radius: 4px;
+      padding: 2px 8px;
+    }
+
+    .tl-date {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      margin-left: auto;
+    }
+
+    /* Change groups */
+    .change-group { margin-bottom: 16px; }
+    .change-group:last-child { margin-bottom: 0; }
+
+    .change-type {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      font-family: var(--font-mono);
+      border-radius: 4px;
+      padding: 2px 8px;
+      margin-bottom: 8px;
+    }
+
+    .type-new     { background: rgba(77,232,154,0.1);  color: #4de89a; border: 1px solid rgba(77,232,154,0.2); }
+    .type-fix     { background: rgba(232,96,96,0.1);   color: #e86060; border: 1px solid rgba(232,96,96,0.2); }
+    .type-change  { background: rgba(74,179,232,0.1);  color: #4ab3e8; border: 1px solid rgba(74,179,232,0.2); }
+    .type-remove  { background: rgba(212,169,71,0.1);  color: #d4a947; border: 1px solid rgba(212,169,71,0.2); }
+
+    .change-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 5px;
+      margin: 0;
+    }
+
+    .change-list li {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      flex-wrap: wrap;
+    }
+
+    .change-list li::before {
+      content: '›';
+      color: var(--text-muted);
+      font-weight: 700;
+      flex-shrink: 0;
+      font-size: 1.05em;
+      line-height: 1.55;
+    }
+
+    .change-list li code {
+      font-size: 0.8em;
+    }
+
+    /* Divider between groups */
+    .change-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 14px 0;
+    }
+
+    @media (max-width: 640px) {
+      .page-hero { padding: 40px 0 32px; }
+      .timeline { padding-left: 24px; }
+      .tl-dot { left: calc(-24px + 7px); transform: translateX(-50%); }
+      .tl-card { padding: 22px 18px; }
+      .tl-date { margin-left: 0; width: 100%; }
+    }
+  
+    /* ── Changelog filters ── */
+    .cl-filters {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-bottom: 28px;
+    }
+    .cl-filter {
+      padding: 6px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--ease);
+    }
+    .cl-filter:hover { border-color: var(--blue); color: var(--blue); }
+    .cl-filter.active { background: var(--blue); border-color: var(--blue); color: var(--bg-base); }
+    .cl-no-results { color: var(--text-muted); font-size: 0.9rem; padding: 20px 0; }
+    .tl-entry.hidden { display: none; }
+
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="navbar-logo"><span>Carmelo</span> Bot</a>
+  <ul class="navbar-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="commands.html">Comandi</a></li>
+    <li><a href="changelog.html" class="active">Changelog</a></li>
+    <li><a href="stats.html">Statistiche</a></li>
+    <li><a href="legal.html">Termini & Privacy</a></li>
+    <li><a href="legal.html#contatti">Contatti</a></li>
+  </ul>
+  <a href="#" class="navbar-cta">+ Aggiungi al server</a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" class="active">Home</a>
+  <a href="commands.html">Comandi</a>
+  <a href="changelog.html">Changelog</a>
+  <a href="stats.html">Statistiche</a>
+  <a href="legal.html">Termini & Privacy</a>
+  <a href="legal.html#contatti">Contatti</a>
+  <a href="#" class="mobile-cta">+ Aggiungi al server</a>
+</div>
+
+<div class="container">
+
+  <header class="page-hero">
+    <div class="section-label">Storico aggiornamenti</div>
+    <h1><span style="color:var(--blue);">Changelog</span></h1>
+    <p>Tutte le novità, correzioni e miglioramenti di Carmelo Bot versione per versione.</p>
+  </header>
+
+  
+  <!-- Filtri tipo -->
+  <div class="cl-filters" id="clFilters">
+    <button class="cl-filter active" data-filter="all">Tutti</button>
+    <button class="cl-filter" data-filter="type-new">✦ Novità</button>
+    <button class="cl-filter" data-filter="type-change">↻ Miglioramenti</button>
+    <button class="cl-filter" data-filter="type-fix">● Fix</button>
+    <button class="cl-filter" data-filter="type-remove">✕ Rimosso</button>
+  </div>
+  <p class="cl-no-results" id="clNoResults" style="display:none">Nessuna voce con questo filtro.</p>
+
+  <div class="timeline">
+
+    <!-- v57 -->
+    <div class="tl-entry latest">
+      <div class="tl-dot latest"></div>
+      <div class="tl-card" id="vv57">
+        <div class="tl-header">
+          <span class="tl-version">v57</span>
+          <span class="tl-badge-latest">Ultima versione</span>
+          <span class="tl-date">Giu 2026</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-new">✦ Novità</span>
+          <ul class="change-list">
+            <li>Aggiunta funzione <code>_check_voice()</code>: verifica centralizzata che l'utente sia nel canale vocale prima di ogni comando musicale</li>
+            <li>Se il bot è già in un canale vocale diverso, blocca il comando e invia un messaggio ephemeral automatico</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v55–v56 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv55-v56">
+        <div class="tl-header">
+          <span class="tl-version">v55–v56</span>
+          <span class="tl-date">Giu 2026</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-new">✦ Novità</span>
+          <ul class="change-list">
+            <li>Aggiunto sistema compleanni: <code>/birthday_set</code>, <code>/birthday_enable</code>, <code>/birthday_preview</code> e task automatico giornaliero per gli auguri</li>
+            <li>Aggiunto <code>/autoplay</code> — modalità autoplay musicale, continua a riprodurre brani simili automaticamente</li>
+            <li>Aggiunto task <code>spotify_token_refresh_task</code>: rinnova il token Spotify ogni 50 minuti automaticamente (il token scade dopo 60 min)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v53–v54 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv53-v54">
+        <div class="tl-header">
+          <span class="tl-version">v53–v54</span>
+          <span class="tl-date">Giu 2026</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-new">✦ Novità</span>
+          <ul class="change-list">
+            <li>Aggiunta <code>_now_playing_embed()</code>: embed stile Jockie Music con logo piattaforma colorato (Spotify verde, YouTube rosso, SoundCloud arancio) e thumbnail del brano</li>
+          </ul>
+        </div>
+        <div class="change-divider"></div>
+        <div class="change-group">
+          <span class="change-type type-change">↻ Miglioramenti</span>
+          <ul class="change-list">
+            <li>Cambiata autenticazione Spotify: da <code>SpotifyClientCredentials</code> a <code>SpotifyOAuth</code> con redirect URI locale — permette accesso a funzionalità che richiedono account utente</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v51–v52 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv51-v52">
+        <div class="tl-header">
+          <span class="tl-version">v51–v52</span>
+          <span class="tl-date">Mag 2026</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-new">✦ Novità</span>
+          <ul class="change-list">
+            <li>Aggiunto <code>/duration</code> — mostra la durata del brano corrente e la posizione nella coda</li>
+          </ul>
+        </div>
+        <div class="change-divider"></div>
+        <div class="change-group">
+          <span class="change-type type-change">↻ Miglioramenti</span>
+          <ul class="change-list">
+            <li>Silenziati log verbosi di discord.py (voice_state, opus) per output più pulito</li>
+            <li>Migliorati messaggi di log per la riproduzione musicale: ora mostrano il titolo del brano</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v49–v50 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv49-v50">
+        <div class="tl-header">
+          <span class="tl-version">v49–v50</span>
+          <span class="tl-date">Mag 2026</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-change">↻ Miglioramenti</span>
+          <ul class="change-list">
+            <li>Formato log rinnovato: più compatto con orario <code>HH:MM:SS</code>, silenziati log http e gateway di discord.py</li>
+          </ul>
+        </div>
+        <div class="change-divider"></div>
+        <div class="change-group">
+          <span class="change-type type-fix">● Fix</span>
+          <ul class="change-list">
+            <li>Migliorato <code>/purge</code>: ora elimina i messaggi uno per uno con gestione errori per singolo messaggio invece di interrompere tutto</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v48–v49 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv48-v49">
+        <div class="tl-header">
+          <span class="tl-version">v48–v49</span>
+          <span class="tl-date">Apr 2026</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-new">✦ Novità</span>
+          <ul class="change-list">
+            <li>Aggiunto <code>/purge</code> — elimina gli ultimi 50 messaggi di un utente specifico nel canale (scansiona fino a 250 messaggi)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v47–v48 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv47-v48">
+        <div class="tl-header">
+          <span class="tl-version">v47–v48</span>
+          <span class="tl-date">Apr 2026</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-change">↻ Miglioramenti</span>
+          <ul class="change-list">
+            <li>Immagine di benvenuto migliorata: sfondo più scuro, iniziali server calcolate automaticamente dalle parole del nome</li>
+            <li>Spostato <code>/modnote</code> nella sezione corretta del codice</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v45–v47 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv45-v47">
+        <div class="tl-header">
+          <span class="tl-version">v45–v47</span>
+          <span class="tl-date">Mar 2026</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-new">✦ Novità</span>
+          <ul class="change-list">
+            <li>Aggiunto <code>/claim</code> — permette allo staff di prendersi in carico un ticket aperto</li>
+            <li>Aggiunto <code>/configshow</code> — mostra la configurazione attuale del server (canali, ruoli, ecc.)</li>
+            <li>Aggiunto <code>/modnote</code> — note private staff visibili solo ai moderatori su un utente</li>
+            <li>Aggiunto <code>/untimeout</code> — rimuove il timeout da un utente</li>
+            <li>Aggiunta <code>generate_welcome_image()</code>: immagine di benvenuto generata con Pillow</li>
+            <li>Aggiunto <code>/welcome_test</code> — anteprima del messaggio di benvenuto</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v43–v44 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv43-v44">
+        <div class="tl-header">
+          <span class="tl-version">v43–v44</span>
+          <span class="tl-date">Feb 2026</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-change">↻ Miglioramenti</span>
+          <ul class="change-list">
+            <li>Migliorato caricamento playlist YouTube: nuovo estrattore più robusto con <code>extract_flat</code>, carica i primi 25 brani subito e il resto in background</li>
+            <li>Aggiunta cache URL stream audio: evita di riscaricare lo stesso URL per brani già riprodotti</li>
+            <li>Rimossa classe <code>YTDLSource</code>, sostituita con funzioni dirette più leggere</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v41–v42 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv41-v42">
+        <div class="tl-header">
+          <span class="tl-version">v41–v42</span>
+          <span class="tl-date">Feb 2026</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-change">↻ Miglioramenti</span>
+          <ul class="change-list">
+            <li><code>/serverinfo</code> ora mostra: ID server, proprietario, data di creazione, categorie canali, emoji, descrizione e footer con richiedente</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v40–v41 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv40-v41">
+        <div class="tl-header">
+          <span class="tl-version">v40–v41</span>
+          <span class="tl-date">Gen 2026</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-fix">● Fix</span>
+          <ul class="change-list">
+            <li>Pillole ruoli nel <code>/profile</code> invisibili per ruoli con colore nero — ora usa un grigio neutro visibile; testo delle pillole sempre bianco</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v39–v40 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv39-v40">
+        <div class="tl-header">
+          <span class="tl-version">v39–v40</span>
+          <span class="tl-date">Gen 2026</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-change">↻ Miglioramenti</span>
+          <ul class="change-list">
+            <li>Rank card ripristinata al design originale v36 (900×250px, cerchi viola/teal, avatar circolare con anello, barra teal)</li>
+            <li>Aggiunta colonna <code>XP Totali</code> nelle statistiche del rank, mantenuta anche nel design ripristinato</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v38–v39 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv38-v39">
+        <div class="tl-header">
+          <span class="tl-version">v38–v39</span>
+          <span class="tl-date">Gen 2026</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-change">↻ Miglioramenti</span>
+          <ul class="change-list">
+            <li>Ridisegnata rank card: avatar circolare grande a sinistra, barra XP verde, colonna XP Totali aggiunta</li>
+            <li>Ridisegnata profile card: sfondo con cerchi decorativi, avatar circolare, badge stato colorato</li>
+            <li>Ridisegnata leaderboard: sfondo migliorato, barre colorate per sezione, mini-avatar per ogni entry</li>
+            <li>Ridisegnata roleinfo card: più informazioni, bordo colorato, footer con logo server</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v37_1–v38 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv37_1-v38">
+        <div class="tl-header">
+          <span class="tl-version">v37_1–v38</span>
+          <span class="tl-date">Dic 2025</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-new">✦ Novità</span>
+          <ul class="change-list">
+            <li>Aggiunta funzione <code>_fetch_avatar()</code>: scarica e ridimensiona l'avatar in modo centralizzato, evita codice duplicato in ogni card</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v36–v37 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv36-v37">
+        <div class="tl-header">
+          <span class="tl-version">v36–v37</span>
+          <span class="tl-date">Dic 2025</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-new">✦ Novità</span>
+          <ul class="change-list">
+            <li>Aggiunte card immagine Pillow per tutti i comandi visivi: <code>generate_profile_card()</code>, <code>generate_leaderboard_card()</code>, <code>generate_roleinfo_card()</code>, <code>generate_serverinfo_card()</code></li>
+            <li>Aggiunto <code>/unwarn</code> — rimuove un avvertimento da un utente</li>
+            <li>Aggiunto gestore globale errori <code>on_app_command_error</code></li>
+          </ul>
+        </div>
+        <div class="change-divider"></div>
+        <div class="change-group">
+          <span class="change-type type-remove">✕ Rimosso</span>
+          <ul class="change-list">
+            <li>Rimossi i singoli error handler per ogni comando, sostituiti dal gestore globale</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v35–v36 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv35-v36">
+        <div class="tl-header">
+          <span class="tl-version">v35–v36</span>
+          <span class="tl-date">Nov 2025</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-new">✦ Novità</span>
+          <ul class="change-list">
+            <li>Aggiunta <code>generate_rank_card()</code>: il comando <code>/rank</code> ora genera un'immagine PNG con Pillow invece di un embed testuale</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v34–v35 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv34-v35">
+        <div class="tl-header">
+          <span class="tl-version">v34–v35</span>
+          <span class="tl-date">Nov 2025</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-new">✦ Novità</span>
+          <ul class="change-list">
+            <li>Aggiunto <code>/roleinfo</code> — informazioni dettagliate su un ruolo</li>
+            <li>Aggiunto <code>/serverinfo</code> — informazioni sul server</li>
+            <li>Aggiunto <code>/case</code> — storico sanzioni di un utente</li>
+            <li>Aggiunto <code>/shuffle</code> — mescola la coda musicale</li>
+            <li>Aggiunto <code>/remove</code> — rimuove un brano dalla coda</li>
+            <li>Aggiunte classi <code>LeaderboardView</code> e <code>QueueView</code> con paginazione a bottoni</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v33–v34 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv33-v34">
+        <div class="tl-header">
+          <span class="tl-version">v33–v34</span>
+          <span class="tl-date">Ott 2025</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-new">✦ Novità</span>
+          <ul class="change-list">
+            <li>Aggiunto <code>/profile</code> — primo profilo utente (embed testuale con dati Discord)</li>
+            <li>Ripristinato <code>/kick</code></li>
+          </ul>
+        </div>
+        <div class="change-divider"></div>
+        <div class="change-group">
+          <span class="change-type type-remove">✕ Rimosso</span>
+          <ul class="change-list">
+            <li>Rimossi <code>/clear_levels</code> e <code>/clear_user_messages</code></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v31–v32 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv31-v32">
+        <div class="tl-header">
+          <span class="tl-version">v31–v32</span>
+          <span class="tl-date">Ott 2025</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-new">✦ Novità</span>
+          <ul class="change-list">
+            <li>Disconnessione automatica dal vocale: se il bot rimane solo nel canale si disconnette dopo un timer (<code>_check_alone_in_voice()</code>)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v30–v31 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv30-v31">
+        <div class="tl-header">
+          <span class="tl-version">v30–v31</span>
+          <span class="tl-date">Set 2025</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-change">↻ Miglioramenti</span>
+          <ul class="change-list">
+            <li>Migliorata visualizzazione coda musicale: titoli lunghi troncati a 80 caratteri, aggiunto limite campo Discord (1024 caratteri)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v27–v29 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv27-v29">
+        <div class="tl-header">
+          <span class="tl-version">v27–v29</span>
+          <span class="tl-date">Set 2025</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-change">↻ Miglioramenti</span>
+          <ul class="change-list">
+            <li>Contatore ticket ora è per-server invece che globale del bot — ogni server ha il proprio contatore progressivo</li>
+            <li>Aggiornato <code>/help</code> con tutti i comandi mancanti (rank, leaderboard, daily, wheel, unban, ticket)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v25–v26 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv25-v26">
+        <div class="tl-header">
+          <span class="tl-version">v25–v26</span>
+          <span class="tl-date">Ago 2025</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-new">✦ Novità</span>
+          <ul class="change-list">
+            <li>Aggiunto <code>/termini</code> — mostra termini di servizio e privacy policy del bot</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v24–v25 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv24-v25">
+        <div class="tl-header">
+          <span class="tl-version">v24–v25</span>
+          <span class="tl-date">Ago 2025</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-new">✦ Novità</span>
+          <ul class="change-list">
+            <li>Sistema giveaway completo: <code>/giveaway</code>, <code>/gend</code>, <code>/gdelete</code>, <code>/ginfo</code>, <code>/glist</code>, <code>/gparticipants</code>, <code>/reroll</code></li>
+            <li>Persistenza giveaway su SQLite con ripristino automatico al riavvio del bot</li>
+            <li>Classi <code>GiveawayEnterView</code> e <code>GiveawayModal</code></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v22–v23 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv22-v23">
+        <div class="tl-header">
+          <span class="tl-version">v22–v23</span>
+          <span class="tl-date">Lug 2025</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-new">✦ Novità</span>
+          <ul class="change-list">
+            <li>Aggiunti effetti audio: <code>/8d</code>, <code>/chipmunk</code>, <code>/earrape</code>, <code>/reverb</code>, <code>/robot</code>, <code>/vaporwave</code></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v21–v22 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv21-v22">
+        <div class="tl-header">
+          <span class="tl-version">v21–v22</span>
+          <span class="tl-date">Giu 2025</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-new">✦ Novità</span>
+          <ul class="change-list">
+            <li>Aggiunto <code>/versione</code> — mostra la versione corrente del bot con changelog</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v18–v21 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv18-v21">
+        <div class="tl-header">
+          <span class="tl-version">v18–v21</span>
+          <span class="tl-date">Giu 2025</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-change">↻ Miglioramenti</span>
+          <ul class="change-list">
+            <li>Tracking vocale migliorato: aggiorna i minuti ogni minuto (tick) invece che solo all'uscita dal canale — più preciso per sessioni lunghe</li>
+            <li>Caricamento playlist ottimizzato: playlist e primo brano si caricano in parallelo, la musica parte subito</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v16–v17 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv16-v17">
+        <div class="tl-header">
+          <span class="tl-version">v16–v17</span>
+          <span class="tl-date">Mag 2025</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-change">↻ Miglioramenti</span>
+          <ul class="change-list">
+            <li>Aggiunto campo <code>total_xp</code> nel database: ora gli XP totali sono cumulativi e non si azzerano al level up</li>
+            <li>Rimossa la funzione <code>calculate_total_xp()</code>, sostituita dal valore salvato direttamente</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v14–v15 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv14-v15">
+        <div class="tl-header">
+          <span class="tl-version">v14–v15</span>
+          <span class="tl-date">Apr 2025</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-new">✦ Novità</span>
+          <ul class="change-list">
+            <li>Aggiunto <code>/daily</code> — XP gratuiti ogni 24 ore</li>
+            <li>Aggiunto <code>/wheel</code> — ruota della fortuna per XP extra ogni 12 ore</li>
+            <li>Aggiunto <code>/leaderboard</code> — classifiche server</li>
+            <li>Aggiunto <code>/unban</code> — rimuove un ban</li>
+            <li>Aggiunto <code>/dice</code> — lancia un dado</li>
+            <li>Aggiunto <code>/invite</code> — link di invito del bot</li>
+            <li>Aggiunti <code>/reset_daily</code> e <code>/reset_wheel</code> — reset cooldown per admin</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v11–v13 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv11-v13">
+        <div class="tl-header">
+          <span class="tl-version">v11–v13</span>
+          <span class="tl-date">Mar 2025</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-new">✦ Novità</span>
+          <ul class="change-list">
+            <li>Aggiunto <code>/set_autorole</code> — assegna automaticamente un ruolo ai nuovi membri</li>
+            <li>Aggiunto <code>/set_welcome_channel</code> — configura il canale di benvenuto</li>
+            <li>Aggiunto <code>/set_goodbye_channel</code> — messaggio di addio quando un membro lascia</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v8–v10 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv8-v10">
+        <div class="tl-header">
+          <span class="tl-version">v8–v10</span>
+          <span class="tl-date">Feb 2025</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-new">✦ Novità</span>
+          <ul class="change-list">
+            <li>Aggiunto <code>get_embed_color(level)</code>: il colore dell'embed rank cambia in base al livello (grigio → blu → verde → oro → arancio → rosso)</li>
+            <li>Aggiunto <code>format_xp()</code>: formatta XP grandi come <code>1.2k</code></li>
+            <li>Aggiunto <code>calculate_total_xp()</code>: calcola XP totali accumulati nei livelli precedenti</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v4–v7 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv4-v7">
+        <div class="tl-header">
+          <span class="tl-version">v4–v7</span>
+          <span class="tl-date">Gen 2025</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-new">✦ Novità</span>
+          <ul class="change-list">
+            <li>Sistema ticket completo con <code>TicketCloseView</code> e menu di selezione motivo</li>
+          </ul>
+        </div>
+        <div class="change-divider"></div>
+        <div class="change-group">
+          <span class="change-type type-change">↻ Miglioramenti</span>
+          <ul class="change-list">
+            <li>Refactoring logging: formato più pulito, token caricati da variabili d'ambiente <code>.env</code></li>
+            <li>Gestione file JSON corrotti: ora logga l'errore invece di sovrascrivere con dati vuoti</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v0–v3 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv0-v3">
+        <div class="tl-header">
+          <span class="tl-version">v0–v3</span>
+          <span class="tl-date">Dic 2024</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-new">✦ Novità</span>
+          <ul class="change-list">
+            <li>Prima versione del bot</li>
+            <li>Sistema XP e livelli con salvataggio su JSON</li>
+            <li>Comandi <code>/rank</code> e <code>/setlevel</code> (embed testuale)</li>
+            <li>Comandi di moderazione base: <code>/warn</code>, <code>/ban</code>, <code>/kick</code>, <code>/timeout</code></li>
+          </ul>
+        </div>
+        <div class="change-divider"></div>
+        <div class="change-group">
+          <span class="change-type type-change">↻ Miglioramenti</span>
+          <ul class="change-list">
+            <li><code>/setlevel</code> migliorato: ora accetta livello e/o XP separatamente con validazione</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-left">
+    <div class="footer-brand"><span>Carmelo</span> Bot</div>
+    <div class="footer-meta">discord.py 2.x · v57 · 55+ comandi</div>
+    <div class="footer-copy">© 2026 wicknoob73 & jeimaster. — Non affiliato con Discord Inc.</div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="commands.html">Comandi</a></li>
+    <li><a href="legal.html">Termini</a></li>
+    <li><a href="legal.html#contatti">Contatti</a></li>
+  </ul>
+</footer>
+
+
+<button class="back-to-top" id="backToTop" aria-label="Torna su">
+  <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="18 15 12 9 6 15"/>
+  </svg>
+</button>
+
+<script>
+// Hamburger
+const ham = document.getElementById('hamburgerBtn');
+const mob = document.getElementById('mobileMenu');
+if (ham && mob) {
+  ham.addEventListener('click', () => {
+    ham.classList.toggle('open');
+    mob.classList.toggle('open');
+  });
+  document.addEventListener('click', e => {
+    if (!ham.contains(e.target) && !mob.contains(e.target)) {
+      ham.classList.remove('open');
+      mob.classList.remove('open');
+    }
+  });
+}
+// Back to top
+const btt = document.getElementById('backToTop');
+if (btt) {
+  window.addEventListener('scroll', () => {
+    btt.classList.toggle('visible', window.scrollY > 300);
+  }, { passive: true });
+  btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+}
+</script>
+
+<script>
+// Filtri changelog
+document.querySelectorAll('.cl-filter').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.cl-filter').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    let visible = 0;
+    document.querySelectorAll('.tl-entry').forEach(entry => {
+      if (f === 'all') {
+        entry.classList.remove('hidden'); visible++;
+      } else {
+        const has = entry.querySelector('.' + f);
+        if (has) { entry.classList.remove('hidden'); visible++; }
+        else      { entry.classList.add('hidden'); }
+      }
+    });
+    document.getElementById('clNoResults').style.display = visible === 0 ? 'block' : 'none';
+  });
+});
+</script>
+
+</body>
+</html>
