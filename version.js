@@ -1,6 +1,6 @@
 // version.js
 const VERSION_FALLBACK = 'v0';
-const STATS_URL = 'https://florists-smaller-toll-platform.trycloudflare.com/stats';
+const STATS_URL = 'https://attribute-signals-circuits-rangers.trycloudflare.com/stats';
 
 async function updateVersion() {
   try {
