@@ -216,6 +216,7 @@
 </head>
 <body>
 	
+<script src="config.js"></script>
 <script src="version.js" defer></script>	
 
 <nav class="navbar">
@@ -223,8 +224,8 @@
   <ul class="navbar-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="commands.html">Comandi</a></li>
-    <li><a href="changelog.html">Changelog</a></li>
     <li><a href="stats.html" class="active">Statistiche</a></li>
+    <li><a href="changelog.html">Changelog</a></li>
     <li><a href="legal.html">Termini & Privacy</a></li>
     <li><a href="legal.html#contatti">Contatti</a></li>
   </ul>
@@ -239,8 +240,8 @@
 <div class="mobile-menu" id="mobileMenu">
   <a href="index.html">Home</a>
   <a href="commands.html">Comandi</a>
-  <a href="changelog.html">Changelog</a>
   <a href="stats.html" class="active">Statistiche</a>
+  <a href="changelog.html">Changelog</a>
   <a href="legal.html">Termini & Privacy</a>
   <a href="legal.html#contatti">Contatti</a>
   <a href="#" class="mobile-cta">+ Aggiungi al server</a>
@@ -332,7 +333,7 @@
 <footer>
   <div class="footer-left">
     <div class="footer-brand"><span>Carmelo</span> Bot</div>
-    <div class="footer-meta">discord.py 2.x · <span class="bot-version">v0</span> · 70+ comandi</div>
+    <div class="footer-meta">discord.py 2.x · <span class="bot-version">v0</span> · 120 comandi</div>
     <div class="footer-copy">© 2026 wicknoob73 & jeimaster. — Non affiliato con Discord Inc.</div>
   </div>
   <ul class="footer-links">
@@ -345,9 +346,7 @@
 </footer>
 
 <script>
-// ── Cambia questo con l'IP del tuo telefono ──────────────
-const STATS_URL = 'https://months-consequently-bandwidth-player.trycloudflare.com/stats';
-// ────────────────────────────────────────────────────────
+// STATS_URL è definito globalmente in config.js (caricato prima di questo script).
 
 let refreshTimer = null;
 

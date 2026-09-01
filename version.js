@@ -1,6 +1,6 @@
 // version.js
+// STATS_URL è definito globalmente in config.js, caricato prima di questo file.
 const VERSION_FALLBACK = 'v0';
-const STATS_URL = 'https://attribute-signals-circuits-rangers.trycloudflare.com/stats';
 
 async function updateVersion() {
   try {
