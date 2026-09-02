@@ -251,13 +251,342 @@
 
   <div class="timeline">
 
-    <!-- v69 -->
+    <!-- v103 -->
     <div class="tl-entry latest">
       <div class="tl-dot latest"></div>
+      <div class="tl-card" id="vv103">
+        <div class="tl-header">
+          <span class="tl-version">v103</span>
+          <span class="tl-badge-latest">Ultima versione</span>
+          <span class="tl-date">Ago 2026</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-fix">● Fix</span>
+          <ul class="change-list">
+            <li>Aggiunto un controllo periodico (<code>voice_watchdog_task</code>) che rileva quando la connessione vocale resta "morta in silenzio" dopo un'interruzione di rete prolungata (tipico del Doze mode Android quando il bot gira su Termux) e forza una disconnessione/riconnessione pulita, riprendendo la riproduzione da dove si era fermata</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v102 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv102">
+        <div class="tl-header">
+          <span class="tl-version">v102</span>
+          <span class="tl-date">Ago 2026</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-new">✦ Novità</span>
+          <ul class="change-list">
+            <li>Aggiunto <code>/xp reset-tutti</code> [Admin] — resetta XP e livello di <strong>tutti</strong> gli utenti del server in un colpo solo, con finestra di conferma obbligatoria prima di procedere</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v101 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv101">
+        <div class="tl-header">
+          <span class="tl-version">v101</span>
+          <span class="tl-date">Ago 2026</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-new">✦ Novità</span>
+          <ul class="change-list">
+            <li>Aggiunto <code>/xp sistema</code> — attiva o disattiva l'intero sistema XP/livelli per il server in un colpo solo, invece di doverlo fare comando per comando</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v98–v100 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv98-v100">
+        <div class="tl-header">
+          <span class="tl-version">v98–v100</span>
+          <span class="tl-date">Ago 2026</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-new">✦ Novità</span>
+          <ul class="change-list">
+            <li>Il log di moderazione per messaggi eliminati/modificati ora genera un'immagine invece del solo embed testuale: intestazione, contenuto del messaggio e un "sigillo" colorato e ruotato (ELIMINATO/MODIFICATO) in stile timbro</li>
+          </ul>
+        </div>
+        <div class="change-divider"></div>
+        <div class="change-group">
+          <span class="change-type type-fix">● Fix</span>
+          <ul class="change-list">
+            <li>Il logging dei messaggi eliminati/modificati usa ora gli eventi raw di Discord (<code>on_raw_message_delete</code>/<code>on_raw_message_edit</code>) invece di quelli in cache — prima un messaggio non presente nella cache del bot (es. scritto prima di un riavvio) non veniva loggato</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v97 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv97">
+        <div class="tl-header">
+          <span class="tl-version">v97</span>
+          <span class="tl-date">Ago 2026</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-new">✦ Novità</span>
+          <ul class="change-list">
+            <li>Aggiunta un'immagine generata per gli auguri di compleanno automatici</li>
+            <li>Aggiunto un parser generico di durate/date (es. "2h", "30m", una data assoluta) riutilizzato da più comandi</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v91–v96 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv91-v96">
+        <div class="tl-header">
+          <span class="tl-version">v91–v96</span>
+          <span class="tl-date">Ago 2026</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-new">✦ Novità</span>
+          <ul class="change-list">
+            <li>Aggiornamento automatico giornaliero di yt-dlp (ogni giorno alle 5:00): il bot scarica la nuova versione e si riavvia da solo tramite un codice di uscita dedicato (intercettato dal wrapper <code>start.sh</code>)</li>
+            <li>Aggiunta normalizzazione del volume tra i brani in coda, per evitare salti di volume passando da una canzone all'altra</li>
+          </ul>
+        </div>
+        <div class="change-divider"></div>
+        <div class="change-group">
+          <span class="change-type type-fix">● Fix</span>
+          <ul class="change-list">
+            <li>Migliorato l'abbinamento dei risultati YouTube per ogni brano: confronto più intelligente tra titolo richiesto e titolo trovato (invece del semplice primo risultato) per ridurre le riproduzioni del brano sbagliato</li>
+            <li>Corretto un caso limite nella generazione dei link per brani con titoli particolari</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v85–v87 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv85-v87">
+        <div class="tl-header">
+          <span class="tl-version">v85–v87</span>
+          <span class="tl-date">Ago 2026</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-change">↻ Miglioramenti</span>
+          <ul class="change-list">
+            <li>Il sottocomando <code>mischia</code> di <code>/queue</code> è stato rinominato in <code>/queue shuffle</code>, per coerenza con gli altri comandi in inglese</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v83–v84 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv83-v84">
+        <div class="tl-header">
+          <span class="tl-version">v83–v84</span>
+          <span class="tl-date">Ago 2026</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-new">✦ Novità</span>
+          <ul class="change-list">
+            <li>Aggiunto un nuovo stile "Twitter" per <code>/quote</code>: genera un finto tweet con nome, testo, data/ora in stile X e le icone di risposta/retweet/like/condivisione/salvataggio disegnate a mano</li>
+          </ul>
+        </div>
+        <div class="change-divider"></div>
+        <div class="change-group">
+          <span class="change-type type-change">↻ Miglioramenti</span>
+          <ul class="change-list">
+            <li>Refactor del caricamento dei loghi delle piattaforme (Spotify/YouTube/SoundCloud) usati nella card "Ora in riproduzione"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v81–v82 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv81-v82">
+        <div class="tl-header">
+          <span class="tl-version">v81–v82</span>
+          <span class="tl-date">Ago 2026</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-new">✦ Novità</span>
+          <ul class="change-list">
+            <li>Supporto ai link Spotify condivisi in chat tramite l'embed generato automaticamente da Discord: il bot riesce a leggere brano/playlist anche quando manca l'accesso diretto all'API</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v79–v80 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv79-v80">
+        <div class="tl-header">
+          <span class="tl-version">v79–v80</span>
+          <span class="tl-date">Lug 2026</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-fix">● Fix</span>
+          <ul class="change-list">
+            <li>Risolta una race condition quando arrivano due richieste di riproduzione ravvicinate sullo stesso server: ora sono serializzate con un lock invece di rischiare che entrambe chiamino <code>voice.play()</code> in contemporanea</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v77–v78 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv77-v78">
+        <div class="tl-header">
+          <span class="tl-version">v77–v78</span>
+          <span class="tl-date">Lug 2026</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-new">✦ Novità</span>
+          <ul class="change-list">
+            <li>Aggiunto il sistema achievement con card generata al volo: badge per categoria con tier progressivi, anello di progresso e i giveaway vinti tra i criteri di sblocco</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v75–v76 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv75-v76">
+        <div class="tl-header">
+          <span class="tl-version">v75–v76</span>
+          <span class="tl-date">Lug 2026</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-new">✦ Novità</span>
+          <ul class="change-list">
+            <li>Sistema di mute persistente: ruolo Muted dedicato, durata personalizzabile (es. <code>30s</code>, <code>10m</code>, <code>2h</code>, <code>1g</code>), timer che sopravvive anche a un riavvio del bot</li>
+            <li>Requisiti di partecipazione per i giveaway (ruolo, livello minimo, messaggi minimi) tramite <code>/giveaway richiedi</code>, con blacklist/whitelist utenti dedicata</li>
+            <li>Aggiunta una finestra di conferma prima di un reset XP, per evitare reset accidentali</li>
+          </ul>
+        </div>
+        <div class="change-divider"></div>
+        <div class="change-group">
+          <span class="change-type type-change">↻ Miglioramenti</span>
+          <ul class="change-list">
+            <li>La trascrizione del ticket (<code>/ticket transcript</code>) ora prova a risalire automaticamente a chi ha aperto il ticket</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v74 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv74">
+        <div class="tl-header">
+          <span class="tl-version">v74</span>
+          <span class="tl-date">Lug 2026</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-change">↻ Miglioramenti</span>
+          <ul class="change-list">
+            <li>Riorganizzati gran parte dei comandi in gruppi slash tematici in italiano: <code>/effetto</code>, <code>/giveaway</code>, <code>/player</code>, <code>/queue</code>, <code>/warn</code>, <code>/xp</code>, <code>/config</code>, <code>/comando</code>, <code>/reset</code> e ampliamento di <code>/ticket</code> — stessi comandi di prima, ma raggruppati per categoria invece che tutti a livello principale, più semplici da trovare digitando <code>/</code></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v73 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv73">
+        <div class="tl-header">
+          <span class="tl-version">v73</span>
+          <span class="tl-date">Lug 2026</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-new">✦ Novità</span>
+          <ul class="change-list">
+            <li>Sistema ticket ampliato: aggiunta/rimozione utenti, chiusura, rinomina, argomento e trasferimento del ticket</li>
+            <li>Nuovi comandi di moderazione: blocco/sblocco canale, mute/unmute a tempo, modalità lenta (slowmode)</li>
+            <li>Aggiunto il sistema achievement (comando base per vedere i badge sbloccati)</li>
+            <li>Possibilità di abilitare/disabilitare singoli comandi per server</li>
+            <li>Aggiunto un sistema di segnalazioni (<code>/report</code>) con canale dedicato configurabile</li>
+            <li>Nuovi comandi: sondaggi (<code>/poll</code>), citazioni testuali come immagine (<code>/quote</code>), testi delle canzoni (<code>/lyrics</code>), stazioni radio (<code>/radio</code>), effetti sonori brevi (<code>/soundboard</code>)</li>
+            <li>Salvataggio/caricamento delle code musicali e cronologia dei brani suonati sul server</li>
+            <li>Gestione avanzata dei giveaway: creazione dedicata, modifica, requisiti di partecipazione, blacklist utenti</li>
+            <li>Nuovi comandi di amministrazione XP: moltiplicatore temporaneo, reset, ruoli per livello, statistiche</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v71–v72 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv71-v72">
+        <div class="tl-header">
+          <span class="tl-version">v71–v72</span>
+          <span class="tl-date">Lug 2026</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-new">✦ Novità</span>
+          <ul class="change-list">
+            <li>L'AI del bot può ora generare immagini su richiesta in chat (tramite Pollinations AI), oltre a rispondere ai messaggi e gestire la coda musicale</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v70 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
+      <div class="tl-card" id="vv70">
+        <div class="tl-header">
+          <span class="tl-version">v70</span>
+          <span class="tl-date">Lug 2026</span>
+        </div>
+
+        <div class="change-group">
+          <span class="change-type type-change">↻ Miglioramenti</span>
+          <ul class="change-list">
+            <li>L'AI del bot ora conosce la lista dei comandi disponibili (raggruppati per categoria) e può recuperarne i dettagli su richiesta invece di indovinare quando qualcuno chiede come funziona un comando</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- v69 -->
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
       <div class="tl-card" id="vv69">
         <div class="tl-header">
           <span class="tl-version">v69</span>
-          <span class="tl-badge-latest">Ultima versione</span>
           <span class="tl-date">Lug 2026</span>
         </div>
 
@@ -512,8 +841,8 @@
     </div>
 
     <!-- v57 -->
-    <div class="tl-entry latest">
-      <div class="tl-dot latest"></div>
+    <div class="tl-entry">
+      <div class="tl-dot"></div>
       <div class="tl-card" id="vv57">
         <div class="tl-header">
           <span class="tl-version">v57</span>
@@ -1192,7 +1521,9 @@
   <ul class="footer-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="commands.html">Comandi</a></li>
-    <li><a href="legal.html">Termini</a></li>
+    <li><a href="stats.html">Statistiche</a></li>
+    <li><a href="changelog.html">Changelog</a></li>
+    <li><a href="legal.html">Termini & Privacy</a></li>
     <li><a href="legal.html#contatti">Contatti</a></li>
   </ul>
 </footer>
