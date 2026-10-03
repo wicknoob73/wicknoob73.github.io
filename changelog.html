@@ -5,12 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Changelog — Carmelo Bot</title>
   <meta name="description" content="Cronologia degli aggiornamenti di Carmelo Bot — novità, fix e miglioramenti per ogni versione.">
+  <link rel="canonical" href="https://wicknoob73.github.io/changelog.html">
   <meta property="og:type"        content="website">
   <meta property="og:title"       content="Changelog — Carmelo Bot">
   <meta property="og:description" content="Cronologia degli aggiornamenti di Carmelo Bot.">
-  <meta property="og:image"       content="https://placehold.co/1200x630/0a0c14/4ab3e8?text=Carmelo+Bot+Changelog">
+  <meta property="og:image" content="https://wicknoob73.github.io/assets/og-image.png">
   <meta name="theme-color"        content="#4ab3e8">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230a0c14'/><text y='24' x='4' font-size='22'>🤖</text></svg>">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
   <link rel="stylesheet" href="style.css">
   <style>
     .page-hero { padding: 60px 0 48px; }
@@ -204,15 +209,17 @@
 
 <nav class="navbar">
   <a href="index.html" class="navbar-logo"><span>Carmelo</span> Bot</a>
-  <ul class="navbar-links">
+    <ul class="navbar-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="commands.html">Comandi</a></li>
+    <li><a href="guide.html">Guida</a></li>
+    <li><a href="setup.html">Setup</a></li>
     <li><a href="stats.html">Statistiche</a></li>
     <li><a href="changelog.html" class="active">Changelog</a></li>
     <li><a href="legal.html">Termini & Privacy</a></li>
     <li><a href="legal.html#contatti">Contatti</a></li>
   </ul>
-  <a href="#" class="navbar-cta">+ Aggiungi al server</a>
+  <a href="invite.html" class="navbar-cta">+ Aggiungi al server</a>
   <button class="theme-toggle" id="themeToggle" aria-label="Cambia tema">
     <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     <svg class="icon-sun"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -223,11 +230,13 @@
 <div class="mobile-menu" id="mobileMenu">
   <a href="index.html">Home</a>
   <a href="commands.html">Comandi</a>
+  <a href="guide.html">Guida</a>
+  <a href="setup.html">Setup</a>
   <a href="stats.html">Statistiche</a>
   <a href="changelog.html" class="active">Changelog</a>
   <a href="legal.html">Termini & Privacy</a>
   <a href="legal.html#contatti">Contatti</a>
-  <a href="#" class="mobile-cta">+ Aggiungi al server</a>
+  <a href="invite.html" class="mobile-cta">+ Aggiungi al server</a>
 </div>
 
 <div class="container">
@@ -242,10 +251,10 @@
   <!-- Filtri tipo -->
   <div class="cl-filters" id="clFilters">
     <button class="cl-filter active" data-filter="all">Tutti</button>
-    <button class="cl-filter" data-filter="type-new">✦ Novità</button>
+    <button class="cl-filter" data-filter="type-new"><span aria-hidden="true">✦</span> Novità</button>
     <button class="cl-filter" data-filter="type-change">↻ Miglioramenti</button>
     <button class="cl-filter" data-filter="type-fix">● Fix</button>
-    <button class="cl-filter" data-filter="type-remove">✕ Rimosso</button>
+    <button class="cl-filter" data-filter="type-remove"><span aria-hidden="true">✕</span> Rimosso</button>
   </div>
   <p class="cl-no-results" id="clNoResults" style="display:none">Nessuna voce con questo filtro.</p>
 
@@ -280,7 +289,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Aggiunto <code>/xp reset-tutti</code> [Admin] — resetta XP e livello di <strong>tutti</strong> gli utenti del server in un colpo solo, con finestra di conferma obbligatoria prima di procedere</li>
           </ul>
@@ -298,7 +307,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Aggiunto <code>/xp sistema</code> — attiva o disattiva l'intero sistema XP/livelli per il server in un colpo solo, invece di doverlo fare comando per comando</li>
           </ul>
@@ -316,7 +325,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Il log di moderazione per messaggi eliminati/modificati ora genera un'immagine invece del solo embed testuale: intestazione, contenuto del messaggio e un "sigillo" colorato e ruotato (ELIMINATO/MODIFICATO) in stile timbro</li>
           </ul>
@@ -341,7 +350,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Aggiunta un'immagine generata per gli auguri di compleanno automatici</li>
             <li>Aggiunto un parser generico di durate/date (es. "2h", "30m", una data assoluta) riutilizzato da più comandi</li>
@@ -360,7 +369,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Aggiornamento automatico giornaliero di yt-dlp (ogni giorno alle 5:00): il bot scarica la nuova versione e si riavvia da solo tramite un codice di uscita dedicato (intercettato dal wrapper <code>start.sh</code>)</li>
             <li>Aggiunta normalizzazione del volume tra i brani in coda, per evitare salti di volume passando da una canzone all'altra</li>
@@ -405,7 +414,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Aggiunto un nuovo stile "Twitter" per <code>/quote</code>: genera un finto tweet con nome, testo, data/ora in stile X e le icone di risposta/retweet/like/condivisione/salvataggio disegnate a mano</li>
           </ul>
@@ -430,7 +439,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Supporto ai link Spotify condivisi in chat tramite l'embed generato automaticamente da Discord: il bot riesce a leggere brano/playlist anche quando manca l'accesso diretto all'API</li>
           </ul>
@@ -466,7 +475,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Aggiunto il sistema achievement con card generata al volo: badge per categoria con tier progressivi, anello di progresso e i giveaway vinti tra i criteri di sblocco</li>
           </ul>
@@ -484,7 +493,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Sistema di mute persistente: ruolo Muted dedicato, durata personalizzabile (es. <code>30s</code>, <code>10m</code>, <code>2h</code>, <code>1g</code>), timer che sopravvive anche a un riavvio del bot</li>
             <li>Requisiti di partecipazione per i giveaway (ruolo, livello minimo, messaggi minimi) tramite <code>/giveaway richiedi</code>, con blacklist/whitelist utenti dedicata</li>
@@ -529,7 +538,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Sistema ticket ampliato: aggiunta/rimozione utenti, chiusura, rinomina, argomento e trasferimento del ticket</li>
             <li>Nuovi comandi di moderazione: blocco/sblocco canale, mute/unmute a tempo, modalità lenta (slowmode)</li>
@@ -555,7 +564,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>L'AI del bot può ora generare immagini su richiesta in chat (tramite Pollinations AI), oltre a rispondere ai messaggi e gestire la coda musicale</li>
           </ul>
@@ -599,7 +608,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Aggiunto <code>/crashoutstatus</code> [DEV] — mostra a che punto è un utente verso il crashout (es. "2 su 3" insulti) o, se già attivo, quante risposte piccate restano prima che torni normale</li>
           </ul>
@@ -617,7 +626,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Introdotta la <strong>crashout mode</strong>: dopo 3 insulti di fila rilevati da un classificatore AI dedicato, il bot risponde in modalità sarcastica/aggressiva per 2 messaggi, poi torna normale; reset automatico dopo 3 ore di silenzio</li>
             <li>Aggiunto <code>/crashout</code> [DEV] per attivare o resettare manualmente lo stato crashout di un utente (utile per test)</li>
@@ -637,7 +646,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li><code>/queue</code> ridisegnato con card grafica generata al volo (header, brano in riproduzione, lista brani) e paginazione a bottoni per code lunghe</li>
           </ul>
@@ -673,7 +682,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Aggiunto <code>/modstats</code> — dashboard statistiche di moderazione del server come card grafica: totali per tipo di azione, top moderatori, top utenti warnati, rapporto warn/azioni e registro delle ultime azioni</li>
             <li>Icone della card disegnate a mano con <code>ImageDraw</code> invece di emoji Unicode, per restare leggibili anche su sistemi (es. Termux/Android) senza i glifi emoji nel font di fallback</li>
@@ -692,7 +701,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Aggiunto <code>/text</code> — riscrive e abbellisce un testo con l'AI in uno stile a scelta (Dark, Serio, Annuncio, Gaming, Divertente, Motivazionale, Elegante, Romantico); visibile solo all'utente che lo richiede</li>
             <li>Aggiunta funzione <code>ask_deepseek_rewrite()</code>: chiamata AI isolata (senza memoria di conversazione né tool) dedicata alla riscrittura testuale, con istruzioni di stile dettagliate per ciascuna categoria</li>
@@ -735,7 +744,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>AI: function calling per la musica — se l'utente chiede di riprodurre una canzone o una playlist mentagendo il bot, l'AI chiama direttamente i tool senza passare per risposte testuali intermedie</li>
             <li>Aggiunta <code>ask_deepseek_playlist()</code>: genera una lista di N canzoni tramite una chiamata AI dedicata (JSON puro, senza memoria di conversazione)</li>
@@ -759,7 +768,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Sistema di logging in tempo reale: ogni azione di moderazione (warn, ban, kick, timeout, purge, modnote) invia automaticamente un embed nel canale log configurato</li>
             <li>Aggiunto <code>/log set</code> — imposta un canale per un tipo di log specifico (mod, messaggi, member, nickname, vocale) o per tutti contemporaneamente</li>
@@ -808,7 +817,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Integrazione AI DeepSeek: il bot risponde quando viene menzionato (<code>@Carmelo Bot</code>)</li>
             <li>Tono adattivo: risposte educate per domande serie, sfrontate per parolacce</li>
@@ -830,7 +839,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Server HTTP su porta 5000 per le statistiche: <code>http://0.0.0.0:5000/stats</code></li>
             <li>Contatore comandi giornaliero (<code>commands_used_today</code>)</li>
@@ -850,7 +859,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Aggiunta funzione <code>_check_voice()</code>: verifica centralizzata che l'utente sia nel canale vocale prima di ogni comando musicale</li>
             <li>Se il bot è già in un canale vocale diverso, blocca il comando e invia un messaggio ephemeral automatico</li>
@@ -869,7 +878,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Aggiunto sistema compleanni: <code>/birthday_set</code>, <code>/birthday_enable</code>, <code>/birthday_preview</code> e task automatico giornaliero per gli auguri</li>
             <li>Aggiunto <code>/autoplay</code> — modalità autoplay musicale, continua a riprodurre brani simili automaticamente</li>
@@ -889,7 +898,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Aggiunta <code>_now_playing_embed()</code>: embed stile Jockie Music con logo piattaforma colorato (Spotify verde, YouTube rosso, SoundCloud arancio) e thumbnail del brano</li>
           </ul>
@@ -914,7 +923,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Aggiunto <code>/duration</code> — mostra la durata del brano corrente e la posizione nella coda</li>
           </ul>
@@ -965,7 +974,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Aggiunto <code>/purge</code> — elimina gli ultimi 50 messaggi di un utente specifico nel canale (scansiona fino a 250 messaggi)</li>
           </ul>
@@ -1002,7 +1011,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Aggiunto <code>/claim</code> — permette allo staff di prendersi in carico un ticket aperto</li>
             <li>Aggiunto <code>/configshow</code> — mostra la configurazione attuale del server (canali, ruoli, ecc.)</li>
@@ -1121,7 +1130,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Aggiunta funzione <code>_fetch_avatar()</code>: scarica e ridimensiona l'avatar in modo centralizzato, evita codice duplicato in ogni card</li>
           </ul>
@@ -1139,7 +1148,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Aggiunte card immagine Pillow per tutti i comandi visivi: <code>generate_profile_card()</code>, <code>generate_leaderboard_card()</code>, <code>generate_roleinfo_card()</code>, <code>generate_serverinfo_card()</code></li>
             <li>Aggiunto <code>/unwarn</code> — rimuove un avvertimento da un utente</li>
@@ -1148,7 +1157,7 @@
         </div>
         <div class="change-divider"></div>
         <div class="change-group">
-          <span class="change-type type-remove">✕ Rimosso</span>
+          <span class="change-type type-remove"><span aria-hidden="true">✕</span> Rimosso</span>
           <ul class="change-list">
             <li>Rimossi i singoli error handler per ogni comando, sostituiti dal gestore globale</li>
           </ul>
@@ -1166,7 +1175,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Aggiunta <code>generate_rank_card()</code>: il comando <code>/rank</code> ora genera un'immagine PNG con Pillow invece di un embed testuale</li>
           </ul>
@@ -1184,7 +1193,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Aggiunto <code>/roleinfo</code> — informazioni dettagliate su un ruolo</li>
             <li>Aggiunto <code>/serverinfo</code> — informazioni sul server</li>
@@ -1207,7 +1216,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Aggiunto <code>/profile</code> — primo profilo utente (embed testuale con dati Discord)</li>
             <li>Ripristinato <code>/kick</code></li>
@@ -1215,7 +1224,7 @@
         </div>
         <div class="change-divider"></div>
         <div class="change-group">
-          <span class="change-type type-remove">✕ Rimosso</span>
+          <span class="change-type type-remove"><span aria-hidden="true">✕</span> Rimosso</span>
           <ul class="change-list">
             <li>Rimossi <code>/clear_levels</code> e <code>/clear_user_messages</code></li>
           </ul>
@@ -1233,7 +1242,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Disconnessione automatica dal vocale: se il bot rimane solo nel canale si disconnette dopo un timer (<code>_check_alone_in_voice()</code>)</li>
           </ul>
@@ -1288,7 +1297,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Aggiunto <code>/termini</code> — mostra termini di servizio e privacy policy del bot</li>
           </ul>
@@ -1306,7 +1315,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Sistema giveaway completo: <code>/giveaway</code>, <code>/gend</code>, <code>/gdelete</code>, <code>/ginfo</code>, <code>/glist</code>, <code>/gparticipants</code>, <code>/reroll</code></li>
             <li>Persistenza giveaway su SQLite con ripristino automatico al riavvio del bot</li>
@@ -1326,7 +1335,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Aggiunti effetti audio: <code>/8d</code>, <code>/chipmunk</code>, <code>/earrape</code>, <code>/reverb</code>, <code>/robot</code>, <code>/vaporwave</code></li>
           </ul>
@@ -1344,7 +1353,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Aggiunto <code>/versione</code> — mostra la versione corrente del bot con changelog</li>
           </ul>
@@ -1400,7 +1409,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Aggiunto <code>/daily</code> — XP gratuiti ogni 24 ore</li>
             <li>Aggiunto <code>/wheel</code> — ruota della fortuna per XP extra ogni 12 ore</li>
@@ -1424,7 +1433,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Aggiunto <code>/set_autorole</code> — assegna automaticamente un ruolo ai nuovi membri</li>
             <li>Aggiunto <code>/set_welcome_channel</code> — configura il canale di benvenuto</li>
@@ -1444,7 +1453,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Aggiunto <code>get_embed_color(level)</code>: il colore dell'embed rank cambia in base al livello (grigio → blu → verde → oro → arancio → rosso)</li>
             <li>Aggiunto <code>format_xp()</code>: formatta XP grandi come <code>1.2k</code></li>
@@ -1464,7 +1473,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Sistema ticket completo con <code>TicketCloseView</code> e menu di selezione motivo</li>
           </ul>
@@ -1490,7 +1499,7 @@
         </div>
 
         <div class="change-group">
-          <span class="change-type type-new">✦ Novità</span>
+          <span class="change-type type-new"><span aria-hidden="true">✦</span> Novità</span>
           <ul class="change-list">
             <li>Prima versione del bot</li>
             <li>Sistema XP e livelli con salvataggio su JSON</li>
@@ -1518,12 +1527,16 @@
     <div class="footer-meta">discord.py 2.x · <span class="bot-version">v0</span> · 120 comandi</div>
     <div class="footer-copy">© 2026 wicknoob73 & jeimaster. — Non affiliato con Discord Inc.</div>
   </div>
-  <ul class="footer-links">
+    <ul class="footer-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="commands.html">Comandi</a></li>
+    <li><a href="guide.html">Guida</a></li>
+    <li><a href="setup.html">Setup</a></li>
     <li><a href="stats.html">Statistiche</a></li>
     <li><a href="changelog.html">Changelog</a></li>
     <li><a href="legal.html">Termini & Privacy</a></li>
+    <li><a href="eula.html">EULA</a></li>
+    <li><a href="privacy.html">Privacy Policy</a></li>
     <li><a href="legal.html#contatti">Contatti</a></li>
   </ul>
 </footer>
@@ -1550,6 +1563,12 @@ if (ham && mob) {
       mob.classList.remove('open');
     }
   });
+  mob.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => {
+      ham.classList.remove('open');
+      mob.classList.remove('open');
+    })
+  );
 }
 // Back to top
 const btt = document.getElementById('backToTop');

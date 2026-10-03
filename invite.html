@@ -4,190 +4,265 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Invita Carmelo Bot — Il tuo bot Discord tutto-in-uno</title>
-  <meta name="description" content="Invita Carmelo Bot sul tuo server Discord. Musica, moderazione, livelli XP, ticket, giveaway e AI — tutto gratuito.">
-  
+  <meta name="description" content="Invita Carmelo Bot sul tuo server Discord. Musica, moderazione, livelli XP, ticket, giveaway e AI — 120 comandi, sempre gratuito.">
+  <link rel="canonical" href="https://wicknoob73.github.io/invite.html">
+
   <meta property="og:type" content="website">
   <meta property="og:title" content="Invita Carmelo Bot — Il tuo bot Discord tutto-in-uno">
-  <meta property="og:description" content="Invita Carmelo Bot sul tuo server Discord. Musica, moderazione, livelli XP, ticket, giveaway e AI — tutto gratuito.">
-  <meta property="og:image" content="https://placehold.co/1200x630/0a0c14/4ab3e8?text=Carmelo+Bot+Invite">
+  <meta property="og:description" content="Invita Carmelo Bot sul tuo server Discord. Musica, moderazione, livelli XP, ticket, giveaway e AI — 120 comandi, sempre gratuito.">
+  <meta property="og:image" content="https://wicknoob73.github.io/assets/og-image.png">
   <meta name="theme-color" content="#4ab3e8">
-  
+
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230a0c14'/><text y='24' x='4' font-size='22'>🤖</text></svg>">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
   <link rel="stylesheet" href="style.css">
   <style>
-    .invite-hero {
+    /* ── Hero ─────────────────────────────────────────────── */
+    .inv-hero {
+      padding: 76px 0 56px;
       text-align: center;
-      padding: 80px 0 60px;
     }
-    .invite-hero h1 {
+    .inv-hero .status-badge { margin-bottom: 26px; }
+    .inv-hero h1 {
       font-family: var(--font-display);
-      font-size: clamp(2.8rem, 7vw, 4.2rem);
+      font-size: clamp(2.4rem, 6vw, 3.6rem);
       font-weight: 800;
-      letter-spacing: -0.04em;
-      line-height: 1.08;
+      letter-spacing: -0.03em;
+      line-height: 1.12;
       color: var(--text-primary);
-      margin: 20px 0 18px;
+      max-width: 640px;
+      margin: 0 auto 18px;
     }
-    .invite-hero h1 .accent { color: var(--blue); }
-    .invite-hero p {
+    .inv-hero p {
       font-size: 1.05rem;
       color: var(--text-secondary);
-      max-width: 520px;
-      margin: 0 auto 36px;
+      max-width: 480px;
+      margin: 0 auto 34px;
       line-height: 1.7;
     }
-    .invite-bot-icon {
-      font-size: 5rem;
-      display: block;
-      margin-bottom: 10px;
+    .inv-cta-row {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+      margin-bottom: 46px;
     }
-    
-    .invite-card {
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 15px 30px;
+      background: #5865F2; color: #fff;
+      font-family: var(--font-display); font-weight: 700; font-size: 1rem;
+      border-radius: var(--radius-md); text-decoration: none;
+      transition: background var(--ease), transform var(--ease);
+    }
+    .btn-primary:hover { background: #4752c4; color: #fff; transform: translateY(-2px); }
+    /* Il bot non è ancora pubblico: il pulsante resta visibile ma disattivato,
+       con tooltip nativo (title) + badge sempre visibile per chi è su mobile
+       e non può vedere l'hover. */
+    .btn-primary.btn-disabled {
+      position: relative;
+      background: #3a3f52; color: rgba(255,255,255,0.6);
+      cursor: not-allowed;
+    }
+    .btn-primary.btn-disabled:hover { background: #3a3f52; transform: none; }
+    .btn-primary.btn-disabled .btn-badge {
+      font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      background: rgba(255,255,255,0.14); color: #fff;
+      border-radius: 999px; padding: 3px 9px;
+      margin-left: 2px;
+    }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 15px 26px;
+      background: transparent; color: var(--text-secondary);
+      font-family: var(--font-display); font-weight: 600; font-size: 0.95rem;
+      border: 1px solid var(--border-hover);
+      border-radius: var(--radius-md); text-decoration: none;
+      transition: all var(--ease);
+    }
+    .btn-secondary:hover { color: var(--text-primary); border-color: var(--blue); background: var(--blue-faint); }
+
+    /* Riga di statistiche live sotto ai bottoni */
+    .inv-stats {
+      display: flex; justify-content: center; gap: 44px; flex-wrap: wrap;
+    }
+    .inv-stat { text-align: center; }
+    .inv-stat-num {
+      font-family: var(--font-display); font-weight: 800; font-size: 1.5rem;
+      color: var(--text-primary); line-height: 1;
+    }
+    .inv-stat-lbl {
+      font-size: 0.72rem; color: var(--text-muted); margin-top: 6px;
+      font-family: var(--font-mono);
+    }
+
+    /* ── Sezioni generiche ────────────────────────────────── */
+    .inv-section { padding: 10px 0 64px; }
+    .inv-section-head { text-align: center; max-width: 520px; margin: 0 auto 40px; }
+    .inv-section-head .section-label { justify-content: center; }
+    .inv-section-head .section-label::after { display: none; }
+    .inv-section-head h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3.4vw, 2rem);
+      font-weight: 800; letter-spacing: -0.02em;
+      color: var(--text-primary); margin: 10px 0 10px;
+    }
+    .inv-section-head p { color: var(--text-secondary); font-size: 0.95rem; }
+
+    /* ── Cosa ottieni: griglia FISSA a 3 colonne, mai auto-fill ── */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-top: 2px solid var(--accent, var(--blue));
+      border-radius: var(--radius-md);
+      padding: 26px 24px;
+      transition: border-color var(--ease), transform var(--ease);
+    }
+    .feature-card:hover { border-color: var(--border-hover); transform: translateY(-3px); }
+    .feature-icon {
+      width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.25rem;
+      background: color-mix(in srgb, var(--accent, var(--blue)) 14%, transparent);
+      border-radius: var(--radius-sm);
+      margin-bottom: 16px;
+    }
+    .feature-card h3 {
+      font-family: var(--font-display); font-size: 1.02rem; font-weight: 700;
+      color: var(--text-primary); margin-bottom: 8px;
+    }
+    .feature-card p { font-size: 0.87rem; color: var(--text-secondary); line-height: 1.65; }
+
+    /* ── Permessi: griglia FISSA a 2 colonne ─────────────────── */
+    .perm-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .perm-row {
+      display: flex; gap: 14px; align-items: flex-start;
+      padding: 16px 18px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+    }
+    .perm-row .perm-icon {
+      font-size: 1.15rem; flex-shrink: 0; line-height: 1.4;
+    }
+    .perm-row h4 {
+      font-size: 0.88rem; font-weight: 600; color: var(--text-primary);
+      margin-bottom: 3px;
+    }
+    .perm-row p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+
+    /* ── Dopo l'invito: lista di configurazione verticale ───── */
+    .setup-list {
+      max-width: 640px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+    }
+    .setup-row {
+      display: flex; gap: 20px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .setup-row:last-child { border-bottom: none; }
+    .setup-row.optional { opacity: 0.88; }
+    .setup-num {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: var(--blue-faint);
+      border: 1px solid var(--border-hover);
+      color: var(--blue);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-mono); font-weight: 600; font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .setup-row.check .setup-num {
+      background: rgba(45,212,191,0.08);
+      color: var(--teal);
+      border-color: rgba(45,212,191,0.35);
+    }
+    .setup-content h4 {
+      font-family: var(--font-display); font-size: 0.98rem; font-weight: 700;
+      color: var(--text-primary); margin-bottom: 6px;
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    }
+    .setup-tag {
+      font-size: 0.64rem; font-weight: 700;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 2px 9px;
+      font-family: var(--font-mono);
+    }
+    .setup-content p { font-size: 0.86rem; color: var(--text-secondary); line-height: 1.65; }
+
+    /* ── CTA finale ───────────────────────────────────────── */
+    .cta-strip {
       background: var(--bg-card);
       border: 1px solid var(--border-hover);
       border-radius: var(--radius-lg);
       padding: 48px 40px;
-      max-width: 680px;
-      margin: 0 auto 48px;
       text-align: center;
       position: relative;
       overflow: hidden;
+      max-width: 720px;
+      margin: 0 auto;
     }
-    .invite-card::before {
+    .cta-strip::before {
       content: '';
-      position: absolute;
-      top: -100px; left: 50%; transform: translateX(-50%);
-      width: 400px; height: 200px;
-      background: radial-gradient(ellipse, rgba(74,179,232,0.12) 0%, transparent 70%);
+      position: absolute; top: -120px; left: 50%; transform: translateX(-50%);
+      width: 420px; height: 220px;
+      background: radial-gradient(ellipse, rgba(74,179,232,0.14) 0%, transparent 70%);
       pointer-events: none;
     }
-    
-    .invite-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      padding: 16px 40px;
-      background: #5865F2;
-      color: #fff;
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 1.1rem;
-      border-radius: var(--radius-md);
-      text-decoration: none;
-      transition: all var(--ease);
-      border: none;
-      cursor: pointer;
+    .cta-strip h2 {
+      font-family: var(--font-display); font-size: 1.5rem; font-weight: 800;
+      color: var(--text-primary); margin-bottom: 10px; position: relative;
     }
-    .invite-btn:hover {
-      background: #4752c4;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(88, 101, 242, 0.35);
-      color: #fff;
+    .cta-strip p { color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 26px; position: relative; }
+
+    @media (max-width: 760px) {
+      .feature-grid { grid-template-columns: repeat(2, 1fr); }
     }
-    
-    .permissions-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 10px;
-      margin: 24px 0 32px;
-      text-align: left;
-    }
-    .perm-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      background: var(--bg-surface);
-      border-radius: var(--radius-sm);
-      font-size: 0.82rem;
-      color: var(--text-secondary);
-      border: 1px solid var(--border);
-    }
-    .perm-item .perm-icon {
-      font-size: 1.1rem;
-      flex-shrink: 0;
-    }
-    
-    .invite-features {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 12px;
-      margin: 24px 0;
-    }
-    .invite-feature {
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 14px 16px;
-      text-align: center;
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      transition: border-color var(--ease);
-    }
-    .invite-feature:hover {
-      border-color: var(--blue);
-    }
-    .invite-feature .feat-emoji {
-      font-size: 1.4rem;
-      display: block;
-      margin-bottom: 4px;
-    }
-    
-    .steps {
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-      flex-wrap: wrap;
-      margin: 32px 0 16px;
-    }
-    .step {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 12px 20px;
-      font-size: 0.88rem;
-      color: var(--text-secondary);
-    }
-    .step-num {
-      width: 28px; height: 28px;
-      border-radius: 50%;
-      background: var(--blue);
-      color: var(--bg-base);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 0.8rem;
-      flex-shrink: 0;
-    }
-    
-    @media (max-width: 640px) {
-      .invite-hero { padding: 50px 0 40px; }
-      .invite-card { padding: 32px 20px; }
-      .invite-btn { width: 100%; justify-content: center; }
-      .permissions-grid { grid-template-columns: 1fr 1fr; }
+    @media (max-width: 560px) {
+      .feature-grid { grid-template-columns: 1fr; }
+      .perm-grid { grid-template-columns: 1fr; }
+      .inv-hero { padding: 50px 0 40px; }
+      .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+      .inv-stats { gap: 28px; }
+      .cta-strip { padding: 36px 22px; }
     }
   </style>
 </head>
 <body>
-	
+
 <script src="config.js"></script>
-<script src="version.js" defer></script>	
+<script src="version.js" defer></script>
 
 <nav class="navbar">
   <a href="index.html" class="navbar-logo"><span>Carmelo</span> Bot</a>
-  <ul class="navbar-links">
+    <ul class="navbar-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="commands.html">Comandi</a></li>
+    <li><a href="guide.html">Guida</a></li>
+    <li><a href="setup.html">Setup</a></li>
     <li><a href="stats.html">Statistiche</a></li>
     <li><a href="changelog.html">Changelog</a></li>
     <li><a href="legal.html">Termini & Privacy</a></li>
     <li><a href="legal.html#contatti">Contatti</a></li>
   </ul>
-  <a href="#" class="navbar-cta">+ Aggiungi al server</a>
+  <a href="invite.html" class="navbar-cta">+ Aggiungi al server</a>
   <button class="theme-toggle" id="themeToggle" aria-label="Cambia tema">
     <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     <svg class="icon-sun"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -198,83 +273,210 @@
 <div class="mobile-menu" id="mobileMenu">
   <a href="index.html">Home</a>
   <a href="commands.html">Comandi</a>
+  <a href="guide.html">Guida</a>
+  <a href="setup.html">Setup</a>
   <a href="stats.html">Statistiche</a>
   <a href="changelog.html">Changelog</a>
   <a href="legal.html">Termini & Privacy</a>
   <a href="legal.html#contatti">Contatti</a>
-  <a href="#" class="mobile-cta">+ Aggiungi al server</a>
+  <a href="invite.html" class="mobile-cta">+ Aggiungi al server</a>
 </div>
 
 <div class="container">
 
-  <header class="invite-hero">
-    <span class="invite-bot-icon">🤖</span>
-    <h1>Invita <span class="accent">Carmelo Bot</span></h1>
-    <p>Aggiungi il bot al tuo server e porta musica, moderazione, livelli XP, ticket, giveaway e AI in pochi click.</p>
+  <header class="inv-hero">
+    <div id="status-badge" class="status-badge">
+      <span class="status-dot" id="status-dot"></span>
+      <span id="status-text">Verifica stato…</span>
+    </div>
+
+    <h1>Aggiungi Carmelo Bot al tuo server in 30 secondi</h1>
+    <p>Un solo bot per musica, moderazione, livelli, ticket di supporto e giveaway — con un'AI che risponde in chat quando serve una mano.</p>
+
+    <div class="inv-cta-row">
+      <!-- Il bot non è ancora pubblico: pulsante disattivato invece di un
+           link a vuoto. Quando sarà pronto, sostituisci con il vero link
+           di invito e rimuovi class="btn-disabled" + role/aria-disabled. -->
+      <a class="btn-primary btn-disabled" id="inviteLink" role="button" aria-disabled="true" title="Disponibile a breve — il bot non è ancora pubblico">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.04.036.054a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .085-.026c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+        Aggiungi al server
+        <span class="btn-badge">Presto</span>
+      </a>
+      <a href="commands.html" class="btn-secondary">Guarda tutti i comandi</a>
+    </div>
+
+    <div class="inv-stats">
+      <div class="inv-stat">
+        <div class="inv-stat-num" id="statServers">—</div>
+        <div class="inv-stat-lbl">Server attivi</div>
+      </div>
+      <div class="inv-stat">
+        <div class="inv-stat-num">120</div>
+        <div class="inv-stat-lbl">Comandi</div>
+      </div>
+      <div class="inv-stat">
+        <div class="inv-stat-num"><span class="bot-version">v0</span></div>
+        <div class="inv-stat-lbl">Versione</div>
+      </div>
+      <div class="inv-stat">
+        <div class="inv-stat-num">Gratis</div>
+        <div class="inv-stat-lbl">Per sempre</div>
+      </div>
+    </div>
   </header>
 
-  <div class="invite-card">
-    <h2 style="font-family:var(--font-display);font-size:1.5rem;font-weight:800;margin-bottom:8px;">
-      🚀 Pronto a iniziare?
-    </h2>
-    <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:24px;">
-      Carmelo Bot è gratuito e sempre aggiornato.
-    </p>
-    
-    <!-- Sostituisci il link qui sotto con il tuo link di invito -->
-    <a href="#" class="invite-btn" id="inviteLink">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.04.036.054a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .085-.026c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
-      Aggiungi al server
-    </a>
-
-    <div style="margin-top:16px;font-size:0.78rem;color:var(--text-muted);font-family:var(--font-mono);">
-      🔒 Richiede i permessi necessari per funzionare correttamente
+  <!-- Cosa ottieni -->
+  <section class="inv-section">
+    <div class="inv-section-head">
+      <span class="section-label">Cosa ottieni</span>
+      <h2>Un bot, sei aree coperte</h2>
+      <p>Non solo musica: tutto quello che serve per far girare un server senza installare altri cinque bot.</p>
     </div>
-  </div>
+    <div class="feature-grid">
+      <div class="feature-card" style="--accent:var(--blue)">
+        <div class="feature-icon"><span aria-hidden="true">🎵</span></div>
+        <h3>Musica</h3>
+        <p>YouTube, Spotify e SoundCloud con coda, autoplay, effetti audio (bassboost, nightcore, 8D...) e radio integrate.</p>
+      </div>
+      <div class="feature-card" style="--accent:var(--red)">
+        <div class="feature-icon"><span aria-hidden="true">🛡</span>️</div>
+        <h3>Moderazione</h3>
+        <p>Ban, kick e warn con storico dei case, mute a tempo, slowmode e blocco canale in un solo comando.</p>
+      </div>
+      <div class="feature-card" style="--accent:var(--gold)">
+        <div class="feature-icon"><span aria-hidden="true">📈</span></div>
+        <h3>Livelli & XP</h3>
+        <p>Ogni messaggio fa guadagnare XP, con classifiche, ruoli automatici per livello e moltiplicatori per gli eventi.</p>
+      </div>
+      <div class="feature-card" style="--accent:var(--teal)">
+        <div class="feature-icon"><span aria-hidden="true">🎫</span></div>
+        <h3>Ticket</h3>
+        <p>Sistema di supporto con pannello dedicato: apertura, presa in carico, trascrizione e chiusura del ticket.</p>
+      </div>
+      <div class="feature-card" style="--accent:var(--purple)">
+        <div class="feature-icon"><span aria-hidden="true">🎁</span></div>
+        <h3>Giveaway</h3>
+        <p>Concorsi con requisiti di partecipazione (ruolo, livello, messaggi), blacklist e riestrazione automatica.</p>
+      </div>
+      <div class="feature-card" style="--accent:var(--green)">
+        <div class="feature-icon"><span aria-hidden="true">🤖</span></div>
+        <h3>AI in chat</h3>
+        <p>Risponde alle domande, genera immagini su richiesta e conosce a memoria tutti i comandi del bot.</p>
+      </div>
+    </div>
+  </section>
 
   <!-- Permessi -->
-  <div style="max-width:680px;margin:0 auto 48px;">
-    <h3 style="font-family:var(--font-display);font-size:1.2rem;font-weight:700;margin-bottom:16px;text-align:center;">
-      📋 Permessi richiesti
-    </h3>
-    <div class="permissions-grid">
-      <div class="perm-item"><span class="perm-icon">📨</span> Leggere messaggi</div>
-      <div class="perm-item"><span class="perm-icon">💬</span> Inviare messaggi</div>
-      <div class="perm-item"><span class="perm-icon">🔊</span> Unirsi ai vocali</div>
-      <div class="perm-item"><span class="perm-icon">🎤</span> Parlare in vocale</div>
-      <div class="perm-item"><span class="perm-icon">📁</span> Gestire canali (ticket)</div>
-      <div class="perm-item"><span class="perm-icon">🛡️</span> Moderare membri</div>
-      <div class="perm-item"><span class="perm-icon">🎭</span> Gestire ruoli</div>
-      <div class="perm-item"><span class="perm-icon">📊</span> Vedere statistiche</div>
+  <section class="inv-section">
+    <div class="inv-section-head">
+      <span class="section-label">Permessi richiesti</span>
+      <h2>A cosa servono</h2>
+      <p>Nessun permesso è lì per caso: eccoli spiegati uno per uno.</p>
     </div>
-  </div>
+    <div class="perm-grid">
+      <div class="perm-row">
+        <span class="perm-icon"><span aria-hidden="true">📨</span></span>
+        <div><h4>Leggere messaggi</h4><p>Per riconoscere i comandi e far funzionare l'AI in chat.</p></div>
+      </div>
+      <div class="perm-row">
+        <span class="perm-icon"><span aria-hidden="true">💬</span></span>
+        <div><h4>Inviare messaggi</h4><p>Per rispondere, mostrare embed e segnalare eventuali errori.</p></div>
+      </div>
+      <div class="perm-row">
+        <span class="perm-icon"><span aria-hidden="true">🔊</span></span>
+        <div><h4>Unirsi ai vocali</h4><p>Per entrare nel canale quando parte una canzone.</p></div>
+      </div>
+      <div class="perm-row">
+        <span class="perm-icon"><span aria-hidden="true">🎤</span></span>
+        <div><h4>Parlare in vocale</h4><p>Per trasmettere davvero l'audio della musica.</p></div>
+      </div>
+      <div class="perm-row">
+        <span class="perm-icon"><span aria-hidden="true">📁</span></span>
+        <div><h4>Gestire canali</h4><p>Per creare ed eliminare i canali dei ticket di supporto.</p></div>
+      </div>
+      <div class="perm-row">
+        <span class="perm-icon"><span aria-hidden="true">🛡</span>️</span>
+        <div><h4>Moderare membri</h4><p>Per mute, kick, ban e slowmode.</p></div>
+      </div>
+      <div class="perm-row">
+        <span class="perm-icon"><span aria-hidden="true">🎭</span></span>
+        <div><h4>Gestire ruoli</h4><p>Per assegnare i ruoli sbloccati con i livelli XP e il ruolo Muted.</p></div>
+      </div>
+      <div class="perm-row">
+        <span class="perm-icon"><span aria-hidden="true">📊</span></span>
+        <div><h4>Vedere statistiche</h4><p>Per calcolare classifiche XP e i report interni al server.</p></div>
+      </div>
+    </div>
+  </section>
 
-  <!-- Funzionalità in breve -->
-  <div style="max-width:680px;margin:0 auto 48px;">
-    <h3 style="font-family:var(--font-display);font-size:1.2rem;font-weight:700;margin-bottom:16px;text-align:center;">
-      ✨ Cosa ottieni
-    </h3>
-    <div class="invite-features">
-      <div class="invite-feature"><span class="feat-emoji">🎵</span>Musica</div>
-      <div class="invite-feature"><span class="feat-emoji">🛡️</span>Moderazione</div>
-      <div class="invite-feature"><span class="feat-emoji">📈</span>Livelli & XP</div>
-      <div class="invite-feature"><span class="feat-emoji">🎫</span>Ticket</div>
-      <div class="invite-feature"><span class="feat-emoji">🎁</span>Giveaway</div>
-      <div class="invite-feature"><span class="feat-emoji">🤖</span>AI</div>
+  <!-- Dopo l'invito -->
+  <section class="inv-section">
+    <div class="inv-section-head">
+      <span class="section-label">Dopo l'invito</span>
+      <h2>La configurazione in pratica</h2>
+      <p>Musica e moderazione funzionano da subito. Per attivare anche log, benvenuti e compleanni bastano questi passaggi.</p>
     </div>
-  </div>
+    <div class="setup-list">
+      <div class="setup-row">
+        <div class="setup-num">1</div>
+        <div class="setup-content">
+          <h4>Invita il bot e concedi i permessi</h4>
+          <p>Clicca su "Aggiungi al server", scegli il tuo server e autorizza i permessi richiesti (li trovi spiegati qui sopra).</p>
+        </div>
+      </div>
+      <div class="setup-row">
+        <div class="setup-num">2</div>
+        <div class="setup-content">
+          <h4>Configura il log di moderazione</h4>
+          <p>Crea un canale visibile solo allo staff, poi collegalo con <code>/log set</code>. Se in futuro vuoi scollegarlo, usa <code>/log remove</code>.</p>
+        </div>
+      </div>
+      <div class="setup-row">
+        <div class="setup-num">3</div>
+        <div class="setup-content">
+          <h4>Assegna un ruolo automatico ai nuovi membri</h4>
+          <p>Con <code>/welcome autorole</code> scegli il ruolo che ogni nuovo membro riceve non appena entra nel server.</p>
+        </div>
+      </div>
+      <div class="setup-row">
+        <div class="setup-num">4</div>
+        <div class="setup-content">
+          <h4>Imposta il canale di benvenuto</h4>
+          <p>Con <code>/welcome canale</code> scegli dove il bot manda il messaggio di benvenuto a chi entra.</p>
+        </div>
+      </div>
+      <div class="setup-row optional">
+        <div class="setup-num">5</div>
+        <div class="setup-content">
+          <h4>Canale di addio <span class="setup-tag">opzionale</span></h4>
+          <p>Con <code>/welcome canale-addio</code> puoi mostrare un messaggio anche quando qualcuno lascia il server.</p>
+        </div>
+      </div>
+      <div class="setup-row optional">
+        <div class="setup-num">6</div>
+        <div class="setup-content">
+          <h4>Auguri di compleanno <span class="setup-tag">opzionale</span></h4>
+          <p>Attiva <code>/birthday enable</code> se vuoi che il bot festeggi automaticamente i membri il giorno del loro compleanno.</p>
+        </div>
+      </div>
+      <div class="setup-row check">
+        <div class="setup-num"><span aria-hidden="true">✓</span></div>
+        <div class="setup-content">
+          <h4>Controlla i permessi dei canali</h4>
+          <p>Verifica che il bot possa scrivere nei canali appena scelti (log, benvenuto, addio) — senza quel permesso i messaggi non arrivano, anche se tutto il resto è configurato correttamente.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!-- Come fare -->
-  <div style="max-width:680px;margin:0 auto 60px;text-align:center;">
-    <h3 style="font-family:var(--font-display);font-size:1.2rem;font-weight:700;margin-bottom:16px;">
-      📌 Come invitare
-    </h3>
-    <div class="steps">
-      <div class="step"><span class="step-num">1</span> Clicca su "Aggiungi al server"</div>
-      <div class="step"><span class="step-num">2</span> Seleziona il tuo server</div>
-      <div class="step"><span class="step-num">3</span> Autorizza e divertiti!</div>
+  <!-- CTA finale -->
+  <section class="inv-section" style="padding-bottom:80px;">
+    <div class="cta-strip">
+      <h2>Pronto a iniziare?</h2>
+      <p>Un click, nessuna carta di credito, nessun limite nascosto.</p>
+      <a class="btn-primary btn-disabled" role="button" aria-disabled="true" title="Disponibile a breve — il bot non è ancora pubblico">Aggiungi Carmelo Bot ora <span class="btn-badge">Presto</span></a>
     </div>
-  </div>
+  </section>
 
 </div>
 
@@ -284,12 +486,16 @@
     <div class="footer-meta">discord.py 2.x · <span class="bot-version">v0</span> · 120 comandi</div>
     <div class="footer-copy">© 2026 wicknoob73 & jeimaster. — Non affiliato con Discord Inc.</div>
   </div>
-  <ul class="footer-links">
+    <ul class="footer-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="commands.html">Comandi</a></li>
+    <li><a href="guide.html">Guida</a></li>
+    <li><a href="setup.html">Setup</a></li>
     <li><a href="stats.html">Statistiche</a></li>
     <li><a href="changelog.html">Changelog</a></li>
     <li><a href="legal.html">Termini & Privacy</a></li>
+    <li><a href="eula.html">EULA</a></li>
+    <li><a href="privacy.html">Privacy Policy</a></li>
     <li><a href="legal.html#contatti">Contatti</a></li>
   </ul>
 </footer>
@@ -301,6 +507,62 @@
 </button>
 
 <script>
+const GUILD_ID = "1079422976249843762";
+const BOT_NAME = "Carmelo Bot";
+
+async function checkStatus() {
+  const dot   = document.getElementById('status-dot');
+  const text  = document.getElementById('status-text');
+  const badge = document.getElementById('status-badge');
+  try {
+    const res = await fetch(`https://discord.com/api/guilds/${GUILD_ID}/widget.json`);
+    if (!res.ok) throw new Error();
+    const data = await res.json();
+    const bot = (data.members || []).find(m => m.username === BOT_NAME);
+    if (bot) {
+      dot.style.background = 'var(--teal)';
+      dot.style.boxShadow = '0 0 6px var(--teal)';
+      text.textContent = 'Bot online';
+    } else {
+      dot.style.background = '#555e72';
+      dot.style.boxShadow = 'none';
+      text.textContent = 'Bot offline';
+      badge.style.opacity = '0.65';
+    }
+  } catch {
+    // Il widget Discord pubblico non è attivo/raggiungibile: prima di
+    // arrenderci controlliamo se almeno l'endpoint statistiche del bot
+    // risponde, per non mostrare "sconosciuto" quando il bot è online.
+    try {
+      const fallback = await fetchStatsWithFallback();
+      if (fallback) {
+        dot.style.background = 'var(--teal)';
+        dot.style.boxShadow = '0 0 6px var(--teal)';
+        text.textContent = 'Bot online';
+        return;
+      }
+    } catch {}
+    dot.style.background = '#555e72';
+    dot.style.boxShadow = 'none';
+    text.textContent = 'Stato sconosciuto';
+    badge.style.opacity = '0.55';
+  }
+}
+checkStatus();
+setInterval(checkStatus, 60000);
+
+async function updateServerCount() {
+  try {
+    const result = await fetchStatsWithFallback();
+    if (!result) throw new Error();
+    const data = await result.response.json();
+    document.getElementById('statServers').textContent = data.servers || '—';
+  } catch {
+    document.getElementById('statServers').textContent = '—';
+  }
+}
+updateServerCount();
+
 // Hamburger
 const ham = document.getElementById('hamburgerBtn');
 const mob = document.getElementById('mobileMenu');
@@ -315,6 +577,12 @@ if (ham && mob) {
       mob.classList.remove('open');
     }
   });
+  mob.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => {
+      ham.classList.remove('open');
+      mob.classList.remove('open');
+    })
+  );
 }
 // Back to top
 const btt = document.getElementById('backToTop');

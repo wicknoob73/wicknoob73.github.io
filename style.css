@@ -2,7 +2,12 @@
    Carmelo Bot — style.css (shared)
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+/* Google Fonts (Syne, Inter, JetBrains Mono) sono caricati da ogni pagina
+   tramite <link rel="preconnect"> + <link rel="stylesheet"> nel <head>,
+   invece di @import qui: è più veloce perché il browser può iniziare a
+   scaricarli in parallelo al resto della pagina invece di aspettare che
+   questo file CSS venga interamente scaricato e parsato prima di scoprire
+   che servono altri font da un altro dominio. */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -26,7 +31,7 @@
 
   --text-primary:   #dde4f0;
   --text-secondary: #7a859e;
-  --text-muted:     #3e4a5e;
+  --text-muted:     #6c80a2; /* era #3e4a5e (~2.2:1 su --bg-base); ora ~4.9:1, WCAG AA */
 
   --border:       rgba(74,179,232,0.12);
   --border-hover: rgba(74,179,232,0.35);
@@ -427,12 +432,25 @@ footer {
   gap: 4px;
   transform: translateY(-8px);
   opacity: 0;
-  transition: transform 0.22s var(--ease), opacity 0.22s var(--ease);
+  visibility: hidden;
+  pointer-events: none;
+  /* visibility torna hidden solo DOPO la transizione di chiusura (0.22s),
+     così l'animazione di fade-out si vede per intero prima che il menu
+     esca davvero dal flusso/hit-testing */
+  transition: transform 0.22s var(--ease),
+              opacity 0.22s var(--ease),
+              visibility 0s 0.22s;
 }
 
 .mobile-menu.open {
   transform: translateY(0);
   opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  /* visibility diventa visibile subito (0s), non dopo la transizione */
+  transition: transform 0.22s var(--ease),
+              opacity 0.22s var(--ease),
+              visibility 0s 0s;
 }
 
 .mobile-menu a {
@@ -534,7 +552,7 @@ footer {
 
   --text-primary:   #0f172a;
   --text-secondary: #475569;
-  --text-muted:     #94a3b8;
+  --text-muted:     #5f6a7c; /* era #94a3b8 (~2.3:1 su --bg-base chiaro); ora ~5:1, WCAG AA */
 
   --border:       rgba(42,125,181,0.15);
   --border-hover: rgba(42,125,181,0.4);

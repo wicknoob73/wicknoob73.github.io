@@ -5,18 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Carmelo Bot — Il tuo bot Discord tutto-in-uno</title>
   <meta name="description" content="Musica, moderazione, livelli XP, ticket, giveaway e AI. Carmelo Bot è il bot Discord per la tua community.">
+  <link rel="canonical" href="https://wicknoob73.github.io/">
 
   <!-- Open Graph / Discord embed -->
   <meta property="og:type"        content="website">
   <meta property="og:title"       content="Carmelo Bot — Il tuo bot Discord tutto-in-uno">
   <meta property="og:description" content="Musica, moderazione, livelli XP, ticket, giveaway e AI. Gratuito e sempre aggiornato.">
-  <meta property="og:image"       content="https://placehold.co/1200x630/0a0c14/4ab3e8?text=Carmelo+Bot">
+  <meta property="og:image" content="https://wicknoob73.github.io/assets/og-image.png">
   <meta name="theme-color"        content="#4ab3e8">
   <meta name="twitter:card"       content="summary_large_image">
 
   <!-- Favicon SVG inline -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230a0c14'/><text y='24' x='4' font-size='22'>🤖</text></svg>">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
   <link rel="stylesheet" href="style.css">
   <style>
     .hero {
@@ -256,15 +261,17 @@
 <!-- ── Navbar ─────────────────────────────────────────── -->
 <nav class="navbar">
   <a href="index.html" class="navbar-logo"><span>Carmelo</span> Bot</a>
-  <ul class="navbar-links">
+    <ul class="navbar-links">
     <li><a href="index.html" class="active">Home</a></li>
     <li><a href="commands.html">Comandi</a></li>
+    <li><a href="guide.html">Guida</a></li>
+    <li><a href="setup.html">Setup</a></li>
     <li><a href="stats.html">Statistiche</a></li>
     <li><a href="changelog.html">Changelog</a></li>
     <li><a href="legal.html">Termini & Privacy</a></li>
     <li><a href="legal.html#contatti">Contatti</a></li>
   </ul>
-  <a href="#" class="navbar-cta">+ Aggiungi al server</a>
+  <a href="invite.html" class="navbar-cta">+ Aggiungi al server</a>
   <button class="theme-toggle" id="themeToggle" aria-label="Cambia tema">
     <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     <svg class="icon-sun"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -275,11 +282,13 @@
 <div class="mobile-menu" id="mobileMenu">
   <a href="index.html" class="active">Home</a>
   <a href="commands.html">Comandi</a>
+  <a href="guide.html">Guida</a>
+  <a href="setup.html">Setup</a>
   <a href="stats.html">Statistiche</a>
   <a href="changelog.html">Changelog</a>
   <a href="legal.html">Termini & Privacy</a>
   <a href="legal.html#contatti">Contatti</a>
-  <a href="#" class="mobile-cta">+ Aggiungi al server</a>
+  <a href="invite.html" class="mobile-cta">+ Aggiungi al server</a>
 </div>
 
 <!-- ── Hero ──────────────────────────────────────────── -->
@@ -306,13 +315,13 @@
     </div>
 
     <div class="chips">
-      <span class="chip">🎵 Musica</span>
-      <span class="chip">🛡️ Moderazione</span>
-      <span class="chip">📈 Livelli & XP</span>
-      <span class="chip">🎫 Ticket</span>
-      <span class="chip">🎁 Giveaway</span>
-      <span class="chip">🤖 AI</span>
-      <span class="chip">🎲 Utility</span>
+      <span class="chip"><span aria-hidden="true">🎵</span> Musica</span>
+      <span class="chip"><span aria-hidden="true">🛡</span>️ Moderazione</span>
+      <span class="chip"><span aria-hidden="true">📈</span> Livelli & XP</span>
+      <span class="chip"><span aria-hidden="true">🎫</span> Ticket</span>
+      <span class="chip"><span aria-hidden="true">🎁</span> Giveaway</span>
+      <span class="chip"><span aria-hidden="true">🤖</span> AI</span>
+      <span class="chip"><span aria-hidden="true">🎲</span> Utility</span>
     </div>
   </header>
 
@@ -343,7 +352,7 @@
 
   <div class="features-grid">
     <div class="feat-card" style="--feat-color:#4ab3e8;">
-      <span class="feat-icon">🎵</span>
+      <span class="feat-icon"><span aria-hidden="true">🎵</span></span>
       <div class="feat-title">Musica di qualità</div>
       <p class="feat-desc">Suona musica da YouTube e Spotify, con effetti audio, coda avanzata e autoplay intelligente.</p>
       <div class="feat-tags">
@@ -354,7 +363,7 @@
       </div>
     </div>
     <div class="feat-card" style="--feat-color:#e86060;">
-      <span class="feat-icon">🛡️</span>
+      <span class="feat-icon"><span aria-hidden="true">🛡</span>️</span>
       <div class="feat-title">Moderazione completa</div>
       <p class="feat-desc">Warn, ban, timeout, purge e log dettagliati — tutto tracciato e accessibile dallo staff.</p>
       <div class="feat-tags">
@@ -365,7 +374,7 @@
       </div>
     </div>
     <div class="feat-card" style="--feat-color:#4de89a;">
-      <span class="feat-icon">📈</span>
+      <span class="feat-icon"><span aria-hidden="true">📈</span></span>
       <div class="feat-title">Livelli & XP</div>
       <p class="feat-desc">Sistema di progressione con daily bonus, ruota della fortuna e classifiche del server.</p>
       <div class="feat-tags">
@@ -376,7 +385,7 @@
       </div>
     </div>
     <div class="feat-card" style="--feat-color:#d4a947;">
-      <span class="feat-icon">🎫</span>
+      <span class="feat-icon"><span aria-hidden="true">🎫</span></span>
       <div class="feat-title">Sistema Ticket</div>
       <p class="feat-desc">Pannello ticket integrato per il supporto agli utenti, con claim e gestione staff dedicata.</p>
       <div class="feat-tags">
@@ -385,7 +394,7 @@
       </div>
     </div>
     <div class="feat-card" style="--feat-color:#a78bfa;">
-      <span class="feat-icon">🎁</span>
+      <span class="feat-icon"><span aria-hidden="true">🎁</span></span>
       <div class="feat-title">Giveaway automatici</div>
       <p class="feat-desc">Crea e gestisci giveaway con estrazione automatica, reroll dei vincitori e lista partecipanti.</p>
       <div class="feat-tags">
@@ -395,7 +404,7 @@
       </div>
     </div>
     <div class="feat-card" style="--feat-color:#a78bfa;">
-      <span class="feat-icon">🤖</span>
+      <span class="feat-icon"><span aria-hidden="true">🤖</span></span>
       <div class="feat-title">AI Integrata</div>
       <p class="feat-desc">Chiedi qualsiasi cosa menzionando il bot. Risponde educatamente o a tono, a seconda del tuo messaggio.</p>
       <div class="feat-tags">
@@ -405,7 +414,7 @@
       </div>
     </div>
     <div class="feat-card" style="--feat-color:#2dd4bf;">
-      <span class="feat-icon">🎲</span>
+      <span class="feat-icon"><span aria-hidden="true">🎲</span></span>
       <div class="feat-title">Utility & Server</div>
       <p class="feat-desc">Info server, profilo utenti, ping, dado, coinflip e configurazione admin a portata di slash.</p>
       <div class="feat-tags">
@@ -490,11 +499,11 @@
   <div class="devs">
     <span style="font-size:0.78rem;color:var(--text-muted);font-family:var(--font-mono);">Sviluppato da</span>
     <div class="dev-card">
-      <div class="dev-avatar">👾</div>
+      <div class="dev-avatar"><span aria-hidden="true">👾</span></div>
       <div><div class="dev-name">wicknoob73</div><div class="dev-role">Developer</div></div>
     </div>
     <div class="dev-card">
-      <div class="dev-avatar">🎮</div>
+      <div class="dev-avatar"><span aria-hidden="true">🎮</span></div>
       <div><div class="dev-name">jeimaster.</div><div class="dev-role">Developer</div></div>
     </div>
   </div>
@@ -509,27 +518,27 @@
   </h2>
   <div style="display:flex;flex-direction:column;gap:12px;">
 
-    <a href="changelog.html#vv69" style="text-decoration:none;">
+    <a href="changelog.html#vv103" style="text-decoration:none;">
       <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px 24px;display:flex;align-items:center;gap:16px;transition:border-color .2s,box-shadow .2s;" onmouseover="this.style.borderColor='rgba(74,179,232,0.35)';this.style.boxShadow='0 4px 20px rgba(0,0,0,0.3)'" onmouseout="this.style.borderColor='rgba(74,179,232,0.12)';this.style.boxShadow='none'">
-        <span style="font-family:var(--font-mono);font-size:0.8rem;font-weight:700;color:var(--bg-base);background:var(--blue);border-radius:4px;padding:2px 8px;flex-shrink:0;">v69</span>
-        <span style="color:var(--text-secondary);font-size:0.88rem;flex:1;">Motore AI migrato a Mistral Medium 3.5, nuovo /crashoutstatus</span>
-        <span style="font-family:var(--font-mono);font-size:0.72rem;color:var(--text-muted);flex-shrink:0;">Lug 2026</span>
+        <span style="font-family:var(--font-mono);font-size:0.8rem;font-weight:700;color:var(--bg-base);background:var(--blue);border-radius:4px;padding:2px 8px;flex-shrink:0;">v103</span>
+        <span style="color:var(--text-secondary);font-size:0.88rem;flex:1;">Watchdog vocale: rileva le disconnessioni "silenziose" e riconnette in automatico</span>
+        <span style="font-family:var(--font-mono);font-size:0.72rem;color:var(--text-muted);flex-shrink:0;">Ago 2026</span>
       </div>
     </a>
 
-    <a href="changelog.html#vv68" style="text-decoration:none;">
+    <a href="changelog.html#vv102" style="text-decoration:none;">
       <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px 24px;display:flex;align-items:center;gap:16px;transition:border-color .2s,box-shadow .2s;" onmouseover="this.style.borderColor='rgba(74,179,232,0.35)';this.style.boxShadow='0 4px 20px rgba(0,0,0,0.3)'" onmouseout="this.style.borderColor='rgba(74,179,232,0.12)';this.style.boxShadow='none'">
-        <span style="font-family:var(--font-mono);font-size:0.8rem;font-weight:700;color:var(--bg-base);background:var(--blue);border-radius:4px;padding:2px 8px;flex-shrink:0;">v68</span>
-        <span style="color:var(--text-secondary);font-size:0.88rem;flex:1;">Introdotta la crashout mode con /crashout per i dev</span>
-        <span style="font-family:var(--font-mono);font-size:0.72rem;color:var(--text-muted);flex-shrink:0;">Giu 2026</span>
+        <span style="font-family:var(--font-mono);font-size:0.8rem;font-weight:700;color:var(--bg-base);background:var(--blue);border-radius:4px;padding:2px 8px;flex-shrink:0;">v102</span>
+        <span style="color:var(--text-secondary);font-size:0.88rem;flex:1;">Nuovo /xp reset-tutti [Admin] — azzera XP e livelli di tutto il server con conferma</span>
+        <span style="font-family:var(--font-mono);font-size:0.72rem;color:var(--text-muted);flex-shrink:0;">Ago 2026</span>
       </div>
     </a>
 
-    <a href="changelog.html#vv67" style="text-decoration:none;">
+    <a href="changelog.html#vv101" style="text-decoration:none;">
       <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px 24px;display:flex;align-items:center;gap:16px;transition:border-color .2s,box-shadow .2s;" onmouseover="this.style.borderColor='rgba(74,179,232,0.35)';this.style.boxShadow='0 4px 20px rgba(0,0,0,0.3)'" onmouseout="this.style.borderColor='rgba(74,179,232,0.12)';this.style.boxShadow='none'">
-        <span style="font-family:var(--font-mono);font-size:0.8rem;font-weight:700;color:var(--bg-base);background:var(--blue);border-radius:4px;padding:2px 8px;flex-shrink:0;">v67</span>
-        <span style="color:var(--text-secondary);font-size:0.88rem;flex:1;">/queue ridisegnato con card grafica e paginazione a bottoni</span>
-        <span style="font-family:var(--font-mono);font-size:0.72rem;color:var(--text-muted);flex-shrink:0;">Giu 2026</span>
+        <span style="font-family:var(--font-mono);font-size:0.8rem;font-weight:700;color:var(--bg-base);background:var(--blue);border-radius:4px;padding:2px 8px;flex-shrink:0;">v101</span>
+        <span style="color:var(--text-secondary);font-size:0.88rem;flex:1;">Nuovo /xp sistema — attiva o disattiva l'intero sistema XP/livelli del server</span>
+        <span style="font-family:var(--font-mono);font-size:0.72rem;color:var(--text-muted);flex-shrink:0;">Ago 2026</span>
       </div>
     </a>
 
@@ -545,12 +554,16 @@
     <div class="footer-meta">discord.py 2.x · <span class="bot-version">v0</span> · 120 comandi</div>
     <div class="footer-copy">© 2026 wicknoob73 & jeimaster. — Non affiliato con Discord Inc.</div>
   </div>
-  <ul class="footer-links">
+    <ul class="footer-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="commands.html">Comandi</a></li>
+    <li><a href="guide.html">Guida</a></li>
+    <li><a href="setup.html">Setup</a></li>
     <li><a href="stats.html">Statistiche</a></li>
     <li><a href="changelog.html">Changelog</a></li>
     <li><a href="legal.html">Termini & Privacy</a></li>
+    <li><a href="eula.html">EULA</a></li>
+    <li><a href="privacy.html">Privacy Policy</a></li>
     <li><a href="legal.html#contatti">Contatti</a></li>
   </ul>
 </footer>
@@ -579,6 +592,18 @@ async function checkStatus() {
       badge.style.opacity = '0.65';
     }
   } catch {
+    // Il widget Discord pubblico non è attivo/raggiungibile: prima di
+    // arrenderci controlliamo se almeno l'endpoint statistiche del bot
+    // risponde, per non mostrare "sconosciuto" quando il bot è online.
+    try {
+      const fallback = await fetchStatsWithFallback();
+      if (fallback) {
+        dot.style.background = 'var(--teal)';
+        dot.style.boxShadow = '0 0 6px var(--teal)';
+        text.textContent = 'Bot online';
+        return;
+      }
+    } catch {}
     dot.style.background = '#555e72';
     dot.style.boxShadow = 'none';
     text.textContent = 'Stato sconosciuto';
@@ -601,9 +626,9 @@ setInterval(checkStatus, 60000);
 // ── Aggiorna contatore server dalla API ──
 async function updateServerCount() {
   try {
-    const res = await fetch(STATS_URL);
-    if (!res.ok) throw new Error();
-    const data = await res.json();
+    const result = await fetchStatsWithFallback();
+    if (!result) throw new Error();
+    const data = await result.response.json();
     document.getElementById('statServers').textContent = data.servers || '—';
   } catch {
     document.getElementById('statServers').textContent = '—';
@@ -625,6 +650,12 @@ if (ham && mob) {
       mob.classList.remove('open');
     }
   });
+  mob.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => {
+      ham.classList.remove('open');
+      mob.classList.remove('open');
+    })
+  );
 }
 // Back to top
 const btt = document.getElementById('backToTop');

@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EULA — Carmelo Bot</title>
+  <meta name="description" content="Contratto di Licenza con l'Utente Finale (EULA) di Carmelo Bot.">
+  <link rel="canonical" href="https://wicknoob73.github.io/eula.html">
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="EULA — Carmelo Bot">
+  <meta property="og:description" content="Contratto di Licenza con l'Utente Finale (EULA) di Carmelo Bot.">
+  <meta property="og:image" content="https://wicknoob73.github.io/assets/og-image.png">
+  <meta name="theme-color"        content="#4ab3e8">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230a0c14'/><text y='24' x='4' font-size='22'>🤖</text></svg>">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Smooth scroll + compensazione navbar ───────────── */
+    html { scroll-behavior: smooth; }
+    h3[id] { scroll-margin-top: 90px; }
+
+    /* ── Legal-specific ─────────────────────────────────── */
+    .legal-layout {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 40px;
+      align-items: start;
+      padding-top: 48px;
+    }
+
+    .legal-sidebar {
+      position: sticky;
+      top: 80px;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+      scrollbar-width: thin;
+    }
+
+    .legal-sidebar::-webkit-scrollbar { width: 6px; }
+    .legal-sidebar::-webkit-scrollbar-thumb {
+      background: var(--border-hover);
+      border-radius: 3px;
+    }
+    .legal-sidebar::-webkit-scrollbar-track { background: transparent; }
+
+    .sidebar-label {
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      margin-bottom: 12px;
+      padding-left: 4px;
+    }
+
+    .sidebar-nav {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 2px;
+    }
+
+    .sidebar-nav a {
+      display: flex; align-items: center; gap: 8px;
+      padding: 7px 12px;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      border-left: 2px solid transparent;
+      transition: color var(--ease), background var(--ease), border-color var(--ease);
+    }
+
+    .sidebar-nav a:hover {
+      color: var(--text-primary);
+      background: var(--bg-card);
+      border-left-color: var(--border-hover);
+    }
+
+    .sidebar-nav a.active {
+      color: var(--blue);
+      background: var(--blue-faint);
+      border-left-color: var(--blue);
+    }
+
+    .sidebar-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 10px 0;
+    }
+
+    .legal-main { min-width: 0; }
+
+    .legal-section {
+      margin-bottom: 56px;
+    }
+
+    .legal-section-header {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 28px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .legal-icon {
+      width: 42px; height: 42px;
+      border-radius: var(--radius-sm);
+      background: var(--blue-faint);
+      border: 1px solid var(--border-hover);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .legal-section-header h2 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+    }
+
+    .legal-section-header .updated {
+      margin-left: auto;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      flex-shrink: 0;
+    }
+
+    /* Back link (torna ai documenti) */
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.8rem;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      text-decoration: none;
+      margin-top: 48px;
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      transition: all var(--ease);
+    }
+
+    .back-link:hover {
+      color: var(--blue);
+      border-color: var(--border-hover);
+    }
+
+    @media (max-width: 760px) {
+      .legal-layout {
+        grid-template-columns: 1fr;
+        gap: 0;
+        padding-top: 32px;
+      }
+      .legal-sidebar { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<script src="config.js"></script>
+<script src="version.js" defer></script>
+
+<!-- ── Navbar ─────────────────────────────────────────── -->
+<nav class="navbar">
+  <a href="index.html" class="navbar-logo"><span>Carmelo</span> Bot</a>
+    <ul class="navbar-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="commands.html">Comandi</a></li>
+    <li><a href="guide.html">Guida</a></li>
+    <li><a href="setup.html">Setup</a></li>
+    <li><a href="stats.html">Statistiche</a></li>
+    <li><a href="changelog.html">Changelog</a></li>
+    <li><a href="legal.html" class="active">Termini & Privacy</a></li>
+    <li><a href="legal.html#contatti">Contatti</a></li>
+  </ul>
+  <a href="invite.html" class="navbar-cta">+ Aggiungi al server</a>
+  <button class="theme-toggle" id="themeToggle" aria-label="Cambia tema">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+  </button>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="commands.html">Comandi</a>
+  <a href="guide.html">Guida</a>
+  <a href="setup.html">Setup</a>
+  <a href="stats.html">Statistiche</a>
+  <a href="changelog.html">Changelog</a>
+  <a href="legal.html" class="active">Termini & Privacy</a>
+  <a href="legal.html#contatti">Contatti</a>
+  <a href="invite.html" class="mobile-cta">+ Aggiungi al server</a>
+</div>
+
+<div class="container">
+  <div class="legal-layout">
+
+    <!-- ── Sidebar ──────────────────────────────────── -->
+    <aside class="legal-sidebar">
+      <div class="sidebar-label">Indice EULA</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#premesse" class="active">1. Premesse</a></li>
+        <li><a href="#licenza">2. Concessione licenza</a></li>
+        <li><a href="#servizio">3. Descrizione servizio</a></li>
+        <li><a href="#requisiti">4. Requisiti d'uso</a></li>
+        <li><a href="#condotte">5. Condotte vietate</a></li>
+        <li><a href="#terze-parti">6. Servizi di terze parti</a></li>
+        <li><a href="#ip">7. Proprietà intellettuale</a></li>
+        <li><a href="#privacy">8. Privacy</a></li>
+        <li><a href="#disponibilita">9. Disponibilità</a></li>
+        <li><a href="#responsabilita">10. Limitazione responsabilità</a></li>
+        <li><a href="#manleva">11. Manleva</a></li>
+        <li><a href="#modifiche">12. Modifiche</a></li>
+        <li><a href="#terminazione">13. Terminazione</a></li>
+        <li><a href="#legge">14. Legge applicabile</a></li>
+        <li><a href="#contatti">15. Contatti</a></li>
+        <div class="sidebar-divider"></div>
+        <li><a href="legal.html">← Tutti i documenti</a></li>
+        <li><a href="privacy.html"><span aria-hidden="true">🔐</span> Privacy Policy</a></li>
+      </ul>
+    </aside>
+
+    <!-- ── Main ─────────────────────────────────────── -->
+    <main class="legal-main">
+
+      <section class="legal-section">
+        <div class="legal-section-header">
+          <div class="legal-icon"><span aria-hidden="true">📄</span></div>
+          <h2>EULA — Contratto di Licenza</h2>
+          <span class="updated">Aggiornato: 11 Set 2026</span>
+        </div>
+
+        <div class="card">
+          <p style="font-size:0.85rem; color:var(--text-muted); font-family:var(--font-mono); margin-bottom:24px;">
+            Versione 1.0 — Ultimo aggiornamento: 11 settembre 2026
+          </p>
+
+          <h3 id="premesse">1. Premesse e accettazione</h3>
+          <p>Il presente Contratto di Licenza con l'Utente Finale ("EULA", "Contratto") regola l'utilizzo del bot Discord denominato <strong style="color:var(--text-primary);">Carmelo Bot</strong> ("il Bot", "il Software"), sviluppato e distribuito da <strong style="color:var(--text-primary);">wicknoob73 & jeimaster.</strong> ("gli Sviluppatori", "noi").</p>
+          <p>Aggiungendo il Bot a un server Discord, utilizzando uno qualsiasi dei suoi comandi, o interagendo con esso in qualsiasi modo, l'utente ("tu", "l'Utente") dichiara di aver letto, compreso e accettato integralmente le condizioni del presente Contratto. Se non accetti queste condizioni, non devi utilizzare il Bot e devi rimuoverlo da qualsiasi server.</p>
+
+          <h3 id="licenza">2. Concessione della licenza</h3>
+          <p>Gli Sviluppatori concedono all'Utente una licenza <strong style="color:var(--text-primary);">limitata, personale, non esclusiva, non trasferibile e revocabile</strong> per utilizzare il Bot tramite Discord, esclusivamente alle condizioni stabilite nel presente Contratto.</p>
+          <p><strong style="color:var(--text-primary);">Questa licenza NON include il diritto di:</strong></p>
+          <ul>
+            <li>accedere, copiare, scaricare o ispezionare il codice sorgente del Bot;</li>
+            <li>modificare, adattare, tradurre o creare opere derivate dal Bot;</li>
+            <li>decompilare, disassemblare o effettuare reverse engineering del Bot, salvo nei limiti espressamente consentiti dalla legge applicabile;</li>
+            <li>ridistribuire, sublicenziare, vendere, noleggiare o prestare il Bot o parti di esso;</li>
+            <li>ospitare autonomamente (self-hosting) istanze del Bot;</li>
+            <li>utilizzare il Bot per addestrare modelli di intelligenza artificiale, sistemi di machine learning o tecnologie simili.</li>
+          </ul>
+          <p>Il codice sorgente del Bot è di proprietà esclusiva degli Sviluppatori ed è protetto dalle leggi sul diritto d'autore. <strong style="color:var(--text-primary);">Tutti i diritti non espressamente concessi sono riservati.</strong></p>
+
+          <h3 id="servizio">3. Descrizione del servizio</h3>
+          <p>Il Bot è un'applicazione gratuita per la piattaforma Discord che offre, tra le altre, le seguenti funzionalità:</p>
+          <ul>
+            <li>riproduzione musicale da YouTube, Spotify e SoundCloud, con code, effetti audio, radio in streaming e soundboard;</li>
+            <li>moderazione del server (warn, ban, kick, timeout, mute, purge, blocco canali, note staff);</li>
+            <li>sistema ticket con supporto staff;</li>
+            <li>sistema livelli, XP e statistiche utente;</li>
+            <li>sistema giveaway con requisiti e blacklist;</li>
+            <li>sistema di logging configurabile (moderazione, messaggi, membri, voce);</li>
+            <li>funzionalità di intelligenza artificiale (risposte testuali, generazione immagini, riscrittura testi, generazione playlist);</li>
+            <li>sistema compleanni e achievements;</li>
+            <li>comandi di utilità e configurazione.</li>
+          </ul>
+          <p>L'elenco completo dei comandi è consultabile in qualsiasi momento tramite il comando <code>/help</code>.</p>
+          <p>Gli Sviluppatori si riservano il diritto di aggiungere, modificare o rimuovere funzionalità in qualsiasi momento, senza preavviso.</p>
+
+          <h3 id="requisiti">4. Requisiti di utilizzo</h3>
+          <p>Per utilizzare il Bot l'Utente deve:</p>
+          <ul>
+            <li>avere almeno <strong style="color:var(--text-primary);">13 anni</strong> (o l'età minima richiesta da Discord nella propria giurisdizione);</li>
+            <li>rispettare i <a href="https://discord.com/terms" target="_blank" rel="noopener">Termini di Servizio di Discord</a> e le <a href="https://discord.com/guidelines" target="_blank" rel="noopener">Linee Guida della Community</a>;</li>
+            <li>disporre dei permessi necessari all'interno del server in cui utilizza il Bot;</li>
+            <li>non utilizzare il Bot in contesti illegali o che violino diritti di terzi.</li>
+          </ul>
+          <p>Se utilizzi il Bot per conto di un server o di un'organizzazione, dichiari di avere l'autorità per accettare il presente Contratto a nome della stessa.</p>
+
+          <h3 id="condotte">5. Utilizzo consentito e condotte vietate</h3>
+          <p>L'Utente si impegna a <strong style="color:var(--text-primary);">non</strong> utilizzare il Bot per:</p>
+          <ul>
+            <li>attività illegali di qualsiasi natura;</li>
+            <li>spam, flood, abuso dei rate limit o dei servizi Discord;</li>
+            <li>tentativi di exploit, injection, manipolazione dei comandi o danneggiamento del Bot;</li>
+            <li>aggiramento di filtri, limiti, cooldown o sistemi di sicurezza;</li>
+            <li>molestie, minacce, discriminazione o incitamento all'odio;</li>
+            <li>riproduzione di contenuti protetti da copyright in violazione delle leggi applicabili;</li>
+            <li>utilizzo commerciale, rivendita, o offerta del Bot (o di sue parti) come servizio a terzi;</li>
+            <li>utilizzo dell'AI integrata per generare contenuti illegali, diffamatori, o che violino i termini dei fornitori terzi (Mistral, Pollinations, ecc.).</li>
+          </ul>
+          <p>Gli Sviluppatori si riservano il diritto di revocare l'accesso al Bot a qualsiasi utente, server o community che, a loro insindacabile giudizio, violi il presente Contratto o utilizzi il Bot in modo improprio, <strong style="color:var(--text-primary);">senza preavviso e senza che ciò comporti alcuna responsabilità o ripercussione legale</strong> per gli Sviluppatori.</p>
+
+          <h3 id="terze-parti">6. Servizi di terze parti</h3>
+          <p>Il Bot si integra con servizi di terze parti, ciascuno regolato dai propri termini:</p>
+          <ul>
+            <li><strong style="color:var(--text-primary);">Discord</strong> (piattaforma);</li>
+            <li><strong style="color:var(--text-primary);">YouTube</strong> e <strong style="color:var(--text-primary);">Spotify</strong> (riproduzione musicale);</li>
+            <li><strong style="color:var(--text-primary);">SoundCloud</strong> (riproduzione musicale);</li>
+            <li><strong style="color:var(--text-primary);">Mistral AI</strong> (funzionalità di intelligenza artificiale);</li>
+            <li><strong style="color:var(--text-primary);">Pollinations.ai</strong> (generazione immagini);</li>
+            <li><strong style="color:var(--text-primary);">lyrics.ovh</strong> (ricerca testi delle canzoni).</li>
+          </ul>
+          <p>L'utilizzo di tali servizi tramite il Bot implica l'accettazione dei rispettivi termini. Gli Sviluppatori non sono affiliati, approvati o sponsorizzati da nessuno di questi fornitori e non sono responsabili per il loro funzionamento, le loro interruzioni o le loro politiche.</p>
+
+          <h3 id="ip">7. Proprietà intellettuale</h3>
+          <p>Il nome <strong style="color:var(--text-primary);">Carmelo Bot</strong>, il logo, l'identità visiva, il codice sorgente e qualsiasi altro materiale originale relativo al Bot sono di proprietà esclusiva degli Sviluppatori.</p>
+          <p>È vietato utilizzare il nome o il logo del Bot per rappresentare prodotti, servizi o progetti derivati senza autorizzazione scritta.</p>
+          <p>I marchi, i loghi e i nomi di terze parti (Discord, YouTube, Spotify, SoundCloud, ecc.) appartengono ai rispettivi proprietari.</p>
+
+          <h3 id="privacy">8. Privacy e trattamento dei dati</h3>
+          <p>Il trattamento dei dati personali è descritto nella <a href="privacy.html"><strong>Privacy Policy</strong></a> del Bot, che costituisce parte integrante del presente Contratto. Utilizzando il Bot, l'Utente dichiara di aver letto e compreso la Privacy Policy.</p>
+          <p>In sintesi, il Bot raccoglie e memorizza:</p>
+          <ul>
+            <li>identificatori Discord (ID utente, server, canali, ruoli);</li>
+            <li>statistiche di utilizzo (messaggi, tempo in vocale, reazioni, XP e livelli);</li>
+            <li>dati di moderazione (warn, note staff, log di azioni);</li>
+            <li>dati di configurazione per server;</li>
+            <li>dati relativi a giveaway, compleanni, cronologia musicale e cooldown.</li>
+          </ul>
+          <p>Alcuni contenuti (in particolare i messaggi degli utenti, quando il Bot viene menzionato o utilizzato per l'AI, e i prompt di generazione immagini) vengono <strong style="color:var(--text-primary);">trasmessi a servizi terzi</strong> (in particolare Mistral AI e Pollinations.ai) per l'erogazione delle funzionalità richieste.</p>
+
+          <h3 id="disponibilita">9. Disponibilità del servizio</h3>
+          <p>Il Bot è fornito <em>"così com'è"</em> e <em>"come disponibile"</em>, senza alcuna garanzia di disponibilità continua, assenza di errori, integrità dei dati o adeguatezza a uno scopo particolare.</p>
+          <p>Gli Sviluppatori non garantiscono che:</p>
+          <ul>
+            <li>il Bot sia sempre online o privo di bug;</li>
+            <li>le funzionalità di terze parti (musica, AI, radio) siano sempre operative;</li>
+            <li>i dati memorizzati non vadano mai persi.</li>
+          </ul>
+          <p>Gli Sviluppatori si riservano il diritto di <strong style="color:var(--text-primary);">sospendere, interrompere o terminare</strong> il servizio in qualsiasi momento, in tutto o in parte, senza preavviso.</p>
+
+          <h3 id="responsabilita">10. Limitazione di responsabilità</h3>
+          <p>Nei limiti massimi consentiti dalla legge applicabile, gli Sviluppatori non sono responsabili per:</p>
+          <ul>
+            <li>eventuali danni diretti, indiretti, incidentali, consequenziali o punitivi;</li>
+            <li>perdita di dati, profitti, reputazione o opportunità;</li>
+            <li>disservizi, interruzioni o malfunzionamenti del Bot o dei servizi di terze parti;</li>
+            <li>contenuti generati dall'AI integrata;</li>
+            <li>comportamenti di altri utenti o server.</li>
+          </ul>
+          <p>L'Utente utilizza il Bot a proprio rischio.</p>
+
+          <h3 id="manleva">11. Manleva</h3>
+          <p>L'Utente si impegna a manlevare e tenere indenni gli Sviluppatori da qualsiasi reclamo, richiesta di risarcimento, danno o spesa (incluse le spese legali) derivanti da:</p>
+          <ul>
+            <li>un uso del Bot contrario al presente Contratto;</li>
+            <li>la violazione di leggi o diritti di terzi;</li>
+            <li>contenuti che l'Utente invia, riproduce o diffonde tramite il Bot.</li>
+          </ul>
+
+          <h3 id="modifiche">12. Modifiche al Contratto</h3>
+          <p>Gli Sviluppatori possono modificare il presente EULA in qualsiasi momento. Le modifiche saranno efficaci dal momento della pubblicazione della nuova versione.</p>
+          <p>Continuando a utilizzare il Bot dopo l'entrata in vigore delle modifiche, l'Utente accetta automaticamente la nuova versione del Contratto. È responsabilità dell'Utente consultare periodicamente questo documento.</p>
+
+          <h3 id="terminazione">13. Terminazione</h3>
+          <p>Il presente Contratto è efficace fino a quando l'Utente utilizza il Bot.</p>
+          <p>Gli Sviluppatori possono revocare la licenza in qualsiasi momento, senza preavviso e senza obbligo di motivazione. In caso di revoca, l'Utente deve cessare immediatamente l'utilizzo del Bot.</p>
+          <p>Le clausole relative a proprietà intellettuale, limitazione di responsabilità, manleva e legge applicabile sopravvivono alla terminazione.</p>
+
+          <h3 id="legge">14. Legge applicabile e foro competente</h3>
+          <p>Il presente Contratto è regolato dalla <strong style="color:var(--text-primary);">legge italiana</strong>.</p>
+          <p>Per qualsiasi controversia derivante dall'interpretazione o dall'esecuzione del Contratto, sarà competente in via esclusiva il foro del domicilio degli Sviluppatori, salvo diversa disposizione inderogabile di legge a tutela del consumatore.</p>
+
+          <h3 id="contatti">15. Contatti</h3>
+          <p>Per domande, richieste o comunicazioni relative al presente Contratto:</p>
+          <ul>
+            <li><strong style="color:var(--text-primary);">wicknoob73</strong> — <a href="mailto:slesioalan@gmail.com">slesioalan@gmail.com</a></li>
+            <li><strong style="color:var(--text-primary);">jeimaster.</strong> — <a href="mailto:jeison.barrial12@gmail.com">jeison.barrial12@gmail.com</a></li>
+          </ul>
+
+          <div style="display:flex; align-items:center; gap:12px; background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px 18px; margin-top:24px;">
+            <span style="font-size:1.4rem;"><span aria-hidden="true">⚖</span>️</span>
+            <span style="font-size:0.82rem; color:var(--text-muted); font-family:var(--font-mono);">© 2026 wicknoob73 & jeimaster. — Tutti i diritti riservati.</span>
+          </div>
+
+          <a href="legal.html" class="back-link">← Torna a tutti i documenti legali</a>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- ── Footer ─────────────────────────────────────────── -->
+<footer>
+  <div class="footer-left">
+    <div class="footer-brand"><span>Carmelo</span> Bot</div>
+    <div class="footer-meta">discord.py 2.x · <span class="bot-version">v0</span> · 120 comandi</div>
+    <div class="footer-copy">© 2026 wicknoob73 & jeimaster. — Non affiliato con Discord Inc.</div>
+  </div>
+    <ul class="footer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="commands.html">Comandi</a></li>
+    <li><a href="guide.html">Guida</a></li>
+    <li><a href="setup.html">Setup</a></li>
+    <li><a href="stats.html">Statistiche</a></li>
+    <li><a href="changelog.html">Changelog</a></li>
+    <li><a href="legal.html">Termini & Privacy</a></li>
+    <li><a href="eula.html">EULA</a></li>
+    <li><a href="privacy.html">Privacy Policy</a></li>
+    <li><a href="legal.html#contatti">Contatti</a></li>
+  </ul>
+</footer>
+
+<!-- ── Script: scroll-spy sidebar ─────────────────────── -->
+<script>
+  const navLinks = Array.from(document.querySelectorAll('#sidebar-nav a[href^="#"]'));
+
+  const anchors = navLinks
+    .map(link => {
+      const id = link.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      return el ? { link, el } : null;
+    })
+    .filter(Boolean);
+
+  function setActive(link) {
+    navLinks.forEach(l => l.classList.toggle('active', l === link));
+    if (link && link.parentElement) {
+      const li = link.parentElement;
+      const container = link.closest('.legal-sidebar');
+      if (container) {
+        const liTop = li.offsetTop;
+        const liBottom = liTop + li.offsetHeight;
+        const cTop = container.scrollTop;
+        const cBottom = cTop + container.clientHeight;
+        if (liTop < cTop) container.scrollTo({ top: liTop - 12, behavior: 'smooth' });
+        else if (liBottom > cBottom) container.scrollTo({ top: liBottom - container.clientHeight + 12, behavior: 'smooth' });
+      }
+    }
+  }
+
+  function updateActive() {
+    if (!anchors.length) return;
+    const offset = 120;
+    const y = window.scrollY + offset;
+
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 4) {
+      setActive(anchors[anchors.length - 1].link);
+      return;
+    }
+
+    let current = anchors[0];
+    for (const a of anchors) {
+      if (a.el.getBoundingClientRect().top + window.scrollY <= y) current = a;
+      else break;
+    }
+    setActive(current.link);
+  }
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => { updateActive(); ticking = false; });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  window.addEventListener('resize', updateActive, { passive: true });
+  window.addEventListener('load', updateActive);
+  updateActive();
+</script>
+
+<button class="back-to-top" id="backToTop" aria-label="Torna su">
+  <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="18 15 12 9 6 15"/>
+  </svg>
+</button>
+
+<script>
+const ham = document.getElementById('hamburgerBtn');
+const mob = document.getElementById('mobileMenu');
+if (ham && mob) {
+  ham.addEventListener('click', () => {
+    ham.classList.toggle('open');
+    mob.classList.toggle('open');
+  });
+  document.addEventListener('click', e => {
+    if (!ham.contains(e.target) && !mob.contains(e.target)) {
+      ham.classList.remove('open');
+      mob.classList.remove('open');
+    }
+  });
+  mob.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => {
+      ham.classList.remove('open');
+      mob.classList.remove('open');
+    })
+  );
+}
+const btt = document.getElementById('backToTop');
+if (btt) {
+  window.addEventListener('scroll', () => {
+    btt.classList.toggle('visible', window.scrollY > 300);
+  }, { passive: true });
+  btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+}
+</script>
+
+<script>
+(function() {
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light') document.documentElement.classList.add('light');
+})();
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('themeToggle');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    const isLight = document.documentElement.classList.toggle('light');
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  });
+});
+</script>
+</body>
+</html>

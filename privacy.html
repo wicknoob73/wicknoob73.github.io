@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Carmelo Bot</title>
+  <meta name="description" content="Privacy Policy di Carmelo Bot — quali dati raccogliamo, come li trattiamo e come esercitare i tuoi diritti.">
+  <link rel="canonical" href="https://wicknoob73.github.io/privacy.html">
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="Privacy Policy — Carmelo Bot">
+  <meta property="og:description" content="Quali dati raccogliamo, come li trattiamo, con chi li condividiamo (GDPR).">
+  <meta property="og:image" content="https://wicknoob73.github.io/assets/og-image.png">
+  <meta name="theme-color"        content="#4ab3e8">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230a0c14'/><text y='24' x='4' font-size='22'>🤖</text></svg>">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Smooth scroll + compensazione navbar ───────────── */
+    html { scroll-behavior: smooth; }
+    h3[id] { scroll-margin-top: 90px; }
+    h4 { scroll-margin-top: 90px; }
+
+    /* ── Legal-specific ─────────────────────────────────── */
+    .legal-layout {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 40px;
+      align-items: start;
+      padding-top: 48px;
+    }
+
+    .legal-sidebar {
+      position: sticky;
+      top: 80px;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+      scrollbar-width: thin;
+    }
+
+    .legal-sidebar::-webkit-scrollbar { width: 6px; }
+    .legal-sidebar::-webkit-scrollbar-thumb {
+      background: var(--border-hover);
+      border-radius: 3px;
+    }
+    .legal-sidebar::-webkit-scrollbar-track { background: transparent; }
+
+    .sidebar-label {
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      margin-bottom: 12px;
+      padding-left: 4px;
+    }
+
+    .sidebar-nav {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 2px;
+    }
+
+    .sidebar-nav a {
+      display: flex; align-items: center; gap: 8px;
+      padding: 7px 12px;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      border-left: 2px solid transparent;
+      transition: color var(--ease), background var(--ease), border-color var(--ease);
+    }
+
+    .sidebar-nav a:hover {
+      color: var(--text-primary);
+      background: var(--bg-card);
+      border-left-color: var(--border-hover);
+    }
+
+    .sidebar-nav a.active {
+      color: var(--blue);
+      background: var(--blue-faint);
+      border-left-color: var(--blue);
+    }
+
+    .sidebar-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 10px 0;
+    }
+
+    .legal-main { min-width: 0; }
+
+    .legal-section {
+      margin-bottom: 56px;
+    }
+
+    .legal-section-header {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 28px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .legal-icon {
+      width: 42px; height: 42px;
+      border-radius: var(--radius-sm);
+      background: var(--blue-faint);
+      border: 1px solid var(--border-hover);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .legal-section-header h2 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+    }
+
+    .legal-section-header .updated {
+      margin-left: auto;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      flex-shrink: 0;
+    }
+
+    .file-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+      gap: 8px;
+      margin: 10px 0 14px;
+    }
+
+    .file-pill {
+      display: flex; align-items: center; gap: 6px;
+      padding: 9px 13px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      transition: border-color var(--ease);
+    }
+
+    .file-pill:hover { border-color: var(--blue); }
+
+    .third-party-card {
+      display: flex; align-items: flex-start; gap: 14px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      margin-bottom: 12px;
+    }
+
+    .third-party-card .tp-icon {
+      width: 40px; height: 40px;
+      border-radius: var(--radius-sm);
+      background: var(--blue-faint);
+      border: 1px solid var(--border-hover);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.15rem;
+      flex-shrink: 0;
+    }
+
+    .third-party-card .tp-body { min-width: 0; }
+    .third-party-card .tp-name {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    .third-party-card .tp-desc {
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    .rights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+      margin: 14px 0;
+    }
+
+    .right-pill {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 14px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+    }
+
+    .right-pill .rp-emoji { font-size: 1.1rem; }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.8rem;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      text-decoration: none;
+      margin-top: 48px;
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      transition: all var(--ease);
+    }
+    .back-link:hover { color: var(--blue); border-color: var(--border-hover); }
+
+    @media (max-width: 760px) {
+      .legal-layout { grid-template-columns: 1fr; gap: 0; padding-top: 32px; }
+      .legal-sidebar { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<script src="config.js"></script>
+<script src="version.js" defer></script>
+
+<!-- ── Navbar ─────────────────────────────────────────── -->
+<nav class="navbar">
+  <a href="index.html" class="navbar-logo"><span>Carmelo</span> Bot</a>
+    <ul class="navbar-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="commands.html">Comandi</a></li>
+    <li><a href="guide.html">Guida</a></li>
+    <li><a href="setup.html">Setup</a></li>
+    <li><a href="stats.html">Statistiche</a></li>
+    <li><a href="changelog.html">Changelog</a></li>
+    <li><a href="legal.html" class="active">Termini & Privacy</a></li>
+    <li><a href="legal.html#contatti">Contatti</a></li>
+  </ul>
+  <a href="invite.html" class="navbar-cta">+ Aggiungi al server</a>
+  <button class="theme-toggle" id="themeToggle" aria-label="Cambia tema">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+  </button>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="commands.html">Comandi</a>
+  <a href="guide.html">Guida</a>
+  <a href="setup.html">Setup</a>
+  <a href="stats.html">Statistiche</a>
+  <a href="changelog.html">Changelog</a>
+  <a href="legal.html" class="active">Termini & Privacy</a>
+  <a href="legal.html#contatti">Contatti</a>
+  <a href="invite.html" class="mobile-cta">+ Aggiungi al server</a>
+</div>
+
+<div class="container">
+  <div class="legal-layout">
+
+    <!-- ── Sidebar ──────────────────────────────────── -->
+    <aside class="legal-sidebar">
+      <div class="sidebar-label">Indice Privacy</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#titolare" class="active">1. Titolare</a></li>
+        <li><a href="#ambito">2. Ambito</a></li>
+        <li><a href="#dati">3. Dati raccolti</a></li>
+        <li><a href="#terze-parti">4. Servizi terzi</a></li>
+        <li><a href="#memoria-ai">5. Memoria AI</a></li>
+        <li><a href="#basi">6. Basi giuridiche</a></li>
+        <li><a href="#conservazione">7. Conservazione</a></li>
+        <li><a href="#sicurezza">8. Sicurezza</a></li>
+        <li><a href="#extra-ue">9. Trasferimenti extra-UE</a></li>
+        <li><a href="#diritti">10. Diritti</a></li>
+        <li><a href="#minori">11. Minori</a></li>
+        <li><a href="#modifiche">12. Modifiche</a></li>
+        <li><a href="#contatti">13. Contatti</a></li>
+        <div class="sidebar-divider"></div>
+        <li><a href="legal.html">← Tutti i documenti</a></li>
+        <li><a href="eula.html"><span aria-hidden="true">📄</span> EULA</a></li>
+      </ul>
+    </aside>
+
+    <!-- ── Main ─────────────────────────────────────── -->
+    <main class="legal-main">
+
+      <section class="legal-section">
+        <div class="legal-section-header">
+          <div class="legal-icon"><span aria-hidden="true">🔐</span></div>
+          <h2>Privacy Policy</h2>
+          <span class="updated">Aggiornato: 11 Set 2026</span>
+        </div>
+
+        <div class="card">
+          <p style="font-size:0.85rem; color:var(--text-muted); font-family:var(--font-mono); margin-bottom:24px;">
+            Versione 1.0 — Ultimo aggiornamento: 11 settembre 2026
+          </p>
+
+          <h3 id="titolare">1. Titolare del trattamento</h3>
+          <p>Il titolare del trattamento dei dati personali raccolti tramite Carmelo Bot è:</p>
+          <p><strong style="color:var(--text-primary);">wicknoob73 & jeimaster.</strong><br>
+             Contatti: <a href="mailto:slesioalan@gmail.com">slesioalan@gmail.com</a> — <a href="mailto:jeison.barrial12@gmail.com">jeison.barrial12@gmail.com</a></p>
+          <p>Carmelo Bot è un'applicazione per la piattaforma Discord, non affiliata, approvata o sponsorizzata da Discord Inc., Google LLC (YouTube), Spotify AB o SoundCloud.</p>
+
+          <h3 id="ambito">2. Ambito di applicazione</h3>
+          <p>La presente Privacy Policy descrive:</p>
+          <ul>
+            <li>quali dati personali vengono raccolti dal Bot;</li>
+            <li>come vengono utilizzati, conservati e protetti;</li>
+            <li>con chi vengono condivisi;</li>
+            <li>quali diritti hai e come esercitarli.</li>
+          </ul>
+          <p>Utilizzando Carmelo Bot (aggiungendolo a un server, inviando comandi, menzionandolo o interagendo con le sue funzionalità) dichiari di aver letto e compreso questa Privacy Policy.</p>
+
+          <h3 id="dati">3. Quali dati raccogliamo</h3>
+          <p>Il Bot raccoglie esclusivamente i dati necessari al proprio funzionamento. <strong style="color:var(--text-primary);">Non raccogliamo dati sensibili</strong> (origini etniche, opinioni politiche, credo religioso, dati sanitari, orientamento sessuale, dati biometrici) e <strong style="color:var(--text-primary);">non raccogliamo dati di pagamento</strong>.</p>
+
+          <h4>3.1 Identificatori Discord</h4>
+          <p>ID server (guild), ID utente, ID canale, ID ruolo, ID messaggio. Questi identificatori sono numeri pubblici generati da Discord e <strong style="color:var(--text-primary);">non contengono informazioni personali reali</strong>. Sono usati come chiavi nei file di configurazione e nel database.</p>
+
+          <h4>3.2 Statistiche utente</h4>
+          <p>Memorizzate in <code>stats.json</code>:</p>
+          <div class="file-grid">
+            <div class="file-pill"><span aria-hidden="true">📨</span> Messaggi inviati</div>
+            <div class="file-pill"><span aria-hidden="true">📢</span> Messaggi per canale</div>
+            <div class="file-pill"><span aria-hidden="true">🎙</span>️ Minuti in vocale</div>
+            <div class="file-pill"><span aria-hidden="true">👍</span> Reazioni aggiunte</div>
+            <div class="file-pill"><span aria-hidden="true">❤</span>️ Reazioni ricevute</div>
+            <div class="file-pill"><span aria-hidden="true">🖼</span>️ Immagini allegate</div>
+          </div>
+
+          <h4>3.3 XP e livelli</h4>
+          <p>Memorizzati in <code>levels.json</code>:</p>
+          <div class="file-grid">
+            <div class="file-pill"><span aria-hidden="true">⚡</span> XP attuali</div>
+            <div class="file-pill"><span aria-hidden="true">🏆</span> Livello corrente</div>
+            <div class="file-pill"><span aria-hidden="true">📊</span> XP totali accumulati</div>
+          </div>
+
+          <h4>3.4 Moderazione</h4>
+          <p>Memorizzati in <code>warnings.json</code>, <code>mod_logs.json</code> e <code>mod_notes.json</code>:</p>
+          <ul>
+            <li>ID dell'utente ammonito e motivo del warn;</li>
+            <li>ID del moderatore che ha eseguito l'azione;</li>
+            <li>data, ora e tipo di azione di moderazione (warn, kick, ban, timeout, mute, purge, blocco canale, ecc.);</li>
+            <li>note private dello staff sull'utente.</li>
+          </ul>
+
+          <h4>3.5 Configurazione per server</h4>
+          <p>Memorizzata in <code>config.json</code>:</p>
+          <ul>
+            <li>canali configurati (log, benvenuto, addio, level-up, segnalazioni);</li>
+            <li>ruoli configurati (auto-role, ruolo moderatore, ruoli per livello);</li>
+            <li>canali di log per tipo di evento;</li>
+            <li>comandi disabilitati;</li>
+            <li>moltiplicatore XP e relative scadenze;</li>
+            <li>ruoli XP automatici;</li>
+            <li>contatore progressivo dei ticket aperti.</li>
+          </ul>
+
+          <h4>3.6 Giveaway</h4>
+          <p>Memorizzati in un database SQLite (<code>giveaways.db</code>), composto da quattro tabelle:</p>
+          <ul>
+            <li>ID del giveaway, del messaggio e del canale;</li>
+            <li>premio, descrizione, numero di vincitori previsti, data di fine, immagine/banner (URL);</li>
+            <li>ID del creatore e stato (attivo/concluso);</li>
+            <li>lista degli ID utente partecipanti;</li>
+            <li>lista degli ID utente vincitori;</li>
+            <li>lista degli ID utente in blacklist;</li>
+            <li>requisiti di partecipazione (ruolo, livello minimo, numero minimo di messaggi).</li>
+          </ul>
+
+          <h4>3.7 Ticket</h4>
+          <p>Il Bot salva <strong style="color:var(--text-primary);">solo un contatore progressivo</strong> dei ticket aperti (in <code>config.json</code>). Il contenuto dei ticket (messaggi scambiati nel canale dedicato) <strong style="color:var(--text-primary);">non viene salvato su disco dal Bot</strong>: rimane visibile nel canale Discord e, se esportato, viene inviato come file <code>.txt</code> solo al moderatore che usa il comando di transcript.</p>
+
+          <h4>3.8 Sistema compleanni</h4>
+          <p>Memorizzati in <code>birthdays.json</code>:</p>
+          <ul>
+            <li>giorno e mese di nascita (non l'anno);</li>
+            <li>data di cooldown per la modifica;</li>
+            <li>anno dell'ultimo auguri inviato.</li>
+          </ul>
+
+          <h4>3.9 Cronologia musicale</h4>
+          <p>Memorizzata in <code>music_history.json</code>:</p>
+          <ul>
+            <li>titolo e URL degli ultimi 200 brani riprodotti per server;</li>
+            <li>ID dell'utente che ha aggiunto il brano;</li>
+            <li>durata e timestamp di riproduzione.</li>
+          </ul>
+
+          <h4>3.10 Code musicali salvate</h4>
+          <p>Memorizzate in <code>saved_queues.json</code>:</p>
+          <ul>
+            <li>nome assegnato dall'utente alla coda;</li>
+            <li>lista dei brani salvati (titolo, URL, sorgente).</li>
+          </ul>
+
+          <h4>3.11 Mute attivi</h4>
+          <p>Memorizzati in <code>mutes.json</code>:</p>
+          <ul>
+            <li>ID utente;</li>
+            <li>scadenza del mute;</li>
+            <li>motivo.</li>
+          </ul>
+
+          <h4>3.12 Cooldown comandi</h4>
+          <p>Memorizzati in <code>daily_cooldowns.json</code> e <code>wheel_cooldowns.json</code>: data e ora dell'ultimo utilizzo di <code>/daily</code> e <code>/wheel</code>.</p>
+
+          <h4>3.13 Credenziali Spotify</h4>
+          <p>Il Bot salva localmente un token OAuth di Spotify (<code>.spotify_cache</code>) per consentire la lettura di playlist tramite l'API ufficiale. Il token è strettamente tecnico e non contiene dati personali dell'utente.</p>
+
+          <h4>3.14 Log su Discord</h4>
+          <p>Quando configurati, i seguenti eventi vengono registrati come immagini o embed su canali Discord:</p>
+          <ul>
+            <li>messaggi eliminati (contenuto originale, autore, canale, eventuale autore dell'eliminazione);</li>
+            <li>messaggi modificati (contenuto prima/dopo, autore, canale);</li>
+            <li>entrate/uscite/spostamenti dai canali vocali;</li>
+            <li>entrate/uscite dal server;</li>
+            <li>azioni di moderazione.</li>
+          </ul>
+          <p>Questi contenuti restano su Discord e sono soggetti alla Privacy Policy di Discord Inc.</p>
+
+          <h3 id="terze-parti">4. Dati inviati a servizi di terze parti</h3>
+          <p>Per l'erogazione di alcune funzionalità, il Bot trasmette dati a servizi esterni.</p>
+
+          <div class="third-party-card">
+            <div class="tp-icon"><span aria-hidden="true">🤖</span></div>
+            <div class="tp-body">
+              <div class="tp-name">Mistral AI — api.mistral.ai</div>
+              <div class="tp-desc">
+                Quando menzioni il Bot o utilizzi le funzionalità di intelligenza artificiale, vengono trasmessi: il contenuto del tuo messaggio, gli ultimi <strong>16 messaggi</strong> del canale (contesto), il tuo nome utente Discord (per personalizzare le risposte) e le risposte generate. Con la riscrittura testi viene trasmesso il testo fornito; con la generazione di playlist AI il tema/artista richiesto. Mistral AI ha sede in Francia (UE).
+              </div>
+            </div>
+          </div>
+
+          <div class="third-party-card">
+            <div class="tp-icon"><span aria-hidden="true">🎨</span></div>
+            <div class="tp-body">
+              <div class="tp-name">Pollinations.ai — gen.pollinations.ai</div>
+              <div class="tp-desc">
+                Quando richiedi la generazione di un'immagine, viene trasmesso il <strong>prompt</strong> (descrizione dell'immagine). Nessun dato identificativo dell'utente viene inviato.
+              </div>
+            </div>
+          </div>
+
+          <div class="third-party-card">
+            <div class="tp-icon"><span aria-hidden="true">🎤</span></div>
+            <div class="tp-body">
+              <div class="tp-name">lyrics.ovh</div>
+              <div class="tp-desc">
+                Quando usi il comando di ricerca testi, vengono trasmessi <strong>artista e titolo della canzone</strong>. Nessun dato identificativo dell'utente.
+              </div>
+            </div>
+          </div>
+
+          <div class="third-party-card">
+            <div class="tp-icon"><span aria-hidden="true">🎵</span></div>
+            <div class="tp-body">
+              <div class="tp-name">YouTube · Spotify · SoundCloud</div>
+              <div class="tp-desc">
+                Quando aggiungi un brano o una playlist, il Bot contatta le rispettive piattaforme per ottenere i metadati e lo stream audio. Vengono trasmessi solo gli URL o le query di ricerca, non i tuoi dati personali.
+              </div>
+            </div>
+          </div>
+
+          <p style="margin-top:16px;"><strong style="color:var(--text-primary);">Non condividiamo, vendiamo o affittiamo i tuoi dati a terzi per scopi commerciali o pubblicitari.</strong></p>
+
+          <h3 id="memoria-ai">5. Memoria conversazionale AI</h3>
+          <p>Il Bot mantiene in <strong style="color:var(--text-primary);">memoria RAM</strong> (non su disco) gli ultimi <strong>16 messaggi</strong> scambiati in ciascun canale, per un massimo di <strong>16 ore</strong> dall'ultimo utilizzo.</p>
+          <ul>
+            <li>Questa memoria è <strong style="color:var(--text-primary);">condivisa tra tutti gli utenti dello stesso canale</strong> (comportamento naturale per una chat Discord).</li>
+            <li>Viene <strong style="color:var(--text-primary);">cancellata automaticamente</strong> dopo 16 ore di inattività o al riavvio del Bot.</li>
+            <li><strong style="color:var(--text-primary);">Non viene mai salvata su file</strong> e non è consultabile dagli Sviluppatori in forma persistente.</li>
+          </ul>
+
+          <h3 id="basi">6. Basi giuridiche del trattamento (GDPR)</h3>
+          <p>Trattiamo i tuoi dati personali sulla base delle seguenti basi giuridiche:</p>
+          <ul>
+            <li><strong style="color:var(--text-primary);">Erogazione del servizio</strong> (musica, moderazione, livelli, giveaway, ticket, ecc.) — esecuzione di un contratto (art. 6.1.b GDPR);</li>
+            <li><strong style="color:var(--text-primary);">Funzionalità AI e generazione contenuti</strong> — consenso (art. 6.1.a GDPR), fornito implicitamente interagendo con il Bot;</li>
+            <li><strong style="color:var(--text-primary);">Sicurezza, prevenzione abusi, moderazione</strong> — interesse legittimo (art. 6.1.f GDPR);</li>
+            <li><strong style="color:var(--text-primary);">Log di moderazione e note staff</strong> — interesse legittimo alla gestione del server;</li>
+            <li><strong style="color:var(--text-primary);">Adempimenti di legge</strong> (ove applicabili) — obbligo legale (art. 6.1.c GDPR).</li>
+          </ul>
+
+          <h3 id="conservazione">7. Conservazione dei dati</h3>
+          <ul>
+            <li><strong style="color:var(--text-primary);">Memoria conversazionale AI</strong> — max 16 ore (in RAM);</li>
+            <li><strong style="color:var(--text-primary);">Cronologia musicale</strong> — ultimi 200 brani per server (sovrascritti ciclicamente);</li>
+            <li><strong style="color:var(--text-primary);">Statistiche, XP, warn, note, config</strong> — fino alla cancellazione manuale o al reset del server;</li>
+            <li><strong style="color:var(--text-primary);">Ticket</strong> — solo contatore numerico (nessun contenuto);</li>
+            <li><strong style="color:var(--text-primary);">Cooldown daily/wheel</strong> — fino alla cancellazione manuale;</li>
+            <li><strong style="color:var(--text-primary);">Mute attivi</strong> — fino alla scadenza o alla rimozione manuale;</li>
+            <li><strong style="color:var(--text-primary);">Log su Discord</strong> — fino alla cancellazione del canale Discord o alla rimozione manuale.</li>
+          </ul>
+          <p>I dati non hanno una scadenza automatica fissa, salvo quanto indicato. Su richiesta, vengono cancellati (vedi sezione 10).</p>
+
+          <h3 id="sicurezza">8. Sicurezza dei dati</h3>
+          <p>Adottiamo misure ragionevoli per proteggere i dati:</p>
+          <ul>
+            <li>accesso limitato ai file di persistenza agli Sviluppatori;</li>
+            <li>il Bot non è accessibile pubblicamente (codice non pubblico);</li>
+            <li>le comunicazioni con Discord e con i servizi terzi avvengono tramite HTTPS;</li>
+            <li>i token e le chiavi API sono conservati in variabili d'ambiente (file <code>.env</code>), non nel codice.</li>
+          </ul>
+          <p>Tuttavia, <strong style="color:var(--text-primary);">nessun sistema è completamente sicuro</strong>: non possiamo garantire l'assenza di accessi non autorizzati, perdite o malfunzionamenti.</p>
+
+          <h3 id="extra-ue">9. Trasferimento dei dati extra-UE</h3>
+          <p>I dati inviati a Mistral AI (Francia) rimangono nell'Unione Europea. Per gli altri servizi terzi (Discord, YouTube, Spotify, SoundCloud, Pollinations, lyrics.ovh), ti invitiamo a consultare le rispettive privacy policy per informazioni sui trasferimenti extra-UE.</p>
+
+          <h3 id="diritti">10. Diritti dell'interessato (GDPR)</h3>
+          <p>In qualità di interessato, hai il diritto di:</p>
+          <div class="rights-grid">
+            <div class="right-pill"><span class="rp-emoji"><span aria-hidden="true">👁</span>️</span> Accesso ai tuoi dati</div>
+            <div class="right-pill"><span class="rp-emoji"><span aria-hidden="true">✏</span>️</span> Rettifica dei dati inesatti</div>
+            <div class="right-pill"><span class="rp-emoji"><span aria-hidden="true">🗑</span>️</span> Cancellazione ("oblio")</div>
+            <div class="right-pill"><span class="rp-emoji">⏸️</span> Limitazione del trattamento</div>
+            <div class="right-pill"><span class="rp-emoji"><span aria-hidden="true">📦</span></span> Portabilità dei dati</div>
+            <div class="right-pill"><span class="rp-emoji"><span aria-hidden="true">🚫</span></span> Opposizione al trattamento</div>
+            <div class="right-pill"><span class="rp-emoji"><span aria-hidden="true">⚖</span>️</span> Reclamo al Garante Privacy</div>
+          </div>
+          <p>Per esercitare questi diritti, contatta gli Sviluppatori ai recapiti in sezione 1. Risponderemo <strong style="color:var(--text-primary);">entro 30 giorni</strong>.</p>
+          <p><em>Nota:</em> la cancellazione riguarda i dati conservati dal Bot. I contenuti pubblicati su Discord (messaggi, allegati, ecc.) restano di proprietà di Discord Inc. e devono essere gestiti tramite gli strumenti di Discord.</p>
+          <p>Autorità di controllo italiana: <a href="https://www.garanteprivacy.it/" target="_blank" rel="noopener">Garante per la protezione dei dati personali</a>.</p>
+
+          <h3 id="minori">11. Minori</h3>
+          <p>Carmelo Bot è destinato a utenti di <strong style="color:var(--text-primary);">almeno 13 anni</strong> (o all'età minima richiesta da Discord nella propria giurisdizione). Non raccogliamo consapevolmente dati di minori al di sotto di tale soglia.</p>
+          <p>Se ritieni che un minore ci abbia fornito dati personali, contattaci e provvederemo alla cancellazione.</p>
+
+          <h3 id="modifiche">12. Modifiche alla Privacy Policy</h3>
+          <p>Questa Privacy Policy può essere aggiornata in qualsiasi momento. Le modifiche saranno efficaci dalla data di pubblicazione. Ti invitiamo a consultare periodicamente questa pagina.</p>
+          <p>In caso di modifiche sostanziali, verrà data comunicazione tramite i canali ufficiali del Bot.</p>
+
+          <h3 id="contatti">13. Contatti</h3>
+          <p>Per qualsiasi domanda, richiesta o segnalazione relativa alla privacy:</p>
+          <ul>
+            <li><strong style="color:var(--text-primary);">wicknoob73</strong> — <a href="mailto:slesioalan@gmail.com">slesioalan@gmail.com</a></li>
+            <li><strong style="color:var(--text-primary);">jeimaster.</strong> — <a href="mailto:jeison.barrial12@gmail.com">jeison.barrial12@gmail.com</a></li>
+          </ul>
+
+          <div style="display:flex; align-items:center; gap:12px; background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px 18px; margin-top:24px;">
+            <span style="font-size:1.4rem;"><span aria-hidden="true">🔐</span></span>
+            <span style="font-size:0.82rem; color:var(--text-muted); font-family:var(--font-mono);">Conforme al Regolamento UE 2016/679 (GDPR).</span>
+          </div>
+
+          <a href="legal.html" class="back-link">← Torna a tutti i documenti legali</a>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- ── Footer ─────────────────────────────────────────── -->
+<footer>
+  <div class="footer-left">
+    <div class="footer-brand"><span>Carmelo</span> Bot</div>
+    <div class="footer-meta">discord.py 2.x · <span class="bot-version">v0</span> · 120 comandi</div>
+    <div class="footer-copy">© 2026 wicknoob73 & jeimaster. — Non affiliato con Discord Inc.</div>
+  </div>
+    <ul class="footer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="commands.html">Comandi</a></li>
+    <li><a href="guide.html">Guida</a></li>
+    <li><a href="setup.html">Setup</a></li>
+    <li><a href="stats.html">Statistiche</a></li>
+    <li><a href="changelog.html">Changelog</a></li>
+    <li><a href="legal.html">Termini & Privacy</a></li>
+    <li><a href="eula.html">EULA</a></li>
+    <li><a href="privacy.html">Privacy Policy</a></li>
+    <li><a href="legal.html#contatti">Contatti</a></li>
+  </ul>
+</footer>
+
+<!-- ── Script: scroll-spy sidebar ─────────────────────── -->
+<script>
+  const navLinks = Array.from(document.querySelectorAll('#sidebar-nav a[href^="#"]'));
+
+  const anchors = navLinks
+    .map(link => {
+      const id = link.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      return el ? { link, el } : null;
+    })
+    .filter(Boolean);
+
+  function setActive(link) {
+    navLinks.forEach(l => l.classList.toggle('active', l === link));
+    if (link && link.parentElement) {
+      const li = link.parentElement;
+      const container = link.closest('.legal-sidebar');
+      if (container) {
+        const liTop = li.offsetTop;
+        const liBottom = liTop + li.offsetHeight;
+        const cTop = container.scrollTop;
+        const cBottom = cTop + container.clientHeight;
+        if (liTop < cTop) container.scrollTo({ top: liTop - 12, behavior: 'smooth' });
+        else if (liBottom > cBottom) container.scrollTo({ top: liBottom - container.clientHeight + 12, behavior: 'smooth' });
+      }
+    }
+  }
+
+  function updateActive() {
+    if (!anchors.length) return;
+    const offset = 120;
+    const y = window.scrollY + offset;
+
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 4) {
+      setActive(anchors[anchors.length - 1].link);
+      return;
+    }
+
+    let current = anchors[0];
+    for (const a of anchors) {
+      if (a.el.getBoundingClientRect().top + window.scrollY <= y) current = a;
+      else break;
+    }
+    setActive(current.link);
+  }
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => { updateActive(); ticking = false; });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  window.addEventListener('resize', updateActive, { passive: true });
+  window.addEventListener('load', updateActive);
+  updateActive();
+</script>
+
+<button class="back-to-top" id="backToTop" aria-label="Torna su">
+  <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="18 15 12 9 6 15"/>
+  </svg>
+</button>
+
+<script>
+const ham = document.getElementById('hamburgerBtn');
+const mob = document.getElementById('mobileMenu');
+if (ham && mob) {
+  ham.addEventListener('click', () => {
+    ham.classList.toggle('open');
+    mob.classList.toggle('open');
+  });
+  document.addEventListener('click', e => {
+    if (!ham.contains(e.target) && !mob.contains(e.target)) {
+      ham.classList.remove('open');
+      mob.classList.remove('open');
+    }
+  });
+  mob.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => {
+      ham.classList.remove('open');
+      mob.classList.remove('open');
+    })
+  );
+}
+const btt = document.getElementById('backToTop');
+if (btt) {
+  window.addEventListener('scroll', () => {
+    btt.classList.toggle('visible', window.scrollY > 300);
+  }, { passive: true });
+  btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+}
+</script>
+
+<script>
+(function() {
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light') document.documentElement.classList.add('light');
+})();
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('themeToggle');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    const isLight = document.documentElement.classList.toggle('light');
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  });
+});
+</script>
+</body>
+</html>

@@ -4,261 +4,246 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Termini & Privacy — Carmelo Bot</title>
-  <meta name="description" content="Termini di Servizio, Privacy Policy, Copyright e Contatti di Carmelo Bot.">
+  <meta name="description" content="EULA, Privacy Policy e contatti di Carmelo Bot.">
+  <link rel="canonical" href="https://wicknoob73.github.io/legal.html">
   <meta property="og:type"        content="website">
   <meta property="og:title"       content="Termini & Privacy — Carmelo Bot">
-  <meta property="og:description" content="Termini di Servizio, Privacy Policy, Copyright e Contatti di Carmelo Bot.">
-  <meta property="og:image"       content="https://placehold.co/1200x630/0a0c14/4ab3e8?text=Carmelo+Bot">
+  <meta property="og:description" content="EULA, Privacy Policy e contatti di Carmelo Bot.">
+  <meta property="og:image" content="https://wicknoob73.github.io/assets/og-image.png">
   <meta name="theme-color"        content="#4ab3e8">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230a0c14'/><text y='24' x='4' font-size='22'>🤖</text></svg>">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
   <link rel="stylesheet" href="style.css">
   <style>
-    /* ── Legal-specific ────────────────────────────────── */
+    /* ── Legal hub ─────────────────────────────────────── */
 
-    .legal-layout {
-      display: grid;
-      grid-template-columns: 200px 1fr;
-      gap: 40px;
-      align-items: start;
-      padding-top: 48px;
+    .legal-hub {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 64px 24px 80px;
     }
 
-    /* Sticky sidebar */
-    .legal-sidebar {
-      position: sticky;
-      top: 80px;
+    /* ── Header ── */
+    .legal-hub-header {
+      text-align: center;
+      margin-bottom: 52px;
     }
 
-    .sidebar-label {
-      font-size: 0.66rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-muted);
+    .legal-hub-header .kicker {
+      display: inline-block;
       font-family: var(--font-mono);
-      margin-bottom: 12px;
-      padding-left: 4px;
-    }
-
-    .sidebar-nav {
-      list-style: none;
-      display: flex; flex-direction: column; gap: 2px;
-    }
-
-    .sidebar-nav a {
-      display: flex; align-items: center; gap: 8px;
-      padding: 7px 12px;
-      font-size: 0.82rem;
-      color: var(--text-secondary);
-      text-decoration: none;
-      border-radius: var(--radius-sm);
-      border-left: 2px solid transparent;
-      transition: all var(--ease);
-    }
-
-    .sidebar-nav a:hover {
-      color: var(--text-primary);
-      background: var(--bg-card);
-      border-left-color: var(--border-hover);
-    }
-
-    .sidebar-nav a.active {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
       color: var(--blue);
       background: var(--blue-faint);
-      border-left-color: var(--blue);
-    }
-
-    .sidebar-divider {
-      height: 1px;
-      background: var(--border);
-      margin: 10px 0;
-    }
-
-    /* Main legal content */
-    .legal-main {
-      min-width: 0;
-    }
-
-    .legal-section {
-      margin-bottom: 56px;
-      scroll-margin-top: 80px;
-    }
-
-    .legal-section-header {
-      display: flex; align-items: center; gap: 14px;
-      margin-bottom: 28px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .legal-icon {
-      width: 42px; height: 42px;
-      border-radius: var(--radius-sm);
-      background: var(--blue-faint);
       border: 1px solid var(--border-hover);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.2rem;
-      flex-shrink: 0;
+      border-radius: 999px;
+      padding: 6px 16px;
+      margin-bottom: 20px;
     }
 
-    .legal-section-header h2 {
+    .legal-hub-header h1 {
       font-family: var(--font-display);
-      font-size: 1.4rem;
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
       font-weight: 800;
       letter-spacing: -0.03em;
       color: var(--text-primary);
+      margin-bottom: 14px;
     }
 
-    .legal-section-header .updated {
-      margin-left: auto;
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      font-family: var(--font-mono);
-      flex-shrink: 0;
-    }
-
-    /* File grid */
-    .file-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
-      gap: 8px;
-      margin: 10px 0 14px;
-    }
-
-    .file-pill {
-      display: flex; align-items: center; gap: 6px;
-      padding: 9px 13px;
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      font-size: 0.82rem;
+    .legal-hub-header p {
+      font-size: 0.95rem;
       color: var(--text-secondary);
-      transition: border-color var(--ease);
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.65;
     }
 
-    .file-pill:hover { border-color: var(--blue); }
-
-    /* License banner */
-    .license-banner {
-      display: flex; align-items: center; gap: 18px;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-hover);
-      border-radius: var(--radius-md);
-      padding: 22px 24px;
-      margin: 20px 0 8px;
-    }
-
-    .license-badge {
-      width: 48px; height: 48px;
-      border-radius: 50%;
-      background: var(--blue);
-      color: var(--bg-base);
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 800; font-size: 0.8rem;
-      letter-spacing: 0.04em;
-      flex-shrink: 0;
-      box-shadow: 0 0 14px rgba(74,179,232,0.3);
-    }
-
-    .license-name {
-      font-family: var(--font-mono);
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--text-primary);
-    }
-
-    .license-full {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    /* Contact cards */
-    .contacts-grid {
+    /* ── Cards ── */
+    .legal-cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-      margin-top: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
     }
 
-    .contact-card {
-      background: var(--bg-surface);
+    .legal-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
-      padding: 28px 22px;
-      text-align: center;
-      transition: border-color var(--ease), transform var(--ease);
+      padding: 32px 28px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color var(--ease), transform var(--ease), box-shadow var(--ease);
+      position: relative;
+      overflow: hidden;
     }
 
-    .contact-card:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-3px);
+    .legal-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--blue);
+      opacity: 0;
+      transition: opacity var(--ease);
     }
 
-    .contact-avatar {
+    .legal-card:hover {
+      border-color: var(--blue);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(74, 179, 232, 0.12);
+    }
+
+    .legal-card:hover::before { opacity: 1; }
+
+    .legal-card-icon {
       width: 54px; height: 54px;
-      margin: 0 auto 14px;
-      border-radius: 50%;
+      border-radius: var(--radius-sm);
       background: var(--blue-faint);
       border: 1px solid var(--border-hover);
       display: flex; align-items: center; justify-content: center;
       font-size: 1.5rem;
+      margin-bottom: 20px;
+      flex-shrink: 0;
     }
 
-    .contact-name {
-      font-family: var(--font-mono);
-      font-weight: 700; font-size: 1rem;
+    .legal-card h2 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
       color: var(--text-primary);
-      margin-bottom: 3px;
+      margin-bottom: 4px;
     }
 
-    .contact-role {
-      font-size: 0.75rem;
+    .legal-card .card-subtitle {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
       color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .legal-card p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 22px;
+      flex: 1;
+    }
+
+    .legal-card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .legal-card-date {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .legal-card-arrow {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--blue);
+      transition: gap var(--ease);
+    }
+
+    .legal-card:hover .legal-card-arrow { gap: 10px; }
+
+    /* ── Contatti ── */
+    .legal-contacts {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 32px;
+      text-align: center;
+    }
+
+    .legal-contacts .contacts-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--blue-faint);
+      border: 1px solid var(--border-hover);
+      font-size: 1.2rem;
       margin-bottom: 14px;
     }
 
-    .contact-email {
+    .legal-contacts h3 {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .legal-contacts p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 18px;
+      line-height: 1.6;
+    }
+
+    .contact-emails {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .legal-contacts a.email-pill {
       display: inline-block;
-      font-size: 0.82rem;
       font-family: var(--font-mono);
+      font-size: 0.82rem;
       color: var(--blue);
       border: 1px solid var(--border);
       border-radius: 999px;
-      padding: 5px 14px;
+      padding: 8px 18px;
       text-decoration: none;
       transition: all var(--ease);
     }
 
-    .contact-email:hover {
+    .legal-contacts a.email-pill:hover {
       background: var(--blue);
       border-color: var(--blue);
       color: var(--bg-base);
     }
 
-    /* War clause (fun) */
-    .fun-clause {
-      background: rgba(74,179,232,0.04);
-      border: 1px dashed rgba(74,179,232,0.2);
-      border-radius: var(--radius-sm);
-      padding: 16px 18px;
-      margin-top: 4px;
+    /* ── Footer note ── */
+    .legal-hub-footer {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      line-height: 1.7;
     }
 
-    .fun-clause p {
-      font-size: 0.88rem !important;
-      color: var(--text-muted) !important;
-      font-style: italic;
-    }
-
-    @media (max-width: 760px) {
-      .legal-layout {
-        grid-template-columns: 1fr;
-        gap: 0;
-        padding-top: 32px;
-      }
-      .legal-sidebar { display: none; }
-      .license-banner { flex-direction: column; text-align: center; }
+    @media (max-width: 640px) {
+      .legal-hub { padding: 40px 18px 60px; }
+      .legal-cards { gap: 14px; }
+      .legal-card { padding: 26px 22px; }
+      .legal-contacts { padding: 26px 22px; }
     }
   </style>
 </head>
@@ -270,15 +255,17 @@
 <!-- ── Navbar ─────────────────────────────────────────── -->
 <nav class="navbar">
   <a href="index.html" class="navbar-logo"><span>Carmelo</span> Bot</a>
-  <ul class="navbar-links">
+    <ul class="navbar-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="commands.html">Comandi</a></li>
+    <li><a href="guide.html">Guida</a></li>
+    <li><a href="setup.html">Setup</a></li>
     <li><a href="stats.html">Statistiche</a></li>
     <li><a href="changelog.html">Changelog</a></li>
-    <li><a href="legal.html" class="active">Termini & Privacy</a></li>
+    <li><a href="legal.html" class="active">Termini &amp; Privacy</a></li>
     <li><a href="legal.html#contatti">Contatti</a></li>
   </ul>
-  <a href="#" class="navbar-cta">+ Aggiungi al server</a>
+  <a href="invite.html" class="navbar-cta">+ Aggiungi al server</a>
   <button class="theme-toggle" id="themeToggle" aria-label="Cambia tema">
     <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     <svg class="icon-sun"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -289,282 +276,104 @@
 <div class="mobile-menu" id="mobileMenu">
   <a href="index.html">Home</a>
   <a href="commands.html">Comandi</a>
+  <a href="guide.html">Guida</a>
+  <a href="setup.html">Setup</a>
   <a href="stats.html">Statistiche</a>
   <a href="changelog.html">Changelog</a>
-  <a href="legal.html" class="active">Termini & Privacy</a>
+  <a href="legal.html" class="active">Termini &amp; Privacy</a>
   <a href="legal.html#contatti">Contatti</a>
-  <a href="#" class="mobile-cta">+ Aggiungi al server</a>
+  <a href="invite.html" class="mobile-cta">+ Aggiungi al server</a>
 </div>
 
-<div class="container">
-  <div class="legal-layout">
+<main class="legal-hub">
 
-    <!-- ── Sidebar ──────────────────────────────────── -->
-    <aside class="legal-sidebar">
-      <div class="sidebar-label">Navigazione</div>
-      <ul class="sidebar-nav" id="sidebar-nav">
-        <li><a href="#tos" class="active">📄 Termini di Servizio</a></li>
-        <li><a href="#privacy">🔐 Privacy Policy</a></li>
-        <li><a href="#copyright">©️ Copyright</a></li>
-        <div class="sidebar-divider"></div>
-        <li><a href="#contatti">✉️ Contatti</a></li>
-      </ul>
-    </aside>
+  <!-- ── Header ─────────────────────────────────────── -->
+  <header class="legal-hub-header">
+    <div class="kicker">Documenti Legali</div>
+    <h1>Termini & Privacy</h1>
+    <p>
+      Tutti i documenti che regolano l'utilizzo di Carmelo Bot.
+      Utilizzando il bot — su Discord o tramite questo sito — accetti integralmente quanto qui riportato.
+    </p>
+  </header>
 
-    <!-- ── Main ─────────────────────────────────────── -->
-    <main class="legal-main">
+  <!-- ── Cards ──────────────────────────────────────── -->
+  <div class="legal-cards">
 
-      <!-- ToS -->
-      <section id="tos" class="legal-section">
-        <div class="legal-section-header">
-          <div class="legal-icon">📄</div>
-          <h2>Termini di Servizio</h2>
-          <span class="updated">Aggiornato: 13 Giu 2026</span>
-        </div>
+    <a href="eula.html" class="legal-card">
+      <div class="legal-card-icon"><span aria-hidden="true">📄</span></div>
+      <h2>EULA</h2>
+      <div class="card-subtitle">Contratto di Licenza</div>
+      <p>
+        Condizioni d'uso del bot, diritti e doveri dell'utente,
+        licenza sul codice, limitazioni di responsabilità e legge applicabile.
+      </p>
+      <div class="legal-card-meta">
+        <span class="legal-card-date">Agg. 11 Set 2026</span>
+        <span class="legal-card-arrow">Apri →</span>
+      </div>
+    </a>
 
-        <div class="card">
-          <h3>1. Accettazione dei termini</h3>
-          <p>Utilizzando Carmelo Bot su Discord, accetti integralmente i presenti Termini di Servizio. Se non accetti questi termini, ti invitiamo a non utilizzare il bot.</p>
+    <a href="privacy.html" class="legal-card">
+      <div class="legal-card-icon"><span aria-hidden="true">🔐</span></div>
+      <h2>Privacy Policy</h2>
+      <div class="card-subtitle">Trattamento dei dati</div>
+      <p>
+        Quali dati raccogliamo, come li trattiamo, con chi li condividiamo
+        e come esercitare i tuoi diritti ai sensi del GDPR.
+      </p>
+      <div class="legal-card-meta">
+        <span class="legal-card-date">Agg. 11 Set 2026</span>
+        <span class="legal-card-arrow">Apri →</span>
+      </div>
+    </a>
 
-          <h3>2. Descrizione del servizio</h3>
-          <p>Carmelo Bot è un bot Discord gratuito sviluppato da <strong style="color:var(--text-primary);">wicknoob73 & jeimaster.</strong> — include le seguenti funzionalità:</p>
-          <ul>
-            <li>Riproduzione musicale tramite YouTube e Spotify</li>
-            <li>Strumenti di moderazione del server</li>
-            <li>Sistema ticket con supporto staff</li>
-            <li>Sistema livelli, XP e statistiche utenti</li>
-            <li>Giveaway con estrazione automatica dei vincitori</li>
-            <li>Comandi utility e intrattenimento</li>
-          </ul>
-
-          <h3>3. Utilizzo consentito</h3>
-          <p>Gli utenti si impegnano a non usare il bot per:</p>
-          <ul>
-            <li>Attività illegali di qualsiasi natura</li>
-            <li>Spam, flood o abuso dei servizi Discord</li>
-            <li>Tentativi di exploit, injection o danneggiamento del bot</li>
-            <li>Violazione dei Termini di Servizio di Discord</li>
-          </ul>
-
-          <h3>4. Limitazione di responsabilità</h3>
-          <p>Carmelo Bot è fornito <em>"così com'è"</em>, senza garanzie di disponibilità continua, assenza di bug o integrità dei dati. Lo sviluppatore non è responsabile per eventuali danni, perdite di dati o disservizi derivanti dall'utilizzo del bot.</p>
-
-          <h3>5. Terminazione del servizio</h3>
-          <p>Lo sviluppatore si riserva il diritto di sospendere o terminare l'accesso al bot in qualsiasi momento, senza preavviso e a propria discrezione.</p>
-
-          <h3>6. Revoca per utilizzo improprio</h3>
-          <p>Qualora gli sviluppatori ritengano, a propria esclusiva discrezione, che il bot venga utilizzato in modo improprio, abusivo o contrario allo spirito dei presenti Termini, si riservano il diritto di revocarne l'accesso a un utente, server o community <strong style="color:var(--text-primary);">senza preavviso e senza che ciò comporti alcuna ripercussione legale</strong> per gli sviluppatori stessi.</p>
-
-          <h3>7. Modifiche ai termini</h3>
-          <p>I presenti Termini di Servizio possono essere aggiornati in qualsiasi momento. Continuando a usare il bot dopo eventuali modifiche, l'utente ne accetta automaticamente i nuovi termini.</p>
-
-          <h3>8. Clausola bellica <span style="font-size:0.75em; color:var(--text-muted); text-transform:none; letter-spacing:0; font-weight:400;">(scherzo)</span></h3>
-          <div class="fun-clause">
-            <p>Nel remoto ed improbabile caso in cui Carmelo Bot dovesse entrare in guerra, <strong style="color:var(--text-secondary);">l'utente che ha accettato questi Termini</strong> si offre volontario per essere mandato in prima linea, a tutela della sicurezza di <strong style="color:var(--text-secondary);">wicknoob73 & jeimaster.</strong> e dell'intera community. Questa clausola è puramente goliardica e non ha alcun valore legale. 🫡</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Privacy -->
-      <section id="privacy" class="legal-section">
-        <div class="legal-section-header">
-          <div class="legal-icon">🔐</div>
-          <h2>Privacy Policy</h2>
-          <span class="updated">Aggiornato: 13 Giu 2026</span>
-        </div>
-
-        <div class="card">
-          <h3>1. Dati raccolti</h3>
-          <p>Carmelo Bot raccoglie esclusivamente i dati necessari al corretto funzionamento del servizio. Nessun dato personale sensibile viene memorizzato.</p>
-
-          <h3>2. Identificatori Discord</h3>
-          <ul>
-            <li>ID server (guild)</li>
-            <li>ID utenti</li>
-            <li>ID canali</li>
-          </ul>
-          <p>Questi identificatori vengono usati come chiavi nei file di configurazione e nel database, senza mai essere associati a informazioni personali reali.</p>
-
-          <h3>3. Statistiche utenti</h3>
-          <p>Memorizzate in <code>stats.json</code>:</p>
-          <div class="file-grid">
-            <div class="file-pill">📨 Messaggi inviati</div>
-            <div class="file-pill">📢 Messaggi per canale</div>
-            <div class="file-pill">🎙️ Minuti in vocale</div>
-            <div class="file-pill">👍 Reazioni aggiunte</div>
-            <div class="file-pill">❤️ Reazioni ricevute</div>
-          </div>
-
-          <h3>4. XP e livelli</h3>
-          <p>Memorizzati in <code>levels.json</code>:</p>
-          <div class="file-grid">
-            <div class="file-pill">⚡ XP attuali</div>
-            <div class="file-pill">🏆 Livello corrente</div>
-            <div class="file-pill">📊 XP totali accumulati</div>
-          </div>
-
-          <h3>5. Moderazione</h3>
-          <p>Memorizzati in <code>warnings.json</code> e <code>mod_logs.json</code>:</p>
-          <ul>
-            <li>ID utente ammonito e motivo del warn</li>
-            <li>ID moderatore responsabile dell'azione</li>
-            <li>Data, ora e tipo di azione di moderazione</li>
-          </ul>
-
-          <h3>6. Note dello staff</h3>
-          <p>Memorizzate in <code>mod_notes.json</code> — visibili solo ai moderatori del server.</p>
-
-          <h3>7. Dati ticket</h3>
-          <p>Memorizzati in <code>tickets.json</code>:</p>
-          <ul>
-            <li>ID ticket e ID del canale associato</li>
-            <li>ID dell'utente che ha aperto il ticket</li>
-            <li>Stato del ticket (aperto/chiuso)</li>
-          </ul>
-
-          <h3>8. Dati giveaway</h3>
-          <p>Memorizzati in <code>giveaways.json</code>:</p>
-          <ul>
-            <li>ID del messaggio giveaway e ID del canale</li>
-            <li>Lista degli ID utenti partecipanti</li>
-            <li>Orario di fine e vincitori estratti</li>
-          </ul>
-
-          <h3>9. Condivisione dei dati</h3>
-          <p>I dati raccolti non vengono condivisi con terze parti, non vengono venduti e non vengono usati per scopi commerciali o pubblicitari.</p>
-
-          <h3>10. Cancellazione dei dati</h3>
-          <p>Per richiedere la cancellazione dei tuoi dati, contatta il team di sviluppo tramite i contatti indicati in questa pagina. I dati verranno rimossi entro 30 giorni dalla richiesta.</p>
-
-          <h3>11. Modifiche alla Privacy Policy</h3>
-          <p>Questa Privacy Policy può essere aggiornata in qualsiasi momento. Continua a monitorare questa pagina per le versioni più recenti.</p>
-        </div>
-      </section>
-
-      <!-- Copyright -->
-      <section id="copyright" class="legal-section">
-        <div class="legal-section-header">
-          <div class="legal-icon">©️</div>
-          <h2>Copyright</h2>
-          <span class="updated">Aggiornato: 13 Giu 2026</span>
-        </div>
-
-        <div class="card">
-          <h3>Licenza</h3>
-          <p>Carmelo Bot — inclusi codice sorgente, grafica, documentazione e contenuti correlati — è distribuito sotto licenza <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)</a>.</p>
-
-          <div class="license-banner">
-            <div style="display:flex; gap:10px; flex-shrink:0;">
-              <div class="license-badge">BY</div>
-              <div class="license-badge">NC</div>
-              <div class="license-badge">SA</div>
-            </div>
-            <div>
-              <div class="license-name">CC BY-NC-SA 4.0</div>
-              <div class="license-full">Creative Commons — Attribuzione — Non commerciale — Stessa licenza</div>
-            </div>
-          </div>
-
-          <h3>Cosa puoi fare</h3>
-          <ul>
-            <li><strong style="color:var(--blue);">Condividere</strong> — copiare e ridistribuire il materiale in qualsiasi formato</li>
-            <li><strong style="color:var(--blue);">Modificare</strong> — remixare, trasformare o basarti sul materiale</li>
-          </ul>
-
-          <h3>A queste condizioni</h3>
-          <ul>
-            <li><strong style="color:var(--text-primary);">Attribuzione (BY)</strong> — devi riconoscere la paternità dell'opera e indicare gli autori originali: <strong style="color:var(--text-primary);">wicknoob73 & jeimaster.</strong></li>
-            <li><strong style="color:var(--text-primary);">Non commerciale (NC)</strong> — non puoi usare il materiale per scopi commerciali o a fini di lucro</li>
-            <li><strong style="color:var(--text-primary);">Stessa licenza (SA)</strong> — se modifichi o ridistribuisci il materiale, devi farlo sotto la stessa licenza CC BY-NC-SA 4.0</li>
-          </ul>
-
-          <h3>Diritti riservati</h3>
-          <p>Il nome <strong style="color:var(--text-primary);">Carmelo Bot</strong>, il logo e l'identità visiva sono di esclusiva proprietà degli sviluppatori. Non è consentito l'uso del nome o del logo per rappresentare prodotti derivati senza esplicita autorizzazione scritta.</p>
-
-          <h3>Esonero di garanzia</h3>
-          <p>Questa licenza non limita né rimuove le clausole di limitazione di responsabilità presenti nei Termini di Servizio. Il materiale è fornito senza alcuna garanzia, nei limiti consentiti dalla legge applicabile.</p>
-
-          <div style="display:flex; align-items:center; gap:12px; background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px 18px; margin-top:8px;">
-            <span style="font-size:1.4rem;">⚖️</span>
-            <span style="font-size:0.82rem; color:var(--text-muted); font-family:var(--font-mono);">© 2026 wicknoob73 & jeimaster.</span>
-          </div>
-
-          <h3>Servizi di terze parti</h3>
-          <p>Carmelo Bot utilizza le API di Discord, YouTube e Spotify, ciascuna regolata dai rispettivi Termini di Servizio. Carmelo Bot non è affiliato né approvato da Discord Inc., Google LLC o Spotify AB.</p>
-        </div>
-      </section>
-
-      <!-- Contatti -->
-      <section id="contatti" class="legal-section">
-        <div class="legal-section-header">
-          <div class="legal-icon">✉️</div>
-          <h2>Contatti</h2>
-        </div>
-
-        <div class="card">
-          <h3>Team di sviluppo</h3>
-          <p>Per domande, segnalazioni o richieste di cancellazione dati, puoi contattare direttamente gli sviluppatori.</p>
-
-          <div class="contacts-grid">
-            <div class="contact-card">
-              <div class="contact-avatar">👾</div>
-              <div class="contact-name">wicknoob73</div>
-              <div class="contact-role">Sviluppatore — Carmelo Bot</div>
-              <a class="contact-email" href="mailto:slesioalan@gmail.com" style="max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">slesioalan@gmail.com</a>
-            </div>
-            <div class="contact-card">
-              <div class="contact-avatar">🎮</div>
-              <div class="contact-name">jeimaster.</div>
-              <div class="contact-role">Sviluppatore — Carmelo Bot</div>
-              <a class="contact-email" href="mailto:jeison.barrial12@gmail.com" style="max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:0.75rem;">jeison.barrial12@gmail.com</a>
-            </div>
-          </div>
-
-          <h3 style="margin-top:28px;">Discord</h3>
-          <p>Il modo più rapido per contattarci è tramite Discord — cercaci sui server della community o inviaci un messaggio diretto.</p>
-        </div>
-      </section>
-
-    </main>
   </div>
-</div>
+
+  <!-- ── Contatti ───────────────────────────────────── -->
+  <section id="contatti" class="legal-contacts">
+    <div class="contacts-icon"><span aria-hidden="true">✉</span>️</div>
+    <h3>Contatti</h3>
+    <p>
+      Per domande, segnalazioni o richieste di cancellazione dei dati,
+      puoi contattare direttamente gli sviluppatori.
+    </p>
+    <div class="contact-emails">
+      <a class="email-pill" href="mailto:slesioalan@gmail.com">slesioalan@gmail.com</a>
+      <a class="email-pill" href="mailto:jeison.barrial12@gmail.com">jeison.barrial12@gmail.com</a>
+    </div>
+  </section>
+
+  <!-- ── Footer note ────────────────────────────────── -->
+  <div class="legal-hub-footer">
+    Carmelo Bot non è affiliato, approvato o sponsorizzato da Discord Inc.<br>
+    © 2026 wicknoob73 &amp; jeimaster. — Tutti i diritti riservati.
+  </div>
+
+</main>
 
 <!-- ── Footer ─────────────────────────────────────────── -->
 <footer>
   <div class="footer-left">
     <div class="footer-brand"><span>Carmelo</span> Bot</div>
     <div class="footer-meta">discord.py 2.x · <span class="bot-version">v0</span> · 120 comandi</div>
-    <div class="footer-copy">© 2026 wicknoob73 & jeimaster. — Non affiliato con Discord Inc.</div>
+    <div class="footer-copy">© 2026 wicknoob73 &amp; jeimaster. — Non affiliato con Discord Inc.</div>
   </div>
-  <ul class="footer-links">
+    <ul class="footer-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="commands.html">Comandi</a></li>
+    <li><a href="guide.html">Guida</a></li>
+    <li><a href="setup.html">Setup</a></li>
     <li><a href="stats.html">Statistiche</a></li>
     <li><a href="changelog.html">Changelog</a></li>
-    <li><a href="legal.html">Termini & Privacy</a></li>
+    <li><a href="legal.html">Termini &amp; Privacy</a></li>
+    <li><a href="eula.html">EULA</a></li>
+    <li><a href="privacy.html">Privacy Policy</a></li>
     <li><a href="legal.html#contatti">Contatti</a></li>
   </ul>
 </footer>
 
-<script>
-  // Sidebar active state on scroll
-  const sections = document.querySelectorAll('.legal-section');
-  const navLinks = document.querySelectorAll('#sidebar-nav a');
-
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        navLinks.forEach(l => l.classList.remove('active'));
-        const active = document.querySelector(`#sidebar-nav a[href="#${entry.target.id}"]`);
-        if (active) active.classList.add('active');
-      }
-    });
-  }, { threshold: 0.3, rootMargin: '-60px 0px -60% 0px' });
-
-  sections.forEach(s => observer.observe(s));
-</script>
-
-
+<!-- ── Script ─────────────────────────────────────────── -->
 <button class="back-to-top" id="backToTop" aria-label="Torna su">
   <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
     <polyline points="18 15 12 9 6 15"/>
@@ -586,6 +395,12 @@ if (ham && mob) {
       mob.classList.remove('open');
     }
   });
+  mob.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => {
+      ham.classList.remove('open');
+      mob.classList.remove('open');
+    })
+  );
 }
 // Back to top
 const btt = document.getElementById('backToTop');
@@ -598,7 +413,7 @@ if (btt) {
 </script>
 
 <script>
-// ── Theme toggle ──────────────────────────────────────────
+// Theme toggle
 (function() {
   const saved = localStorage.getItem('theme');
   if (saved === 'light') document.documentElement.classList.add('light');
@@ -612,5 +427,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
+
 </body>
 </html>

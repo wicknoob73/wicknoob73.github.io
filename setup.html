@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guida Setup — Carmelo Bot</title>
+  <meta name="description" content="Configura Carmelo Bot sul tuo server in pochi minuti: canale di benvenuto, auto-ruolo, ticket e compleanni.">
+  <link rel="canonical" href="https://wicknoob73.github.io/setup.html">
+
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="Guida Setup — Carmelo Bot">
+  <meta property="og:description" content="Configura Carmelo Bot sul tuo server in pochi minuti: benvenuto, auto-ruolo, ticket e compleanni.">
+  <meta property="og:image" content="https://wicknoob73.github.io/assets/og-image.png">
+  <meta name="theme-color"        content="#4ab3e8">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230a0c14'/><text y='24' x='4' font-size='22'>🤖</text></svg>">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .page-hero { text-align: center; padding: 64px 0 40px; }
+    .page-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5.5vw, 3.2rem);
+      font-weight: 800; letter-spacing: -0.04em; line-height: 1.1;
+      margin: 18px 0 14px;
+    }
+    .page-hero h1 .accent { color: var(--blue); }
+    .page-hero p { font-size: 1rem; color: var(--text-secondary); max-width: 540px; margin: 0 auto; line-height: 1.7; }
+
+    /* First-step banner */
+    .first-step {
+      display: flex; align-items: center; gap: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-hover);
+      border-radius: var(--radius-lg);
+      padding: 26px 30px;
+      margin: 40px 0 60px;
+      position: relative; overflow: hidden;
+    }
+    .first-step::before {
+      content: '';
+      position: absolute; top: -60px; right: -40px;
+      width: 220px; height: 160px;
+      background: radial-gradient(ellipse, rgba(74,179,232,0.16) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .first-step-icon {
+      width: 50px; height: 50px; flex-shrink: 0;
+      border-radius: var(--radius-md);
+      background: var(--blue-faint);
+      border: 1px solid var(--border-hover);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+    }
+    .first-step h3 { font-family: var(--font-display); font-size: 1.05rem; margin-bottom: 4px; }
+    .first-step p { font-size: 0.86rem; color: var(--text-secondary); margin: 0; }
+    .first-step code {
+      background: var(--bg-surface); border: 1px solid var(--border);
+      border-radius: 4px; padding: 1px 7px; color: var(--blue); font-family: var(--font-mono); font-size: 0.85em;
+    }
+
+    /* Steps timeline */
+    .setup-section { margin-bottom: 68px; scroll-margin-top: 80px; }
+    .setup-section-header {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 24px;
+    }
+    .setup-icon {
+      width: 44px; height: 44px; flex-shrink: 0;
+      border-radius: var(--radius-sm);
+      background: var(--blue-faint);
+      border: 1px solid var(--border-hover);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.25rem;
+    }
+    .setup-section-header h2 {
+      font-family: var(--font-display); font-size: 1.35rem; font-weight: 800; letter-spacing: -0.03em;
+    }
+    .setup-section-header p { font-size: 0.85rem; color: var(--text-secondary); margin-top: 2px; }
+
+    .step-list { display: flex; flex-direction: column; gap: 2px; }
+    .step-card {
+      display: flex; gap: 18px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 20px 22px;
+      transition: border-color var(--ease);
+    }
+    .step-card:first-child { border-radius: var(--radius-md) var(--radius-md) 0 0; }
+    .step-card:last-child  { border-radius: 0 0 var(--radius-md) var(--radius-md); }
+    .step-card:only-child  { border-radius: var(--radius-md); }
+    .step-card:hover { border-color: var(--border-hover); }
+    .step-num-badge {
+      width: 30px; height: 30px; flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--blue);
+      color: var(--bg-base);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-weight: 800; font-size: 0.82rem;
+    }
+    .step-body { flex: 1; min-width: 0; }
+    .step-title {
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+      font-family: var(--font-display); font-weight: 700; font-size: 0.95rem;
+      color: var(--text-primary); margin-bottom: 6px;
+    }
+    .step-cmd {
+      font-family: var(--font-mono); font-size: 0.8rem;
+      color: var(--blue);
+      background: rgba(74,179,232,0.08);
+      border: 1px solid rgba(74,179,232,0.2);
+      border-radius: 5px; padding: 2px 9px;
+    }
+    .step-desc { font-size: 0.87rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 6px; }
+    .step-badge {
+      display: inline-block;
+      font-size: 0.68rem; font-family: var(--font-mono); font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      padding: 2px 8px; border-radius: 4px;
+      background: rgba(232,96,96,0.1); color: var(--red);
+      border: 1px solid rgba(232,96,96,0.25);
+      margin-top: 4px;
+    }
+
+    /* Permission grid */
+    .permissions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .perm-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 12px 14px;
+      background: var(--bg-surface);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+    }
+    .perm-item .perm-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+    .perm-item-title { font-size: 0.85rem; font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
+    .perm-item-why { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+
+    .section-label {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--blue); font-family: var(--font-mono); margin-bottom: 8px;
+    }
+
+    @media (max-width: 640px) {
+      .page-hero { padding: 44px 0 30px; }
+      .first-step { flex-direction: column; text-align: center; padding: 26px 22px; }
+      .step-card { flex-direction: column; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<script src="config.js"></script>
+<script src="version.js" defer></script>
+
+<!-- ── Navbar ─────────────────────────────────────────── -->
+<nav class="navbar">
+  <a href="index.html" class="navbar-logo"><span>Carmelo</span> Bot</a>
+    <ul class="navbar-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="commands.html">Comandi</a></li>
+    <li><a href="guide.html">Guida</a></li>
+    <li><a href="setup.html" class="active">Setup</a></li>
+    <li><a href="stats.html">Statistiche</a></li>
+    <li><a href="changelog.html">Changelog</a></li>
+    <li><a href="legal.html">Termini & Privacy</a></li>
+    <li><a href="legal.html#contatti">Contatti</a></li>
+  </ul>
+  <a href="invite.html" class="navbar-cta">+ Aggiungi al server</a>
+  <button class="theme-toggle" id="themeToggle" aria-label="Cambia tema">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+  </button>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="commands.html">Comandi</a>
+  <a href="guide.html">Guida</a>
+  <a href="setup.html" class="active">Setup</a>
+  <a href="stats.html">Statistiche</a>
+  <a href="changelog.html">Changelog</a>
+  <a href="legal.html">Termini & Privacy</a>
+  <a href="legal.html#contatti">Contatti</a>
+  <a href="invite.html" class="mobile-cta">+ Aggiungi al server</a>
+</div>
+
+<div class="container">
+
+  <header class="page-hero">
+    <span style="font-size:2.6rem;display:block;margin-bottom:6px;"><span aria-hidden="true">⚙</span>️</span>
+    <h1>Nuovo sul server?<br><span class="accent">Inizia da qui.</span></h1>
+    <p>Aggiungi il bot e configuralo in pochi minuti: benvenuto, auto-ruolo, ticket e compleanni.</p>
+  </header>
+
+  <!-- ── Aggiungi il bot ─────────────────────────── -->
+  <section class="setup-section" id="aggiungi">
+    <div class="setup-section-header">
+      <div class="setup-icon"><span aria-hidden="true">🚀</span></div>
+      <div>
+        <h2>1. Aggiungi il bot al server</h2>
+        <p>Il primo passo: invitarlo con i permessi giusti.</p>
+      </div>
+    </div>
+
+    <div class="card" style="text-align:center;">
+      <p style="margin-bottom:20px;">Carmelo Bot è gratuito e richiede solo pochi permessi essenziali per funzionare correttamente.</p>
+      <a href="invite.html" class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:var(--blue);color:var(--bg-base);font-family:var(--font-display);font-weight:700;font-size:0.92rem;border-radius:var(--radius-md);text-decoration:none;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.04.036.054a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .085-.026c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+        Aggiungi al server
+      </a>
+      <div style="margin-top:10px;">
+        <a href="invite.html" style="font-size:0.82rem;color:var(--text-muted);">Vedi la lista completa dei permessi richiesti →</a>
+      </div>
+    </div>
+
+    <div class="permissions-grid" style="margin-top:16px;">
+      <div class="perm-item">
+        <span class="perm-icon"><span aria-hidden="true">💬</span></span>
+        <div><div class="perm-item-title">Leggere/inviare messaggi</div><div class="perm-item-why">Necessario per comandi, AI e log</div></div>
+      </div>
+      <div class="perm-item">
+        <span class="perm-icon"><span aria-hidden="true">🔊</span></span>
+        <div><div class="perm-item-title">Entrare/parlare in vocale</div><div class="perm-item-why">Per la riproduzione musicale</div></div>
+      </div>
+      <div class="perm-item">
+        <span class="perm-icon"><span aria-hidden="true">📁</span></span>
+        <div><div class="perm-item-title">Gestire canali</div><div class="perm-item-why">Per creare i canali ticket</div></div>
+      </div>
+      <div class="perm-item">
+        <span class="perm-icon"><span aria-hidden="true">🛡</span>️</span>
+        <div><div class="perm-item-title">Moderare membri</div><div class="perm-item-why">Per warn, timeout, ban, kick</div></div>
+      </div>
+      <div class="perm-item">
+        <span class="perm-icon"><span aria-hidden="true">🎭</span></span>
+        <div><div class="perm-item-title">Gestire ruoli</div><div class="perm-item-why">Per l'auto-role e alcuni comandi mod</div></div>
+      </div>
+      <div class="perm-item">
+        <span class="perm-icon"><span aria-hidden="true">📊</span></span>
+        <div><div class="perm-item-title">Vedere i membri online</div><div class="perm-item-why">Per statistiche server accurate</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Primo controllo ─────────────────────────── -->
+  <div class="first-step">
+    <div class="first-step-icon"><span aria-hidden="true">✅</span></div>
+    <div>
+      <h3>Prima cosa da fare: controlla la configurazione</h3>
+      <p>In qualsiasi momento puoi lanciare <code>/configshow</code> per vedere cosa hai già impostato (canali, auto-ruolo, ecc.) — usalo come checklist mentre segui questa guida.</p>
+    </div>
+  </div>
+
+  <!-- ── Benvenuto & Addio ───────────────────────── -->
+  <section class="setup-section" id="benvenuto">
+    <div class="setup-section-header">
+      <div class="setup-icon"><span aria-hidden="true">👋</span></div>
+      <div>
+        <h2>2. Benvenuto, addio e auto-ruolo</h2>
+        <p>Accogli chi entra e assegna automaticamente un ruolo base.</p>
+      </div>
+    </div>
+
+    <div class="step-list">
+      <div class="step-card">
+        <div class="step-num-badge">1</div>
+        <div class="step-body">
+          <div class="step-title">Imposta il canale di benvenuto <span class="step-cmd">/set_welcome_channel</span></div>
+          <p class="step-desc">Scegli il canale dove Carmelo Bot invierà una card grafica di benvenuto ogni volta che un nuovo membro entra nel server.</p>
+          <span class="step-badge">Admin</span>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num-badge">2</div>
+        <div class="step-body">
+          <div class="step-title">Imposta il canale di addio <span class="step-cmd">/set_goodbye_channel</span></div>
+          <p class="step-desc">Scegli il canale dove verrà inviato un messaggio quando un membro lascia il server.</p>
+          <span class="step-badge">Admin</span>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num-badge">3</div>
+        <div class="step-body">
+          <div class="step-title">Imposta l'auto-ruolo <span class="step-cmd">/set_autorole</span></div>
+          <p class="step-desc">Scegli un ruolo che verrà assegnato automaticamente a ogni nuovo membro non appena entra — utile per dare subito accesso ai canali base.</p>
+          <span class="step-badge">Admin</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Ticket ───────────────────────────────────── -->
+  <section class="setup-section" id="ticket">
+    <div class="setup-section-header">
+      <div class="setup-icon"><span aria-hidden="true">🎫</span></div>
+      <div>
+        <h2>3. Pannello ticket</h2>
+        <p>Dai ai membri un modo per contattare lo staff in privato.</p>
+      </div>
+    </div>
+
+    <div class="step-list">
+      <div class="step-card">
+        <div class="step-num-badge">1</div>
+        <div class="step-body">
+          <div class="step-title">Invia il pannello ticket <span class="step-cmd">/sendticketpanel</span></div>
+          <p class="step-desc">Lancialo nel canale dove vuoi che appaia il pannello di supporto. Gli utenti selezionano il motivo da un menu e viene creato automaticamente un canale privato dedicato.</p>
+          <span class="step-badge">Admin</span>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num-badge">2</div>
+        <div class="step-body">
+          <div class="step-title">Prendi in carico un ticket <span class="step-cmd">/claim</span></div>
+          <p class="step-desc">I moderatori usano questo comando dentro un canale ticket per segnalare che se ne stanno occupando.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Compleanni ───────────────────────────────── -->
+  <section class="setup-section" id="compleanni">
+    <div class="setup-section-header">
+      <div class="setup-icon"><span aria-hidden="true">🎂</span></div>
+      <div>
+        <h2>4. Sistema compleanni</h2>
+        <p>Fai sentire speciale ogni membro il giorno del suo compleanno.</p>
+      </div>
+    </div>
+
+    <div class="step-list">
+      <div class="step-card">
+        <div class="step-num-badge">1</div>
+        <div class="step-body">
+          <div class="step-title">Attiva il sistema <span class="step-cmd">/birthday enable</span></div>
+          <p class="step-desc">Scegli il canale dove verranno inviati gli auguri automatici. Rilancia il comando per disattivarlo in qualsiasi momento.</p>
+          <span class="step-badge">Mod</span>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num-badge">2</div>
+        <div class="step-body">
+          <div class="step-title">Ogni utente imposta la propria data <span class="step-cmd">/birthday set</span></div>
+          <p class="step-desc">Ogni membro può impostare giorno e mese del proprio compleanno. Una volta impostata, la data può essere modificata di nuovo solo dopo 10 giorni.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA finale ───────────────────────────────── -->
+  <div class="cta-strip" style="background:var(--bg-card);border:1px solid var(--border-hover);border-radius:var(--radius-lg);padding:44px 40px;text-align:center;">
+    <h2 style="font-family:var(--font-display);font-size:1.5rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:10px;">Tutto configurato?</h2>
+    <p style="color:var(--text-secondary);font-size:0.92rem;margin-bottom:22px;">Esplora tutti gli altri comandi disponibili o scopri come funziona l'AI integrata.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="commands.html" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:var(--blue);color:var(--bg-base);font-family:var(--font-display);font-weight:700;font-size:0.92rem;border-radius:var(--radius-md);text-decoration:none;">Vedi tutti i comandi</a>
+      <a href="guide.html#ia" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:transparent;color:var(--text-secondary);font-family:var(--font-display);font-weight:600;font-size:0.92rem;border:1px solid var(--border-hover);border-radius:var(--radius-md);text-decoration:none;">Scopri l'AI →</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-left">
+    <div class="footer-brand"><span>Carmelo</span> Bot</div>
+    <div class="footer-meta">discord.py 2.x · <span class="bot-version">v0</span> · 120 comandi</div>
+    <div class="footer-copy">© 2026 wicknoob73 & jeimaster. — Non affiliato con Discord Inc.</div>
+  </div>
+    <ul class="footer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="commands.html">Comandi</a></li>
+    <li><a href="guide.html">Guida</a></li>
+    <li><a href="setup.html">Setup</a></li>
+    <li><a href="stats.html">Statistiche</a></li>
+    <li><a href="changelog.html">Changelog</a></li>
+    <li><a href="legal.html">Termini & Privacy</a></li>
+    <li><a href="eula.html">EULA</a></li>
+    <li><a href="privacy.html">Privacy Policy</a></li>
+    <li><a href="legal.html#contatti">Contatti</a></li>
+  </ul>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Torna su">
+  <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="18 15 12 9 6 15"/>
+  </svg>
+</button>
+
+<script>
+// Hamburger
+const ham = document.getElementById('hamburgerBtn');
+const mob = document.getElementById('mobileMenu');
+if (ham && mob) {
+  ham.addEventListener('click', () => {
+    ham.classList.toggle('open');
+    mob.classList.toggle('open');
+  });
+  document.addEventListener('click', e => {
+    if (!ham.contains(e.target) && !mob.contains(e.target)) {
+      ham.classList.remove('open');
+      mob.classList.remove('open');
+    }
+  });
+  mob.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => {
+      ham.classList.remove('open');
+      mob.classList.remove('open');
+    })
+  );
+}
+// Back to top
+const btt = document.getElementById('backToTop');
+if (btt) {
+  window.addEventListener('scroll', () => {
+    btt.classList.toggle('visible', window.scrollY > 300);
+  }, { passive: true });
+  btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+}
+</script>
+
+<script>
+// ── Theme toggle ──────────────────────────────────────────
+(function() {
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light') document.documentElement.classList.add('light');
+})();
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('themeToggle');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    const isLight = document.documentElement.classList.toggle('light');
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  });
+});
+</script>
+</body>
+</html>
