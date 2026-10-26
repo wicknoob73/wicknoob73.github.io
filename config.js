@@ -73,7 +73,7 @@ async function fetchStatsWithFallback(query = '', options = {}) {
 //     createMediaElementSource (il browser non permette di farlo due
 //     volte sullo stesso elemento) a questo grafo:
 //
-//       sorgente → highpass → lowpass → lowshelf (bassi) → pan (8D) ─┬→ master → uscita
+//       sorgente → highpass → lowpass(×2) → lowshelf (bassi) → tremolo → pan (8D) ─┬→ master → uscita
 //                                              └→ delay+feedback (eco) ─┘
 //
 //     Il volume passa dal nodo "master", perché dopo il collegamento
@@ -99,12 +99,15 @@ async function fetchStatsWithFallback(query = '', options = {}) {
 //   pitchLock true = il tono resta uguale; false = tono e velocità insieme
 //   bass      guadagno in dB del lowshelf a 100 Hz
 //   hp / lp   frequenze (Hz) di highpass / lowpass; null = filtro aperto
+//   lpSteep   true = lowpass doppio (taglio più netto, come "discoteca")
+//   trem      { freq, depth } tremolo: il volume pulsa; depth 0 = spento
 //   echo      { time, feedback, wet } eco; wet 0 = spenta
 //   pan       true = LFO sul panning stereo (audio rotante)
 //   gain      correzione di livello (per evitare clipping coi bassi)
 const AUDIO_FX_NEUTRAL = {
   rate: 1, pitchLock: true,
-  bass: 0, hp: null, lp: null,
+  bass: 0, hp: null, lp: null, lpSteep: false,
+  trem: { freq: 0.5, depth: 0 },
   echo: { time: 0.06, feedback: 0.4, wet: 0 },
   pan: false, gain: 1,
 };
@@ -116,6 +119,8 @@ const AUDIO_FX = {
   bassboost: { label: '🔊 Bassboost',  bass: 12, gain: 0.75 },
   eightd:    { label: '🎧 8D Audio',   pan: true },
   telefono:  { label: '📞 Telefono',   hp: 300, lp: 3400 },
+  radio_vecchia: { label: '📻 Radio vecchia', hp: 500, lp: 2500, trem: { freq: 0.5, depth: 0.15 } },
+  discoteca: { label: '🪩 Discoteca',  lp: 500, lpSteep: true, bass: 8 },
   vaporwave: { label: '🌊 Vaporwave',  rate: 0.8, pitchLock: false, lp: 4500, echo: { time: 0.35, feedback: 0.45, wet: 0.3 } },
 };
 
@@ -155,10 +160,27 @@ function buildFxGraph(ctx, audio) {
     lp.type = 'lowpass';
     lp.frequency.value = ctx.sampleRate / 2;
 
+    // Secondo lowpass in cascata: attivo solo per "discoteca" (taglio più netto).
+    const lp2 = ctx.createBiquadFilter();
+    lp2.type = 'lowpass';
+    lp2.frequency.value = ctx.sampleRate / 2;
+
     const bass = ctx.createBiquadFilter();
     bass.type = 'lowshelf';
     bass.frequency.value = 100;
     bass.gain.value = 0;
+
+    // Tremolo: il volume oscilla tra (1 - depth) e 1 con un LFO.
+    const trem = ctx.createGain();
+    trem.gain.value = 1;
+    const tremLfo = ctx.createOscillator();
+    tremLfo.type = 'sine';
+    tremLfo.frequency.value = 0.5;
+    const tremDepth = ctx.createGain();
+    tremDepth.gain.value = 0;              // 0 = spento
+    tremLfo.connect(tremDepth);
+    tremDepth.connect(trem.gain);
+    tremLfo.start();
 
     // 8D: un oscillatore lento che muove il pan da -1 a +1.
     const panner = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
@@ -186,15 +208,17 @@ function buildFxGraph(ctx, audio) {
 
     src.connect(hp);
     hp.connect(lp);
-    lp.connect(bass);
-    const tail = panner || bass;
-    if (panner) bass.connect(panner);
+    lp.connect(lp2);
+    lp2.connect(bass);
+    bass.connect(trem);
+    const tail = panner || trem;
+    if (panner) trem.connect(panner);
     tail.connect(master);                   // segnale diretto
     tail.connect(delay);                    // ramo eco
     delay.connect(wet).connect(master);
     master.connect(ctx.destination);
 
-    return { hp, lp, bass, panner, lfoDepth, delay, feedback, wet, master };
+    return { hp, lp, lp2, bass, trem, tremLfo, tremDepth, panner, lfoDepth, delay, feedback, wet, master };
   } catch (err) {
     // Es. createMediaElementSource già chiamato, o audio cross-origin.
     return null;
@@ -279,6 +303,7 @@ function initListenPlayers() {
       fxName = AUDIO_FX[name] ? name : 'none';
       const fx = Object.assign({}, AUDIO_FX_NEUTRAL, AUDIO_FX[fxName]);
       fx.echo = Object.assign({}, AUDIO_FX_NEUTRAL.echo, AUDIO_FX[fxName].echo);
+      fx.trem = Object.assign({}, AUDIO_FX_NEUTRAL.trem, AUDIO_FX[fxName].trem);
 
       setPlaybackRateSafe(audio, fx.rate, fx.pitchLock);
 
@@ -286,7 +311,12 @@ function initListenPlayers() {
         const t = _fxCtx.currentTime, k = 0.03;
         graph.hp.frequency.setTargetAtTime(fx.hp || 10, t, k);
         graph.lp.frequency.setTargetAtTime(fx.lp || _fxCtx.sampleRate / 2, t, k);
+        graph.lp2.frequency.setTargetAtTime(fx.lpSteep && fx.lp ? fx.lp : _fxCtx.sampleRate / 2, t, k);
         graph.bass.gain.setTargetAtTime(fx.bass, t, k);
+        // Tremolo: base = 1 - depth/2, oscillazione ± depth/2 (come ffmpeg tremolo)
+        graph.trem.gain.setTargetAtTime(1 - fx.trem.depth / 2, t, k);
+        graph.tremDepth.gain.setTargetAtTime(fx.trem.depth / 2, t, k);
+        graph.tremLfo.frequency.setTargetAtTime(fx.trem.freq, t, k);
         graph.delay.delayTime.setTargetAtTime(fx.echo.time, t, k);
         graph.feedback.gain.setTargetAtTime(fx.echo.feedback, t, k);
         graph.wet.gain.setTargetAtTime(fx.echo.wet, t, k);
