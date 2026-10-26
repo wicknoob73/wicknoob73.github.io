@@ -1026,6 +1026,55 @@ footer {
   border-radius: 4px;
 }
 
+/* ── Effetti audio (select dentro la listen-card) ── */
+.fx-control {
+  flex-shrink: 0;
+  position: relative;
+}
+.fx-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  background-color: var(--bg-card);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237a859e' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 9px 32px 9px 16px;
+  max-width: 170px;
+  cursor: pointer;
+  outline: none;
+  transition: color var(--ease), border-color var(--ease), background-color var(--ease), box-shadow var(--ease);
+}
+.fx-select:hover,
+.fx-select:focus-visible {
+  color: var(--text-primary);
+  border-color: var(--pcolor, var(--blue));
+}
+.fx-select:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--pcolor, var(--blue)) 25%, transparent);
+}
+.fx-select.active {
+  color: var(--pcolor, var(--blue));
+  border-color: var(--pcolor, var(--blue));
+  background-color: color-mix(in srgb, var(--pcolor, var(--blue)) 10%, var(--bg-card));
+}
+.fx-select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.fx-select option {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-weight: 500;
+}
+
 /* ── Volume slider ── */
 .volume-control {
   display: flex;
@@ -1088,4 +1137,9 @@ footer {
   .pf-overview-table th:nth-child(3),
   .pf-overview-table td:nth-child(3) { display: none; }
   .volume-slider { width: 45px; }
+  .listen-card { flex-wrap: wrap; row-gap: 12px; }
+  .listen-info { flex: 1 1 100%; }
+  .fx-control { flex: 1 1 auto; }
+  .fx-select { width: 100%; max-width: none; }
+  .volume-control { margin-right: 0; }
 }
