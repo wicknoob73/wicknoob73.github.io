@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Guida ai comandi — Carmelo Bot</title>
-  <meta name="description" content="Come funzionano i comandi di Carmelo Bot, come usarli e soluzioni ai problemi più comuni.">
+  <title>Guida alla musica — Carmelo Bot</title>
+  <meta name="description" content="Guida completa ai comandi musicali di Carmelo Bot: YouTube, Spotify, SoundCloud, TikTok, Instagram, effetti audio e problemi comuni.">
   <link rel="canonical" href="https://wicknoob73.github.io/guide.html">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Guida ai comandi — Carmelo Bot">
-  <meta property="og:description" content="Come funzionano i comandi di Carmelo Bot, come usarli e soluzioni ai problemi più comuni.">
+  <meta property="og:title" content="Guida alla musica — Carmelo Bot">
+  <meta property="og:description" content="Guida completa ai comandi musicali di Carmelo Bot.">
   <meta property="og:image" content="https://wicknoob73.github.io/assets/og-image.png">
   <meta name="theme-color" content="#4ab3e8">
 
@@ -19,150 +19,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
   <link rel="stylesheet" href="style.css">
-  <style>
-    .guide-hero {
-      text-align: center;
-      padding: 80px 0 60px;
-    }
-    .guide-hero h1 {
-      font-family: var(--font-display);
-      font-size: clamp(2.2rem, 5.5vw, 3.2rem);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      color: var(--text-primary);
-      margin: 18px 0 14px;
-    }
-    .guide-hero p {
-      font-size: 1rem;
-      color: var(--text-secondary);
-      max-width: 480px;
-      margin: 0 auto;
-      line-height: 1.7;
-    }
-
-    /* ── Tab piattaforme musicali ─────────────────────────────
-       Non dividono la pagina in 3 blocchi separati: sono un
-       selettore compatto, pronto per mostrare contenuto diverso
-       per piattaforma quando lo aggiungeremo. Per ora solo colori
-       e nomi, nessuna funzione. */
-    .platform-tabs {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      max-width: 560px;
-      margin: 0 auto 36px;
-    }
-    .platform-tab {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      cursor: pointer;
-      transition: all var(--ease);
-    }
-    .platform-tab .platform-icon {
-      width: 20px; height: 20px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.7rem;
-      background: var(--pcolor);
-      color: #fff;
-      flex-shrink: 0;
-    }
-    .platform-tab:hover {
-      color: var(--text-primary);
-      border-color: var(--pcolor);
-      background: color-mix(in srgb, var(--pcolor) 10%, transparent);
-    }
-    .platform-tab.active {
-      color: #fff;
-      background: var(--pcolor);
-      border-color: transparent;
-    }
-    .platform-tab.active .platform-icon {
-      background: rgba(255,255,255,0.28);
-    }
-
-    /* ── Pannello che cambia in base alla piattaforma selezionata ── */
-    .platform-panel {
-      display: none;
-      max-width: 640px;
-      margin: 0 auto 100px;
-      padding: 44px 40px;
-      text-align: center;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-top: 3px solid var(--pcolor);
-      border-radius: var(--radius-lg);
-      transition: border-color var(--ease);
-    }
-    .platform-panel.active { display: block; }
-    .platform-panel .panel-icon {
-      width: 46px; height: 46px; margin: 0 auto 18px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.2rem; color: #fff;
-      background: var(--pcolor);
-    }
-    .platform-panel h3 {
-      font-family: var(--font-display); font-weight: 800; font-size: 1.15rem;
-      color: var(--text-primary); margin-bottom: 10px;
-    }
-    .platform-panel p {
-      font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7;
-      font-family: var(--font-mono);
-    }
-
-    /* ── Pannello categoria: sezione normale, niente box colorato ── */
-    .category-panel {
-      display: none;
-      max-width: 640px;
-      margin: 0 auto 100px;
-      text-align: center;
-    }
-    .category-panel.active { display: block; }
-    .category-panel h3 {
-      font-family: var(--font-display); font-weight: 800; font-size: 1.4rem;
-      letter-spacing: -0.02em;
-      color: var(--ccolor, var(--text-primary));
-      margin-bottom: 12px;
-    }
-    .category-panel p {
-      font-size: 0.92rem; color: var(--text-secondary); line-height: 1.7;
-    }
-
-    /* ── Filtro categorie — stesso stile/colori di commands.html ── */
-    .cat-filter {
-      display: flex; flex-wrap: wrap; gap: 8px;
-      justify-content: center;
-      max-width: 720px;
-      margin: 0 auto 56px;
-      padding-bottom: 28px;
-      border-bottom: 1px solid var(--border);
-    }
-    .cat-pill {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 7px 16px; border-radius: 999px;
-      font-size: 0.82rem; font-weight: 600;
-      color: var(--text-secondary);
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      cursor: pointer;
-      transition: all var(--ease);
-      user-select: none;
-      font-family: var(--font-body);
-    }
-    .cat-pill:hover { color: var(--text-primary); border-color: var(--border-hover); }
-    .cat-pill.active { color: var(--bg-base); background: var(--pill-color, var(--blue)); border-color: transparent; }
-  </style>
 </head>
 <body>
 
@@ -204,99 +60,695 @@
 <div class="container">
 
   <header class="guide-hero">
-    <h1>Guida ai comandi</h1>
-    <p>Come funzionano i comandi di Carmelo Bot, come usarli al meglio e come risolvere i problemi più comuni.</p>
+    <h1>La musica su Carmelo Bot</h1>
+    <p>Tutto quello che serve per usare <code>/play</code>, gestire la coda, applicare effetti e capire cosa succede quando qualcosa non va.</p>
   </header>
 
-  <!-- Selettore piattaforme musicali — cambia il pannello sotto -->
-  <div class="platform-tabs">
-    <button class="platform-tab active" data-platform="youtube" style="--pcolor:#FF0000">
-      <span class="platform-icon">▶</span> YouTube
-    </button>
-    <button class="platform-tab" data-platform="spotify" style="--pcolor:#1DB954">
-      <span class="platform-icon"><span aria-hidden="true">♪</span></span> Spotify
-    </button>
-    <button class="platform-tab" data-platform="soundcloud" style="--pcolor:#FF5500">
-      <span class="platform-icon"><span aria-hidden="true">☁</span></span> SoundCloud
-    </button>
-  </div>
+  <!-- TAB PIATTAFORME -->
+  <section aria-labelledby="platforms-title">
+    <div class="section-heading">
+      <span class="section-kicker">Piattaforme supportate</span>
+      <h2 id="platforms-title">Scegli una piattaforma</h2>
+      <p>Ogni scheda contiene una canzone di esempio che puoi ascoltare, cosa fa il bot, cosa non fa e gli errori più comuni.</p>
+    </div>
 
-  <!-- Filtro categorie — stesse sezioni/colori di commands.html,
-       ancora nessun contenuto o funzione collegata -->
-  <div class="cat-filter">
-    <button class="cat-pill" data-filter="musica"            style="--pill-color:#4ab3e8;"><span aria-hidden="true">🎵</span> Musica</button>
-    <button class="cat-pill" data-filter="moderazione"       style="--pill-color:#e86060;"><span aria-hidden="true">🛡</span>️ Moderazione</button>
-    <button class="cat-pill" data-filter="livelli"           style="--pill-color:#4de89a;"><span aria-hidden="true">📈</span> Livelli & XP</button>
-    <button class="cat-pill" data-filter="ticket"            style="--pill-color:#d4a947;"><span aria-hidden="true">🎫</span> Ticket</button>
-    <button class="cat-pill" data-filter="giveaway"          style="--pill-color:#a78bfa;"><span aria-hidden="true">🎁</span> Giveaway</button>
-    <button class="cat-pill" data-filter="compleanni"        style="--pill-color:#e8c46a;"><span aria-hidden="true">🎂</span> Compleanni</button>
-    <button class="cat-pill" data-filter="config"            style="--pill-color:#2d8bbf;"><span aria-hidden="true">⚙</span>️ Configurazione</button>
-    <button class="cat-pill" data-filter="ia"                style="--pill-color:#a78bfa;"><span aria-hidden="true">🤖</span> AI</button>
-    <button class="cat-pill" data-filter="utility"           style="--pill-color:#2dd4bf;"><span aria-hidden="true">🎲</span> Utility</button>
-    <button class="cat-pill" data-filter="dev"               style="--pill-color:#8a8f9c;"><span aria-hidden="true">🔧</span> Sviluppo</button>
-  </div>
+    <div class="platform-tabs">
+      <button class="platform-tab" data-platform="youtube" style="--pcolor:#FF0000">
+        <span class="platform-icon"><img src="assets/loghi/youtube.png" alt="YouTube"></span> YouTube
+      </button>
+      <button class="platform-tab" data-platform="spotify" style="--pcolor:#1DB954">
+        <span class="platform-icon"><img src="assets/loghi/spotify.png" alt="Spotify"></span> Spotify
+      </button>
+      <button class="platform-tab" data-platform="soundcloud" style="--pcolor:#FF5500">
+        <span class="platform-icon"><img src="assets/loghi/soundcloud.png" alt="SoundCloud"></span> SoundCloud
+      </button>
+      <button class="platform-tab" data-platform="tiktok" style="--pcolor:#FE2C55">
+        <span class="platform-icon"><img src="assets/loghi/tiktok.png" alt="TikTok"></span> TikTok
+      </button>
+      <button class="platform-tab" data-platform="instagram" style="--pcolor:#E1306C">
+        <span class="platform-icon"><img src="assets/loghi/instagram.png" alt="Instagram"></span> Instagram
+      </button>
+    </div>
+    <p class="tabs-hint">
+      <span>👆 Clicca una piattaforma per aprire la scheda con la canzone di esempio</span>
+    </p>
+  </section>
 
-  <!-- Pannello che cambia in base alla piattaforma selezionata sopra.
-       Contenuto ancora provvisorio: la struttura vera arriva dopo. -->
-  <div class="platform-panel active" data-panel="youtube" style="--pcolor:#FF0000">
-    <div class="panel-icon">▶</div>
-    <h3>YouTube</h3>
-    <p>Con <code>/play</code> incolla un link YouTube (video o playlist) oppure scrivi semplicemente il titolo della canzone: il bot cerca il primo risultato e lo aggiunge alla coda.</p>
-  </div>
-  <div class="platform-panel" data-panel="spotify" style="--pcolor:#1DB954">
-    <div class="panel-icon"><span aria-hidden="true">♪</span></div>
-    <h3>Spotify</h3>
-    <p>Incolla un link Spotify (traccia, playlist o album) in <code>/play</code>: il bot lo riconosce e trova l'audio corrispondente da riprodurre in vocale.</p>
-  </div>
-  <div class="platform-panel" data-panel="soundcloud" style="--pcolor:#FF5500">
-    <div class="panel-icon"><span aria-hidden="true">☁</span></div>
-    <h3>SoundCloud</h3>
-    <p>Funziona come su YouTube: incolla il link diretto di una traccia SoundCloud in <code>/play</code>, oppure cerca per titolo se il brano è pubblico.</p>
-  </div>
+  <!-- PANORAMICA -->
+  <section class="pf-overview" aria-labelledby="overview-title">
+    <div class="section-heading">
+      <span class="section-kicker">In breve</span>
+      <h2 id="overview-title">Panoramica rapida</h2>
+    </div>
 
-  <!-- Pannelli categoria: aprendone uno si nasconde il blocco piattaforme
-       sopra e si torna a una sezione "normale" (niente box colorato). -->
-  <div class="category-panel" data-category="musica" style="--ccolor:#4ab3e8">
-    <h3><span aria-hidden="true">🎵</span> Musica</h3>
-    <p><code>/play</code> avvia la riproduzione, <code>/queue</code> mostra e gestisce la coda, <code>/player</code> raggruppa i controlli avanzati (loop, velocità, testi) e <code>/effetto</code> applica filtri audio al volo come nightcore o bassboost. Il bot si disconnette da solo se il canale vocale resta vuoto per qualche minuto.<br><a href="commands.html#play">Vedi tutti i comandi Musica →</a></p>
-  </div>
-  <div class="category-panel" data-category="moderazione" style="--ccolor:#e86060">
-    <h3><span aria-hidden="true">🛡</span>️ Moderazione</h3>
-    <p><code>/kick</code>, <code>/ban</code>, <code>/timeout</code> e <code>/mute</code> coprono le azioni base; <code>/warn</code> tiene uno storico consultabile degli avvertimenti, <code>/modnote</code> lascia note private su un utente visibili solo allo staff, e <code>/log</code> sceglie dove il bot invia i log delle azioni. Richiedono permessi di moderazione sul server.<br><a href="commands.html#kick">Vedi tutti i comandi Moderazione →</a></p>
-  </div>
-  <div class="category-panel" data-category="livelli" style="--ccolor:#4de89a">
-    <h3><span aria-hidden="true">📈</span> Livelli & XP</h3>
-    <p>Ogni messaggio scritto fa guadagnare XP (con un piccolo cooldown anti-spam). <code>/rank</code> mostra il tuo livello e la posizione in classifica, <code>/leaderboard</code> elenca i membri più attivi, <code>/daily</code> e <code>/wheel</code> danno bonus giornalieri, mentre gli admin regolano tutto con <code>/xp</code> (moltiplicatori, ruoli sblocco, reset).<br><a href="commands.html#rank">Vedi tutti i comandi Livelli & XP →</a></p>
-  </div>
-  <div class="category-panel" data-category="ticket" style="--ccolor:#d4a947">
-    <h3><span aria-hidden="true">🎫</span> Ticket</h3>
-    <p><code>/sendticketpanel</code> pubblica un pannello con un bottone che i membri cliccano per aprire un ticket privato. Da lì lo staff può prenderlo in carico con <code>/ticket claim</code>, aggiungere altri utenti con <code>/ticket add</code>, e chiuderlo con <code>/ticket close</code> (con possibilità di salvare un transcript).<br><a href="commands.html#sendticketpanel">Vedi tutti i comandi Ticket →</a></p>
-  </div>
-  <div class="category-panel" data-category="giveaway" style="--ccolor:#a78bfa">
-    <h3><span aria-hidden="true">🎁</span> Giveaway</h3>
-    <p><code>/giveaway crea</code> imposta un giveaway completo (premio, durata, numero di vincitori, requisiti), mentre <code>/giveaway veloce</code> ne lancia uno in pochi secondi con le impostazioni di base. <code>/giveaway reroll</code> estrae un nuovo vincitore se serve, e <code>/giveaway blacklist</code> esclude utenti specifici.<br><a href="commands.html#giveaway-crea">Vedi tutti i comandi Giveaway →</a></p>
-  </div>
-  <div class="category-panel" data-category="compleanni" style="--ccolor:#e8c46a">
-    <h3><span aria-hidden="true">🎂</span> Compleanni</h3>
-    <p><code>/birthday set</code> salva il giorno e il mese di nascita (niente anno), e il bot pubblica automaticamente un messaggio di auguri nel canale configurato. <code>/birthday preview</code> mostra un'anteprima dell'annuncio, <code>/birthday cooldown_reset</code> toglie il limite di modifica per un utente.<br><a href="commands.html#birthday-set">Vedi tutti i comandi Compleanni →</a></p>
-  </div>
-  <div class="category-panel" data-category="config" style="--ccolor:#2d8bbf">
-    <h3><span aria-hidden="true">⚙</span>️ Configurazione</h3>
-    <p>È la sezione da cui si imposta tutto il resto: <code>/config mostra</code> riepiloga la configurazione attuale, <code>/config canale-levelup</code> e <code>/config canale-report</code> scelgono dove inviare le notifiche, <code>/config ruolo-mod</code> definisce chi modera, e <code>/welcome</code> gestisce benvenuto, addio e autorole per i nuovi membri.<br><a href="commands.html#config-mostra">Vedi tutti i comandi Configurazione →</a></p>
-  </div>
-  <div class="category-panel" data-category="ia" style="--ccolor:#a78bfa">
-    <h3><span aria-hidden="true">🤖</span> AI</h3>
-    <p>Al momento l'unico comando è <code>/text</code>: scrivi una richiesta e il bot risponde usando un modello di intelligenza artificiale — utile per domande veloci, riformulare un testo o avere idee senza uscire da Discord. È una sezione ancora in crescita: altri comandi AI arriveranno con i prossimi aggiornamenti.<br><a href="commands.html#text">Vedi il comando AI →</a></p>
-  </div>
-  <div class="category-panel" data-category="utility" style="--ccolor:#2dd4bf">
-    <h3><span aria-hidden="true">🎲</span> Utility</h3>
-    <p>Strumenti generici utili in ogni server: <code>/dice</code> e <code>/coinflip</code> per decisioni rapide, <code>/poll</code> per creare sondaggi con reazioni, <code>/serverinfo</code> e <code>/roleinfo</code> per controllare dati su server e ruoli, e <code>/versione</code> per sapere subito su quale versione del bot gira il server.<br><a href="commands.html#dice">Vedi tutti i comandi Utility →</a></p>
-  </div>
-  <div class="category-panel" data-category="dev" style="--ccolor:#8a8f9c">
-    <h3><span aria-hidden="true">🔧</span> Sviluppo</h3>
-    <p><code>/crashout</code> e <code>/crashoutstatus</code> sono comandi riservati agli sviluppatori del bot, usati per diagnosticare e gestire situazioni anomale lato infrastruttura. Non sono pensati per l'uso quotidiano sul server e restano visibili solo a chi ha i permessi giusti.<br><a href="commands.html#crashout">Vedi i comandi Sviluppo →</a></p>
-  </div>
+    <table class="pf-overview-table">
+      <thead>
+        <tr>
+          <th>Piattaforma</th>
+          <th>Cosa accetta</th>
+          <th>Note</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="pf-platform-cell">
+              <img src="assets/loghi/youtube.png" alt="YouTube" class="pf-table-icon">
+              <span>YouTube</span>
+            </div>
+          </td>
+          <td>Link video · playlist · titolo</td>
+          <td>Ricerca smart: evita slowed/reverb/lyric video</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="pf-platform-cell">
+              <img src="assets/loghi/spotify.png" alt="Spotify" class="pf-table-icon">
+              <span>Spotify</span>
+            </div>
+          </td>
+          <td>Link traccia · playlist · album</td>
+          <td>Riproduce la versione YouTube del brano</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="pf-platform-cell">
+              <img src="assets/loghi/soundcloud.png" alt="SoundCloud" class="pf-table-icon">
+              <span>SoundCloud</span>
+            </div>
+          </td>
+          <td>Link traccia · set/playlist</td>
+          <td>Playlist lunghe caricate in background</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="pf-platform-cell">
+              <img src="assets/loghi/tiktok.png" alt="TikTok" class="pf-table-icon">
+              <span>TikTok</span>
+            </div>
+          </td>
+          <td>Link diretto · link corto (vm/vt)</td>
+          <td>Titolo ripulito da hashtag e menzioni</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="pf-platform-cell">
+              <img src="assets/loghi/instagram.png" alt="Instagram" class="pf-table-icon">
+              <span>Instagram</span>
+            </div>
+          </td>
+          <td>Link reel · video</td>
+          <td>Solo contenuti pubblici</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
 
+  <!-- EFFETTI AUDIO -->
+  <section class="effects-section" aria-labelledby="effects-title">
+    <div class="section-heading">
+      <span class="section-kicker">Effetti audio</span>
+      <h2 id="effects-title">Trasforma la musica in tempo reale</h2>
+      <p>Con <code>/effetto</code> applichi filtri al brano in riproduzione. Ogni effetto ha il suo comando dedicato.</p>
+    </div>
+
+    <div class="effects-grid">
+      <div class="effect-card"><span class="effect-emoji">🌙</span><div class="effect-body"><div class="effect-name">/effetto nightcore</div><div class="effect-desc">Veloce e acuto</div></div></div>
+      <div class="effect-card"><span class="effect-emoji">🔊</span><div class="effect-body"><div class="effect-name">/effetto bassboost</div><div class="effect-desc">Bassi potenziati</div></div></div>
+      <div class="effect-card"><span class="effect-emoji">🐢</span><div class="effect-body"><div class="effect-name">/effetto slowed</div><div class="effect-desc">Rallentato con eco</div></div></div>
+      <div class="effect-card"><span class="effect-emoji">🌊</span><div class="effect-body"><div class="effect-name">/effetto vaporwave</div><div class="effect-desc">Rallentato e ovattato</div></div></div>
+      <div class="effect-card"><span class="effect-emoji">🏛️</span><div class="effect-body"><div class="effect-name">/effetto reverb</div><div class="effect-desc">Riverbero da stanza</div></div></div>
+      <div class="effect-card"><span class="effect-emoji">🎧</span><div class="effect-body"><div class="effect-name">/effetto 8d</div><div class="effect-desc">Audio rotante</div></div></div>
+      <div class="effect-card"><span class="effect-emoji">🐿️</span><div class="effect-body"><div class="effect-name">/effetto chipmunk</div><div class="effect-desc">Voce acuta e veloce</div></div></div>
+      <div class="effect-card"><span class="effect-emoji">💥</span><div class="effect-body"><div class="effect-name">/effetto earrape</div><div class="effect-desc">Volume alle stelle</div></div></div>
+      <div class="effect-card"><span class="effect-emoji">🪩</span><div class="effect-body"><div class="effect-name">/effetto discoteca</div><div class="effect-desc">Musica dalla stanza accanto</div></div></div>
+      <div class="effect-card"><span class="effect-emoji">🌊</span><div class="effect-body"><div class="effect-name">/effetto sottacqua</div><div class="effect-desc">Ovattato e ondeggiante</div></div></div>
+      <div class="effect-card"><span class="effect-emoji">📞</span><div class="effect-body"><div class="effect-name">/effetto telefono</div><div class="effect-desc">Stretto e metallico</div></div></div>
+      <div class="effect-card"><span class="effect-emoji">📻</span><div class="effect-body"><div class="effect-name">/effetto radio-vecchia</div><div class="effect-desc">Come da una radio d'epoca</div></div></div>
+      <div class="effect-card"><span class="effect-emoji">🎤</span><div class="effect-body"><div class="effect-name">/effetto karaoke</div><div class="effect-desc">Riduce la voce</div></div></div>
+      <div class="effect-card"><span class="effect-emoji">〰️</span><div class="effect-body"><div class="effect-name">/effetto tremolo</div><div class="effect-desc">Il volume pulsa</div></div></div>
+      <div class="effect-card"><span class="effect-emoji">🎻</span><div class="effect-body"><div class="effect-name">/effetto vibrato</div><div class="effect-desc">Il tono ondeggia</div></div></div>
+      <div class="effect-card"><span class="effect-emoji">🔈</span><div class="effect-body"><div class="effect-name">/effetto mono</div><div class="effect-desc">I due canali uniti</div></div></div>
+      <div class="effect-card"><span class="effect-emoji">✨</span><div class="effect-body"><div class="effect-name">/effetto reset</div><div class="effect-desc">Rimuove tutti gli effetti</div></div></div>
+    </div>
+
+    <div class="effects-note">
+      <strong>Come si comportano:</strong> su alcuni server un effetto <strong>sostituisce</strong> il precedente, su altri si <strong>sommano</strong>. Per togliere tutto usa <code>/effetto reset</code>. Puoi regolare velocità e tono con <code>/player speed</code> e <code>/player pitch</code>.<br><br>
+      <strong>⚠️ Attenzione con <code>earrape</code>:</strong> alza moltissimo il volume. Abbassa le cuffie prima di attivarlo.
+    </div>
+  </section>
+
+  <!-- PROBLEMI COMUNI -->
+  <section class="troubleshoot-section" aria-labelledby="troubleshoot-title">
+    <div class="section-heading">
+      <span class="section-kicker">Problemi comuni</span>
+      <h2 id="troubleshoot-title">Se qualcosa non funziona</h2>
+      <p>I messaggi di errore più frequenti del bot e come risolverli.</p>
+    </div>
+
+    <div class="troubleshoot-list">
+      <div class="troubleshoot-item" style="--tc:#e86060">
+        <div class="troubleshoot-q">Non riesco a usare <code>/play</code></div>
+        <div class="troubleshoot-a">Il bot risponde <span class="troubleshoot-msg">❌ Entra in vocale!</span> — devi essere in un canale vocale. Entra e riprova.</div>
+      </div>
+      <div class="troubleshoot-item" style="--tc:#e86060">
+        <div class="troubleshoot-q">Il bot dice che è già in un altro canale</div>
+        <div class="troubleshoot-a">Messaggio: <span class="troubleshoot-msg">❌ Il bot è già in #canale — entra in quel canale</span>. Il bot suona in un solo canale vocale. Spostati lì, oppure fai spostare il bot con <code>/join</code>.</div>
+      </div>
+      <div class="troubleshoot-item" style="--tc:#d4a947">
+        <div class="troubleshoot-q">Un brano di YouTube non parte</div>
+        <div class="troubleshoot-a">Il bot scrive <span class="troubleshoot-msg">⚠️ Salto il brano: YouTube ha bloccato l'URL audio</span>. Succede quando YouTube blocca temporaneamente il server. Il bot passa al brano dopo. Prova un altro video (a volte la versione "Topic" dello stesso brano funziona).</div>
+      </div>
+      <div class="troubleshoot-item" style="--tc:#d4a947">
+        <div class="troubleshoot-q">La coda è finita ma non aggiunge altra musica</div>
+        <div class="troubleshoot-a">L'autoplay è disattivato. Attivalo con <code>/player autoplay</code>: quando la coda finisce, il bot cerca brani correlati. Su generi molto di nicchia potrebbe non trovare nulla.</div>
+      </div>
+      <div class="troubleshoot-item" style="--tc:#d4a947">
+        <div class="troubleshoot-q">Il bot dice "Sono rimasto da solo in vocale"</div>
+        <div class="troubleshoot-a">Nessuno è più nel canale. Il bot mette in pausa la musica e ti dà <strong>5 minuti</strong> per rientrare. Se rientri, riprende da solo. Se nessuno torna, si disconnette.</div>
+      </div>
+      <div class="troubleshoot-item" style="--tc:#a78bfa">
+        <div class="troubleshoot-q">Un effetto non cambia nulla</div>
+        <div class="troubleshoot-a">Due motivi: (1) stai usando <code>/effetto reverb</code> su un server dove non è supportato — prova <code>nightcore</code> o <code>bassboost</code> che funzionano ovunque; (2) non c'è musica in riproduzione — gli effetti agiscono solo sull'audio in corso.</div>
+      </div>
+      <div class="troubleshoot-item" style="--tc:#a78bfa">
+        <div class="troubleshoot-q">La musica "balbetta" o si sente a scatti</div>
+        <div class="troubleshoot-a">Succede quando cambi effetto a metà brano (il bot ricarica lo stream). Con <code>/player crossfade</code> un admin può regolare la sfumatura. Se succede spesso anche senza cambiare effetti, probabilmente è la rete del server.</div>
+      </div>
+      <div class="troubleshoot-item" style="--tc:#4de89a">
+        <div class="troubleshoot-q">Il brano riparte dall'inizio invece che dal punto in cui ero</div>
+        <div class="troubleshoot-a">Se cambi effetto o fai <code>/seek</code>, il bot prova a riprendere dallo stesso punto. Su alcuni stream (radio, live) non è possibile. Per un salto preciso usa <code>/seek minuti secondi</code>.</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- OVERLAY FULL-SCREEN CON LE SCHEDE DELLE PIATTAFORME -->
+<div class="platform-overlay" id="platformOverlay" role="dialog" aria-modal="true" aria-labelledby="platformOverlayTitle">
+  <button class="platform-modal-close" id="platformClose" aria-label="Chiudi scheda">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+
+  <div class="platform-modal" id="platformModal">
+
+    <!-- ═════════ YOUTUBE ═════════ -->
+    <div class="platform-panel-content" data-content="youtube" style="--pcolor:#FF0000">
+      <div class="pf-header">
+        <div class="pf-header-icon"><img src="assets/loghi/youtube.png" alt="YouTube"></div>
+        <div class="pf-header-text">
+          <h2 id="platformOverlayTitle">YouTube</h2>
+          <p>La piattaforma più supportata. Video, playlist, ricerche testuali.</p>
+        </div>
+        <a href="commands.html#play" class="pf-header-link">/play →</a>
+      </div>
+
+      <!-- Player canzone di esempio -->
+      <div class="listen-inline">
+        <div class="listen-label">🎵 Ascolta un estratto</div>
+        <div class="listen-card" style="--pcolor:#FF0000">
+          <div class="listen-info">
+            <div class="listen-title">Gangnam Style</div>
+            <div class="listen-artist">PSY</div>
+          </div>
+          <button class="listen-play" data-audio="youtube" aria-label="Riproduci Gangnam Style">
+            <svg class="icon-play" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="icon-pause" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+          </button>
+          <div class="listen-progress"><div class="listen-progress-bar"></div></div>
+          <audio id="audio-youtube" src="assets/audio/youtube.mp3" preload="none"></audio>
+        </div>
+      </div>
+
+      <div class="pf-section">
+        <div class="pf-section-title">📥 Cosa puoi incollare</div>
+        <div class="pf-section-body">
+          <ul>
+            <li><strong>Link di un video:</strong> <code>youtube.com/watch?v=...</code> oppure <code>youtu.be/...</code></li>
+            <li><strong>Link di una playlist:</strong> <code>youtube.com/playlist?list=...</code> (anche con <code>&list=</code> dentro un video)</li>
+            <li><strong>Solo il titolo:</strong> <code>/play blinding lights</code> — il bot cerca per te</li>
+            <li><strong>Titolo + artista:</strong> <code>/play The Weeknd - Blinding Lights</code> — più preciso</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pf-section">
+        <div class="pf-section-title">⚙️ Cosa fa il bot</div>
+        <div class="pf-section-body">
+          <p>Il bot non prende il primo risultato a caso: usa una <strong>ricerca smart</strong> che guarda i primi 5 risultati e sceglie il migliore secondo queste regole:</p>
+          <ul>
+            <li><strong>+50 punti</strong> ai canali "Topic" (audio ufficiale caricato automaticamente da YouTube Music)</li>
+            <li><strong>+20 punti</strong> ai video con "official audio" nel titolo</li>
+            <li><strong>−5 punti</strong> ai video "official video" (preferisce l'audio puro al video musicale)</li>
+            <li><strong>−100 punti</strong> a slowed, reverb, sped up, nightcore, lyric video, karaoke, instrumental, "1 hour", reaction, ecc.</li>
+          </ul>
+          <p>Per le <strong>playlist</strong>: il bot carica subito i primi 25 brani e continua in background.</p>
+        </div>
+      </div>
+
+      <div class="pf-section">
+        <div class="pf-section-title">💬 Esempi concreti</div>
+        <div class="pf-section-body">
+          <div class="pf-example">
+            <div class="pf-example-input">
+              <span class="pf-example-label">Tu scrivi</span>
+              /play https://www.youtube.com/watch?v=dQw4w9WgXcQ
+            </div>
+            <div class="pf-example-output">
+              <span class="pf-example-label">Il bot fa</span>
+              Entra in vocale · ▶ Started playing · <em>Rick Astley - Never Gonna Give You Up (Official Video)</em>
+            </div>
+          </div>
+          <div class="pf-example">
+            <div class="pf-example-input">
+              <span class="pf-example-label">Tu scrivi</span>
+              /play blinding lights
+            </div>
+            <div class="pf-example-output">
+              <span class="pf-example-label">Il bot fa</span>
+              ✅ Aggiunto: blinding lights<br>▶ Started playing · <em>The Weeknd - Blinding Lights (Official Audio)</em>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pf-section">
+        <div class="pf-section-title">⛔ Cosa NON succede</div>
+        <div class="pf-section-body">
+          <div class="pf-no">
+            <ul>
+              <li><strong>Non scarica il video:</strong> estrae solo l'audio, non vedrai mai il video nel canale.</li>
+              <li><strong>Non riproduce live streaming:</strong> se incolli il link di una diretta, il bot la tratta come brano normale e potrebbe non partire.</li>
+              <li><strong>Non aggira le restrizioni:</strong> video "vietati ai minori" o bloccati per regione potrebbero non partire.</li>
+              <li><strong>Non suona in due canali contemporaneamente:</strong> un solo canale vocale alla volta per server.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="pf-section">
+        <div class="pf-section-title">⚠️ Errori comuni</div>
+        <div class="pf-section-body">
+          <div class="pf-error">
+            <div class="pf-error-msg">⚠️ Salto il brano: YouTube ha bloccato l'URL audio</div>
+            <div class="pf-error-fix">YouTube ha temporaneamente bloccato il server del bot. Il bot salta il brano e passa al successivo. <strong>Cosa fare:</strong> riprova più tardi, oppure prova un'altra versione dello stesso brano.</div>
+          </div>
+          <div class="pf-error">
+            <div class="pf-error-msg">❌ Entra in vocale!</div>
+            <div class="pf-error-fix">Non sei in un canale vocale. <strong>Cosa fare:</strong> entra in un canale e riprova.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═════════ SPOTIFY ═════════ -->
+    <div class="platform-panel-content" data-content="spotify" style="--pcolor:#1DB954">
+      <div class="pf-header">
+        <div class="pf-header-icon"><img src="assets/loghi/spotify.png" alt="Spotify"></div>
+        <div class="pf-header-text">
+          <h2>Spotify</h2>
+          <p>Traccia, playlist o album: il bot suona la versione YouTube dello stesso brano.</p>
+        </div>
+        <a href="commands.html#play" class="pf-header-link">/play →</a>
+      </div>
+
+      <div class="listen-inline">
+        <div class="listen-label">🎵 Ascolta un estratto</div>
+        <div class="listen-card" style="--pcolor:#1DB954">
+          <div class="listen-info">
+            <div class="listen-title">Blinding Lights</div>
+            <div class="listen-artist">The Weeknd</div>
+          </div>
+          <button class="listen-play" data-audio="spotify" aria-label="Riproduci Blinding Lights">
+            <svg class="icon-play" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="icon-pause" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+          </button>
+          <div class="listen-progress"><div class="listen-progress-bar"></div></div>
+          <audio id="audio-spotify" src="assets/audio/spotify.mp3" preload="none"></audio>
+        </div>
+      </div>
+
+      <div class="pf-section">
+        <div class="pf-section-title">📥 Cosa puoi incollare</div>
+        <div class="pf-section-body">
+          <ul>
+            <li><strong>Link di una traccia:</strong> <code>open.spotify.com/track/...</code></li>
+            <li><strong>Link di una playlist:</strong> <code>open.spotify.com/playlist/...</code> — sia tua che pubblica</li>
+            <li><strong>Link di un album:</strong> <code>open.spotify.com/album/...</code></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pf-section">
+        <div class="pf-section-title">⚙️ Cosa fa il bot</div>
+        <div class="pf-section-body">
+          <p>Spotify non permette ai bot di riprodurre direttamente il suo audio (DRM). Quindi Carmelo Bot:</p>
+          <ul>
+            <li>Legge <strong>titolo e artista</strong> dalla pagina della traccia o della playlist.</li>
+            <li>Cerca il brano su <strong>YouTube</strong> (con la stessa ricerca smart usata per YouTube).</li>
+            <li>Riproduce la versione YouTube in vocale: quello che senti non è lo stream Spotify, ma la stessa canzone caricata da YouTube.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pf-section">
+        <div class="pf-section-title">💬 Esempi concreti</div>
+        <div class="pf-section-body">
+          <div class="pf-example">
+            <div class="pf-example-input">
+              <span class="pf-example-label">Tu scrivi</span>
+              /play https://open.spotify.com/track/4cOdK2wGLETKBW3PvgPWqT
+            </div>
+            <div class="pf-example-output">
+              <span class="pf-example-label">Il bot fa</span>
+              ✅ Spotify: <strong>Never Gonna Give You Up - Rick Astley</strong><br>▶ Started playing · <em>Rick Astley - Never Gonna Give You Up (Official Audio)</em>
+            </div>
+          </div>
+          <div class="pf-example">
+            <div class="pf-example-input">
+              <span class="pf-example-label">Tu scrivi</span>
+              /play https://open.spotify.com/playlist/37i9dQZ...
+            </div>
+            <div class="pf-example-output">
+              <span class="pf-example-label">Il bot fa</span>
+              ✅ Playlist Spotify aggiunta: <strong>[Top 50 Global]</strong> — <strong>200 brani</strong>!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pf-section">
+        <div class="pf-section-title">⛔ Cosa NON succede</div>
+        <div class="pf-section-body">
+          <div class="pf-no">
+            <ul>
+              <li><strong>Non riproduce l'audio di Spotify:</strong> impossibile tecnicamente, per via del DRM. Il bot usa sempre YouTube.</li>
+              <li><strong>Non mostra copertine Spotify:</strong> nell'embed "Started playing" vedi la copertina di YouTube.</li>
+              <li><strong>Non accede al tuo account:</strong> il bot legge solo la pagina pubblica del link che gli incolli.</li>
+              <li><strong>Non funziona con playlist private di altri utenti:</strong> solo le playlist pubbliche o le tue.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="pf-section">
+        <div class="pf-section-title">⚠️ Errori comuni</div>
+        <div class="pf-section-body">
+          <div class="pf-error">
+            <div class="pf-error-msg">❌ Non sono riuscito a leggere questa playlist</div>
+            <div class="pf-error-fix">La playlist è privata, oppure Spotify ha cambiato qualcosa nella pagina. <strong>Cosa fare:</strong> verifica che sia pubblica.</div>
+          </div>
+          <div class="pf-error">
+            <div class="pf-error-msg">✅ Spotify: <em>titolo sbagliato</em></div>
+            <div class="pf-error-fix">Il bot ha cercato su YouTube e ha trovato un brano diverso. <strong>Cosa fare:</strong> usa <code>/player playnext</code> con il titolo esatto.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═════════ SOUNDCLOUD ═════════ -->
+    <div class="platform-panel-content" data-content="soundcloud" style="--pcolor:#FF5500">
+      <div class="pf-header">
+        <div class="pf-header-icon"><img src="assets/loghi/soundcloud.png" alt="SoundCloud"></div>
+        <div class="pf-header-text">
+          <h2>SoundCloud</h2>
+          <p>Tracce e set/playlist, con audio originale della piattaforma (non passa da YouTube).</p>
+        </div>
+        <a href="commands.html#play" class="pf-header-link">/play →</a>
+      </div>
+
+      <div class="listen-inline">
+        <div class="listen-label">🎵 Ascolta un estratto</div>
+        <div class="listen-card" style="--pcolor:#FF5500">
+          <div class="listen-info">
+            <div class="listen-title">Not Like Us</div>
+            <div class="listen-artist">Kendrick Lamar</div>
+          </div>
+          <button class="listen-play" data-audio="soundcloud" aria-label="Riproduci Not Like Us">
+            <svg class="icon-play" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="icon-pause" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+          </button>
+          <div class="listen-progress"><div class="listen-progress-bar"></div></div>
+          <audio id="audio-soundcloud" src="assets/audio/soundcloud.mp3" preload="none"></audio>
+        </div>
+      </div>
+
+      <div class="pf-section">
+        <div class="pf-section-title">📥 Cosa puoi incollare</div>
+        <div class="pf-section-body">
+          <ul>
+            <li><strong>Link di una traccia:</strong> <code>soundcloud.com/artista/brano</code></li>
+            <li><strong>Link di un set/playlist:</strong> <code>soundcloud.com/artista/sets/nome-set</code></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pf-section">
+        <div class="pf-section-title">⚙️ Cosa fa il bot</div>
+        <div class="pf-section-body">
+          <ul>
+            <li><strong>Traccia singola:</strong> aggiunge il brano alla coda e lo riproduce direttamente dal link SoundCloud.</li>
+            <li><strong>Set/playlist:</strong> parte con il primo brano e carica gli altri in background.</li>
+            <li><strong>Audio originale:</strong> quello che senti è il file originale caricato dall'artista, non una versione YouTube.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pf-section">
+        <div class="pf-section-title">💬 Esempi concreti</div>
+        <div class="pf-section-body">
+          <div class="pf-example">
+            <div class="pf-example-input">
+              <span class="pf-example-label">Tu scrivi</span>
+              /play https://soundcloud.com/artist/track-name
+            </div>
+            <div class="pf-example-output">
+              <span class="pf-example-label">Il bot fa</span>
+              ✅ Aggiunto: track-name<br>▶ Started playing · <em>artist - track-name</em>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pf-section">
+        <div class="pf-section-title">⛔ Cosa NON succede</div>
+        <div class="pf-section-body">
+          <div class="pf-no">
+            <ul>
+              <li><strong>Non supporta profili interi:</strong> solo tracce e set/playlist.</li>
+              <li><strong>Non aggira i limiti di SoundCloud:</strong> alcune tracce hanno restrizioni regionali o sono state rimosse.</li>
+              <li><strong>Non converte tracce "premium":</strong> se una traccia è riservata agli abbonati, non si può riprodurre.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="pf-section">
+        <div class="pf-section-title">⚠️ Errori comuni</div>
+        <div class="pf-section-body">
+          <div class="pf-error">
+            <div class="pf-error-msg">❌ Non sono riuscito a leggere questa playlist SoundCloud</div>
+            <div class="pf-error-fix">Il set potrebbe essere privato o il link non contiene <code>/sets/</code>. <strong>Cosa fare:</strong> verifica che l'URL sia del tipo <code>soundcloud.com/artista/sets/nome</code>.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═════════ TIKTOK ═════════ -->
+    <div class="platform-panel-content" data-content="tiktok" style="--pcolor:#FE2C55">
+      <div class="pf-header">
+        <div class="pf-header-icon"><img src="assets/loghi/tiktok.png" alt="TikTok"></div>
+        <div class="pf-header-text">
+          <h2>TikTok</h2>
+          <p>Estrae l'audio dai video TikTok e ripulisce il titolo da hashtag e menzioni.</p>
+        </div>
+        <a href="commands.html#play" class="pf-header-link">/play →</a>
+      </div>
+
+      <div class="listen-inline">
+        <div class="listen-label">🎵 Ascolta un estratto</div>
+        <div class="listen-card" style="--pcolor:#FE2C55">
+          <div class="listen-info">
+            <div class="listen-title">Non mi innamorerò</div>
+            <div class="listen-artist">Pucho &amp; Mia LoBosco</div>
+          </div>
+          <button class="listen-play" data-audio="tiktok" aria-label="Riproduci Non mi innamorerò">
+            <svg class="icon-play" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="icon-pause" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+          </button>
+          <div class="listen-progress"><div class="listen-progress-bar"></div></div>
+          <audio id="audio-tiktok" src="assets/audio/tiktok.mp3" preload="none"></audio>
+        </div>
+      </div>
+
+      <div class="pf-section">
+        <div class="pf-section-title">📥 Cosa puoi incollare</div>
+        <div class="pf-section-body">
+          <ul>
+            <li><strong>Link diretto:</strong> <code>tiktok.com/@utente/video/123456789</code></li>
+            <li><strong>Link corto:</strong> <code>vm.tiktok.com/xxxxx</code> oppure <code>vt.tiktok.com/xxxxx</code></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pf-section">
+        <div class="pf-section-title">⚙️ Cosa fa il bot</div>
+        <div class="pf-section-body">
+          <ul>
+            <li><strong>Estrae l'audio del video</strong> e lo riproduce in vocale come brano normale.</li>
+            <li><strong>Ripulisce il titolo:</strong> rimuove tutti gli hashtag (<code>#fyp</code>, <code>#perte</code>, ecc.) e le menzioni (<code>@amico</code>), e tronca a 80 caratteri.</li>
+            <li>Se dopo la pulizia non resta nulla, il titolo diventa <strong>"TikTok di @autore"</strong>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pf-section">
+        <div class="pf-section-title">💬 Esempi concreti</div>
+        <div class="pf-section-body">
+          <div class="pf-example">
+            <div class="pf-example-input">
+              <span class="pf-example-label">Didascalia originale</span>
+              Questa canzone è fantastica #fyp #perte @mario
+            </div>
+            <div class="pf-example-output">
+              <span class="pf-example-label">Titolo ripulito dal bot</span>
+              Questa canzone è fantastica
+            </div>
+          </div>
+          <div class="pf-example">
+            <div class="pf-example-input">
+              <span class="pf-example-label">Didascalia solo hashtag</span>
+              #fyp #perte #viral
+            </div>
+            <div class="pf-example-output">
+              <span class="pf-example-label">Titolo ripulito dal bot</span>
+              TikTok di @utente
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pf-section">
+        <div class="pf-section-title">⛔ Cosa NON succede</div>
+        <div class="pf-section-body">
+          <div class="pf-no">
+            <ul>
+              <li><strong>Non scarica il video:</strong> solo l'audio viene estratto.</li>
+              <li><strong>Non funziona con video privati:</strong> se il video è riservato agli amici o privato, non parte.</li>
+              <li><strong>Non salta i blocchi di TikTok:</strong> se TikTok blocca il server, il brano viene saltato.</li>
+              <li><strong>Non mostra commenti, like, effetti:</strong> il bot prende solo l'audio e la didascalia (per il titolo).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="pf-section">
+        <div class="pf-section-title">⚠️ Errori comuni</div>
+        <div class="pf-section-body">
+          <div class="pf-error">
+            <div class="pf-error-msg">⚠️ Salto il brano</div>
+            <div class="pf-error-fix">TikTok ha bloccato il server, oppure il video è stato rimosso. <strong>Cosa fare:</strong> riprova più tardi, oppure usa un altro video.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═════════ INSTAGRAM ═════════ -->
+    <div class="platform-panel-content" data-content="instagram" style="--pcolor:#E1306C">
+      <div class="pf-header">
+        <div class="pf-header-icon"><img src="assets/loghi/instagram.png" alt="Instagram"></div>
+        <div class="pf-header-text">
+          <h2>Instagram</h2>
+          <p>Reel e video pubblici. Stessa logica di TikTok per l'audio e per il titolo.</p>
+        </div>
+        <a href="commands.html#play" class="pf-header-link">/play →</a>
+      </div>
+
+      <div class="listen-inline">
+        <div class="listen-label">🎵 Ascolta un estratto</div>
+        <div class="listen-card" style="--pcolor:#E1306C">
+          <div class="listen-info">
+            <div class="listen-title">Birds of a Feather</div>
+            <div class="listen-artist">Billie Eilish</div>
+          </div>
+          <button class="listen-play" data-audio="instagram" aria-label="Riproduci Birds of a Feather">
+            <svg class="icon-play" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="icon-pause" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+          </button>
+          <div class="listen-progress"><div class="listen-progress-bar"></div></div>
+          <audio id="audio-instagram" src="assets/audio/instagram.mp3" preload="none"></audio>
+        </div>
+      </div>
+
+      <div class="pf-section">
+        <div class="pf-section-title">📥 Cosa puoi incollare</div>
+        <div class="pf-section-body">
+          <ul>
+            <li><strong>Link di un reel:</strong> <code>instagram.com/reel/ABC123/</code></li>
+            <li><strong>Link di un video (post video):</strong> <code>instagram.com/p/ABC123/</code> — solo se è un video, non una foto</li>
+            <li><strong>Link corto:</strong> <code>instagr.am/p/ABC123/</code></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pf-section">
+        <div class="pf-section-title">⚙️ Cosa fa il bot</div>
+        <div class="pf-section-body">
+          <ul>
+            <li><strong>Estrae l'audio del video</strong> e lo riproduce in vocale.</li>
+            <li><strong>Ripulisce il titolo:</strong> come per TikTok, rimuove hashtag e menzioni e tronca a 80 caratteri.</li>
+            <li>Se dopo la pulizia non resta nulla, il titolo diventa <strong>"Instagram di @autore"</strong>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pf-section">
+        <div class="pf-section-title">💬 Esempi concreti</div>
+        <div class="pf-section-body">
+          <div class="pf-example">
+            <div class="pf-example-input">
+              <span class="pf-example-label">Tu scrivi</span>
+              /play https://www.instagram.com/reel/ABC123/
+            </div>
+            <div class="pf-example-output">
+              <span class="pf-example-label">Il bot fa</span>
+              ✅ Aggiunto: descrizione del reel pulita<br>▶ Started playing · <em>descrizione del reel pulita</em>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pf-section">
+        <div class="pf-section-title">⛔ Cosa NON succede</div>
+        <div class="pf-section-body">
+          <div class="pf-no">
+            <ul>
+              <li><strong>Non funziona con post privati:</strong> serve che il contenuto sia pubblico.</li>
+              <li><strong>Non supporta le foto:</strong> solo reel e video hanno audio da estrarre.</li>
+              <li><strong>Non mostra la griglia del profilo:</strong> solo il singolo link che incolli.</li>
+              <li><strong>Non salta il login-wall di Instagram:</strong> alcuni contenuti richiedono l'accesso e non si possono riprodurre.</li>
+              <li><strong>Non supporta stories:</strong> solo post e reel pubblici.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="pf-section">
+        <div class="pf-section-title">⚠️ Errori comuni</div>
+        <div class="pf-section-body">
+          <div class="pf-error">
+            <div class="pf-error-msg">⚠️ Salto il brano</div>
+            <div class="pf-error-fix">Il contenuto potrebbe essere privato, rimosso, o Instagram ha bloccato il server. <strong>Cosa fare:</strong> verifica che il contenuto sia visibile da un browser in incognito, poi riprova.</div>
+          </div>
+          <div class="pf-error">
+            <div class="pf-error-msg">⚠️ Aggiunto ma non parte</div>
+            <div class="pf-error-fix">Alcuni reel hanno audio sotto copyright e vengono bloccati. <strong>Cosa fare:</strong> prova con un altro contenuto.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
 
 <footer>
@@ -326,57 +778,62 @@
 </button>
 
 <script>
-const platformTabs   = document.querySelectorAll('.platform-tab');
-const platformPanels = document.querySelectorAll('.platform-panel');
-const catPills       = document.querySelectorAll('.cat-pill');
-const categoryPanels = document.querySelectorAll('.category-panel');
+// ── Overlay piattaforme ──────────────────────────────────────
+const overlay       = document.getElementById('platformOverlay');
+const overlayModal  = document.getElementById('platformModal');
+const closeBtn      = document.getElementById('platformClose');
+const platformTabs  = document.querySelectorAll('.platform-tab');
+const panels        = document.querySelectorAll('.platform-panel-content');
 
-// Click su un tab piattaforma → mostra il box colorato piattaforma,
-// nasconde eventuale sezione categoria aperta
+const PLATFORM_COLORS = {
+  youtube:   '#FF0000',
+  spotify:   '#1DB954',
+  soundcloud:'#FF5500',
+  tiktok:    '#FE2C55',
+  instagram: '#E1306C',
+};
+
+function openPlatform(name, updateHash = true) {
+  const panel = document.querySelector(`.platform-panel-content[data-content="${name}"]`);
+  if (!panel) return;
+
+  panels.forEach(p => p.classList.toggle('active', p.dataset.content === name));
+  overlayModal.style.setProperty('--pcolor', PLATFORM_COLORS[name] || 'var(--blue)');
+
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  overlay.scrollTop = 0;
+
+  if (updateHash) history.pushState(null, '', '#' + name);
+}
+
+function closePlatform(updateHash = true) {
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+  if (updateHash && location.hash) history.pushState(null, '', location.pathname + location.search);
+}
+
 platformTabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    activatePlatform(tab.dataset.platform, true);
-  });
+  tab.addEventListener('click', () => openPlatform(tab.dataset.platform));
 });
 
-// Click su una pill categoria → apre quella sezione, toglie il box
-// piattaforme e torna alla pagina "normale"
-catPills.forEach(pill => {
-  pill.addEventListener('click', () => {
-    activateCategory(pill.dataset.filter, true);
-  });
+closeBtn.addEventListener('click', () => closePlatform());
+overlay.addEventListener('click', e => {
+  if (e.target === overlay) closePlatform();
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && overlay.classList.contains('open')) closePlatform();
 });
 
-function activatePlatform(target, updateHash) {
-  platformTabs.forEach(t => t.classList.toggle('active', t.dataset.platform === target));
-  catPills.forEach(p => p.classList.remove('active'));
-  platformPanels.forEach(panel => panel.classList.toggle('active', panel.dataset.panel === target));
-  categoryPanels.forEach(panel => panel.classList.remove('active'));
-  if (updateHash) history.replaceState(null, '', '#' + target);
-}
-
-function activateCategory(target, updateHash) {
-  catPills.forEach(p => p.classList.toggle('active', p.dataset.filter === target));
-  platformTabs.forEach(t => t.classList.remove('active'));
-  platformPanels.forEach(panel => panel.classList.remove('active'));
-  categoryPanels.forEach(panel => panel.classList.toggle('active', panel.dataset.category === target));
-  if (updateHash) history.replaceState(null, '', '#' + target);
-}
-
-// Deep-linking: guide.html#ia o guide.html#spotify apre direttamente la
-// sezione giusta, sia al primo caricamento sia con indietro/avanti browser.
-function syncPanelFromHash() {
+function syncOverlayFromHash() {
   const slug = location.hash.slice(1);
-  if (!slug) return;
-  const hasCategory = [...categoryPanels].some(p => p.dataset.category === slug);
-  const hasPlatform = [...platformPanels].some(p => p.dataset.panel === slug);
-  if (hasCategory) activateCategory(slug, false);
-  else if (hasPlatform) activatePlatform(slug, false);
+  if (!slug) { closePlatform(false); return; }
+  if (PLATFORM_COLORS[slug]) openPlatform(slug, false);
 }
-window.addEventListener('hashchange', syncPanelFromHash);
-syncPanelFromHash();
+window.addEventListener('hashchange', syncOverlayFromHash);
+if (location.hash) syncOverlayFromHash();
 
-// Hamburger
+// ── Hamburger ──────────────────────────────────────────────
 const ham = document.getElementById('hamburgerBtn');
 const mob = document.getElementById('mobileMenu');
 if (ham && mob) {
@@ -397,7 +854,8 @@ if (ham && mob) {
     })
   );
 }
-// Back to top
+
+// ── Back to top ───────────────────────────────────────────
 const btt = document.getElementById('backToTop');
 if (btt) {
   window.addEventListener('scroll', () => {

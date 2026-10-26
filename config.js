@@ -47,3 +47,96 @@ async function fetchStatsWithFallback(query = '', options = {}) {
   }
   return null;
 }
+
+
+// ══════════════════════════════════════════════════════════════
+// LISTEN — player audio dentro i pannelli piattaforma (guide.html)
+// ══════════════════════════════════════════════════════════════
+// Ogni pannello di piattaforma nella pagina Guida contiene una
+// canzone di esempio con un pulsante play/pausa.
+//
+// Comportamento:
+//   • Un solo brano alla volta: avviandone uno, gli altri si fermano
+//     e la loro barra di progresso torna a 0.
+//   • La barra colorata in basso al player avanza in tempo reale.
+//   • A fine brano il pulsante torna a ▶ e la barra a 0.
+//   • Se il file audio non esiste (o è corrotto), il pulsante
+//     diventa ⏳ disabilitato — nessun errore in console, nessun
+//     crash del sito.
+//
+// I file audio vanno messi in assets/audio/ con questi nomi:
+//   youtube.mp3 · spotify.mp3 · soundcloud.mp3 · tiktok.mp3 · instagram.mp3
+// Se usi un'estensione diversa da .mp3, aggiorna il src="..." nel
+// <audio> dentro guide.html.
+
+function initListenPlayers() {
+  const buttons = document.querySelectorAll('.listen-play');
+  if (!buttons.length) return;
+
+  buttons.forEach(btn => {
+    const audioId = 'audio-' + btn.dataset.audio;
+    const audio = document.getElementById(audioId);
+    if (!audio) return;
+
+    const card = btn.closest('.listen-card');
+    const bar = card ? card.querySelector('.listen-progress-bar') : null;
+
+    // Se il file audio non esiste o è corrotto, il pulsante si blocca su ⏳
+    audio.addEventListener('error', () => {
+      btn.classList.add('missing');
+      btn.disabled = true;
+      btn.title = 'File audio non ancora disponibile';
+    });
+
+    btn.addEventListener('click', () => {
+      if (btn.classList.contains('missing')) return;
+
+      // Ferma tutti gli altri player (uno solo alla volta)
+      document.querySelectorAll('.listen-play.playing').forEach(other => {
+        if (other === btn) return;
+        other.classList.remove('playing');
+        const otherCard = other.closest('.listen-card');
+        if (otherCard) {
+          const otherBar = otherCard.querySelector('.listen-progress-bar');
+          if (otherBar) otherBar.style.width = '0%';
+        }
+        const otherAudio = document.getElementById('audio-' + other.dataset.audio);
+        if (otherAudio) {
+          otherAudio.pause();
+          otherAudio.currentTime = 0;
+        }
+      });
+
+      if (audio.paused) {
+        audio.play().then(() => {
+          btn.classList.add('playing');
+        }).catch(() => {
+          btn.classList.add('missing');
+          btn.disabled = true;
+          btn.title = 'File audio non ancora disponibile';
+        });
+      } else {
+        audio.pause();
+        btn.classList.remove('playing');
+      }
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      if (bar && audio.duration && isFinite(audio.duration)) {
+        bar.style.width = (audio.currentTime / audio.duration * 100) + '%';
+      }
+    });
+
+    audio.addEventListener('ended', () => {
+      btn.classList.remove('playing');
+      if (bar) bar.style.width = '0%';
+      audio.currentTime = 0;
+    });
+  });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initListenPlayers);
+} else {
+  initListenPlayers();
+}
