@@ -53,16 +53,16 @@ async function fetchStatsWithFallback(query = '', options = {}) {
 // LISTEN — player audio dentro i pannelli piattaforma (guide.html)
 // ══════════════════════════════════════════════════════════════
 // Ogni pannello di piattaforma nella pagina Guida contiene una
-// canzone di esempio con un pulsante play/pausa.
+// canzone di esempio con un pulsante play/pausa e uno slider volume.
 //
 // Comportamento:
 //   • Un solo brano alla volta: avviandone uno, gli altri si fermano
 //     e la loro barra di progresso torna a 0.
 //   • La barra colorata in basso al player avanza in tempo reale.
 //   • A fine brano il pulsante torna a ▶ e la barra a 0.
+//   • Volume iniziale al 30% per non spaventare le orecchie.
 //   • Se il file audio non esiste (o è corrotto), il pulsante
-//     diventa ⏳ disabilitato — nessun errore in console, nessun
-//     crash del sito.
+//     diventa ⏳ disabilitato — nessun errore in console.
 //
 // I file audio vanno messi in assets/audio/ con questi nomi:
 //   youtube.mp3 · spotify.mp3 · soundcloud.mp3 · tiktok.mp3 · instagram.mp3
@@ -80,6 +80,47 @@ function initListenPlayers() {
 
     const card = btn.closest('.listen-card');
     const bar = card ? card.querySelector('.listen-progress-bar') : null;
+    
+    // Setup Volume
+    audio.volume = 0.3; // Volume predefinito al 30%
+    const volSlider = card.querySelector('.volume-slider');
+    const volBtn = card.querySelector('.volume-btn');
+    const iconUp = card.querySelector('.icon-vol-up');
+    const iconMute = card.querySelector('.icon-vol-mute');
+    let lastVolume = 0.3;
+
+    if (volSlider && volBtn) {
+      // Cambio volume tramite slider
+      volSlider.addEventListener('input', (e) => {
+        audio.volume = e.target.value;
+        audio.muted = audio.volume === 0;
+        updateVolumeIcon();
+        if (audio.volume > 0) lastVolume = audio.volume;
+      });
+
+      // Click sull'icona per mutare
+      volBtn.addEventListener('click', () => {
+        if (audio.muted || audio.volume === 0) {
+          audio.muted = false;
+          audio.volume = lastVolume || 0.3;
+          volSlider.value = audio.volume;
+        } else {
+          audio.muted = true;
+          volSlider.value = 0;
+        }
+        updateVolumeIcon();
+      });
+
+      function updateVolumeIcon() {
+        if (audio.muted || audio.volume === 0) {
+          iconUp.style.display = 'none';
+          iconMute.style.display = 'block';
+        } else {
+          iconUp.style.display = 'block';
+          iconMute.style.display = 'none';
+        }
+      }
+    }
 
     // Se il file audio non esiste o è corrotto, il pulsante si blocca su ⏳
     audio.addEventListener('error', () => {
@@ -88,6 +129,7 @@ function initListenPlayers() {
       btn.title = 'File audio non ancora disponibile';
     });
 
+    // Play/Pausa
     btn.addEventListener('click', () => {
       if (btn.classList.contains('missing')) return;
 
@@ -121,12 +163,14 @@ function initListenPlayers() {
       }
     });
 
+    // Progress bar
     audio.addEventListener('timeupdate', () => {
       if (bar && audio.duration && isFinite(audio.duration)) {
         bar.style.width = (audio.currentTime / audio.duration * 100) + '%';
       }
     });
 
+    // Fine brano
     audio.addEventListener('ended', () => {
       btn.classList.remove('playing');
       if (bar) bar.style.width = '0%';
