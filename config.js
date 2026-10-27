@@ -22,7 +22,7 @@
 // stats.html e index.html) vengono eseguiti.
 // ─────────────────────────────────────────────────────────────
 const STATS_URLS = [
-  'https://birth-burton-salaries-forge.trycloudflare.com/stats',
+  'https://bikes-rest-kennedy-supplier.trycloudflare.com/stats',
   // 'https://un-eventuale-tunnel-di-backup.trycloudflare.com/stats',
 ];
 
